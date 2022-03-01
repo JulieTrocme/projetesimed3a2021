@@ -1,0 +1,266 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    {% include 'front/default/_head.html.twig' %}
+</head>
+<!-- Page-->
+<div class="page">
+    <!-- Page preloader
+    <div class="page-loader">
+        <div>
+            <div class="page-loader-body">
+                <div class="cssload-loader">
+                    <div class="cssload-inner cssload-one"></div>
+                    <div class="cssload-inner cssload-two"></div>
+                    <div class="cssload-inner cssload-three"></div>
+                </div>
+            </div>
+        </div>
+    </div>-->
+    <!--HEADER-->
+    {% include 'front/default/_header.html.twig' %}
+
+
+    <!--SLIDER -->
+    <section class="section">
+        <div class="swiper-custom-container">
+            <!-- Swiper-->
+            <div class="swiper-container swiper-slider swiper-slider-custom" data-loop="true" data-autoplay="4500" data-simulate-touch="false">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" data-slide-bg="images/slider-home-creatures-magiques-noblecollection1.jpg">
+                        <div class="swiper-slide-caption"></div>
+                    </div>
+                    <div class="swiper-slide" data-slide-bg="images/harry-potter-g90531ac661280.jpg">
+                        <div class="swiper-slide-caption"></div>
+                    </div>
+                    <div class="swiper-slide" data-slide-bg="images/slider-home-1.jpg">
+                        <div class="swiper-slide-caption"></div>
+                    </div>
+                </div>
+                <!-- Swiper Pagination-->
+                <div class="swiper-pagination"></div>
+                <!-- Swiper Navigation-->
+                <div class="swiper-button swiper-button-prev">
+                    <div class="swiper-button__arrow">
+                        <div class="icon mdi mdi-keyboard-backspace"></div>
+                    </div>
+                    <div class="preview">
+                        <div class="preview__img"></div>
+                    </div>
+                </div>
+                <div class="swiper-button swiper-button-next">
+                    <div class="swiper-button__arrow">
+                        <div class="icon icon-inverse mdi mdi-keyboard-backspace"></div>
+                    </div>
+                    <div class="preview">
+                        <div class="preview__img"></div>
+                    </div>
+                </div>
+            </div>
+            <!--<div class="jumbotron-custom-wrapper">
+                <div class="container">
+                    <div class="row justify-content-center">
+                        <div class="col-md-9 col-xl-8">
+                            <div class="jumbotron-custom">
+                                <div class="light-box"><img src="images/image-icon-1-49x43.png" alt="" width="49" height="43"/>
+                                    <h2 class="title">Chemical Free, Natural Handmade Skin Care Lines</h2>
+                                    <div class="exeption">100% Natural and Active ingredients, without water, mineral oils, propylene glycol and other petrochemicals, phthalates, perfumes, dyes, triethanolamine, parabens etc.</div>
+                                </div>
+                                <div class="primary-box"><a class="button button-white" href="products.html">View products</a></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>-->
+        </div>
+    </section>
+
+    <!-- NOUVEAUTE -->
+    <section class="section section-lg bg-default">
+        <div class="container-fluid text-center">
+            <h1 class="heading-decorative"><span><img src="images/iconHP.png" alt="" width="58" height="60"/>Nouveauté</span></h1>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel" data-items="1" data-sm-items="1" data-md-items="2" data-lg-items="4" data-dots="true" data-nav="true" data-stage-padding="28" data-xxl-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false">
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-7-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Handmade Soap</a></div>
+                        <p class="exeption">A true beauty, each piece of this handmade soap will put a smile on your face with the refreshing tingle of peppermint and the aroma of lemongrass.</p>
+                        <p class="price">$25.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-8-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Organic Makeup Set</a></div>
+                        <p class="exeption">This set for makeup and skin care is considered the most popular and affordable beauty product, which can be ordered on the Web.Try it out!</p>
+                        <p class="price">$35.80</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-9-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Beeswax Lip Balm</a></div>
+                        <p class="exeption">Flavored with a hint of a citrusy tangerine oil, this rich balm serves up a matte finish that protects lips against the elements and has a sweet summer flavor.</p>
+                        <p class="price">$12.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-7-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Handmade Soap</a></div>
+                        <p class="exeption">A true beauty, each piece of this handmade soap will put a smile on your face with the refreshing tingle of peppermint and the aroma of lemongrass.</p>
+                        <p class="price">$25.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-8-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Organic Makeup Set</a></div>
+                        <p class="exeption">This set for makeup and skin care is considered the most popular and affordable beauty product, which can be ordered on the Web.Try it out!</p>
+                        <p class="price">$35.80</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-9-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Beeswax Lip Balm</a></div>
+                        <p class="exeption">Flavored with a hint of a citrusy tangerine oil, this rich balm serves up a matte finish that protects lips against the elements and has a sweet summer flavor.</p>
+                        <p class="price">$12.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- PRESENTATION ENTREPRISE -->
+    <section class="section section-lg bg-image bg-image-8 context-dark">
+        <div class="container text-center">
+            <div class="row justify-content-center">
+                <div class="col-md-10 col-xl-8">
+                    <div class="row justify-content-center">
+                        <div class="col-md-10">
+                            <h2 class="heading-decorative"><span><img src="images/typography-image-5-83x72.png" alt="" width="83" height="72"/>Change your lifestyle</span></h2>
+                            <p class="big">For the hygiene of your body, we developed ecological and economic vegan soaps made from natural ingredients such as essential oils and plant oils.</p>
+                        </div>
+                    </div>
+                    <div class="highlited-box offset-top-1">
+                        <h1>Purchasing our 100% natural soaps is a first step towards a healthier lifestyle</h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--brick categorie -->
+    <section class="section section-lg bg-default">
+        <div class="container-fluid">
+            <div class="row row-30 justify-content-center">
+                <div class="col-md-6">
+                    <div class="block1" style="display: block">
+                        <img src="images/bg-cta-1.jpg" style="width: 100%">
+                        <div class="block1-button" style="position: absolute;bottom: 20px;left: 35%;">
+                            <a class="button button-primary" href="products-for-face.html">View products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="block1" style="display: block">
+                        <img src="images/bg-cta-2.jpg" style="width: 100%">
+                        <div class="block1-button" style="position: absolute;bottom: 20px;left: 35%;">
+                            <a class="button button-primary" href="products-for-face.html">View products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="block1" style="display: block">
+                        <img src="images/bg-cta-1.jpg" style="width: 100%">
+                        <div class="block1-button" style="position: absolute;bottom: 20px;left: 35%;">
+                            <a class="button button-primary" href="products-for-face.html">View products</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="block1" style="display: block">
+                        <img src="images/bg-cta-2.jpg" style="width: 100%">
+                        <div class="block1-button" style="position: absolute;bottom: 20px;left: 35%;">
+                            <a class="button button-primary" href="products-for-face.html">View products</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- MISE EN AVANT -->
+    <section class="section section-lg bg-default">
+        <div class="container text-center">
+            <h1 class="heading-decorative"><span><img src="images/typography-image-2-58x60.png" alt="" width="58" height="60"/>Featured products</span></h1>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel" data-items="1" data-sm-items="1" data-md-items="2" data-lg-items="3" data-xl-items="3" data-xxl-items="3" data-dots="true" data-nav="true" data-stage-padding="28" data-xxl-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false">
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-7-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Handmade Soap</a></div>
+                        <p class="exeption">A true beauty, each piece of this handmade soap will put a smile on your face with the refreshing tingle of peppermint and the aroma of lemongrass.</p>
+                        <p class="price">$25.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-8-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Organic Makeup Set</a></div>
+                        <p class="exeption">This set for makeup and skin care is considered the most popular and affordable beauty product, which can be ordered on the Web.Try it out!</p>
+                        <p class="price">$35.80</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-9-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Beeswax Lip Balm</a></div>
+                        <p class="exeption">Flavored with a hint of a citrusy tangerine oil, this rich balm serves up a matte finish that protects lips against the elements and has a sweet summer flavor.</p>
+                        <p class="price">$12.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-7-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Handmade Soap</a></div>
+                        <p class="exeption">A true beauty, each piece of this handmade soap will put a smile on your face with the refreshing tingle of peppermint and the aroma of lemongrass.</p>
+                        <p class="price">$25.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-8-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Organic Makeup Set</a></div>
+                        <p class="exeption">This set for makeup and skin care is considered the most popular and affordable beauty product, which can be ordered on the Web.Try it out!</p>
+                        <p class="price">$35.80</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="single-product.html"><img src="images/product-category-9-370x270.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="single-product.html">Beeswax Lip Balm</a></div>
+                        <p class="exeption">Flavored with a hint of a citrusy tangerine oil, this rich balm serves up a matte finish that protects lips against the elements and has a sweet summer flavor.</p>
+                        <p class="price">$12.90</p><a class="button button-primary" href="#">Buy on amazon</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Bandeau de reassurence-->
+    {% include 'front/default/_reassurance.html.twig' %}
+
+    <!-- footer -->
+    {% include 'front/default/_footer.html.twig' %}
+
+
+    <!-- Javascript-->
+    {% include 'front/default/_script.html.twig' %}
+
+    </body>
+</html>
+
