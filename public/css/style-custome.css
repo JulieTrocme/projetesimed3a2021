@@ -1,0 +1,104 @@
+/** TITRE **/
+@font-face {
+    font-family: "Harrypotter";
+    src : url("../fonts/HARRYP__.TTF");
+}
+/** Texte **/
+@font-face {
+    font-family: "Benne-Regular";
+    src : url("../fonts/Benne-Regular.ttf");
+}
+
+/** Chiffre **/
+@font-face {
+    font-family: "Arvo";
+    src : url("../fonts/Arvo-Regular.ttf");
+}
+
+h1,h2,h3,h4,h5,h6 {
+    font-family: "Harrypotter" !important;
+}
+
+body{
+    font-family: "Benne-Regular" !important;
+}
+
+small,.price, chiffre {
+    font-family: "Arvo" !important;
+}
+
+chiffre {
+    font-size: 12px;
+}
+
+.list-marked a {
+    color: white;
+}
+.list-marked a:hover {
+    color: #ad8900;
+}
+
+.contact-list,.contact-list a,.contact-list a[href*='tel'] {
+    color: white;
+}
+
+.contact-list a:hover,.contact-list a[href*='tel']:hover {
+    color: #ad8900;
+}
+
+.page-footer-default{
+    background-color: #222222;;
+}
+
+.list-inline a {
+    padding-top: 10px;
+    font-size: 25px;
+    color: white;
+}
+
+.list-inline a:hover {
+    color: #ad8900;
+}
+
+.logo-footer {
+    width: 290px;
+}
+
+.img-fluid {
+    width: 100%;
+}
+
+.hov-img-zoom {
+    display: block;
+    overflow: hidden;
+}
+.hov-img-zoom img{
+    width: 100%;
+    -webkit-transition: all 0.6s;
+    -o-transition: all 0.6s;
+    -moz-transition: all 0.6s;
+    transition: all 0.6s;
+}
+.hov-img-zoom:hover img {
+    -webkit-transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -ms-transform: scale(1.1);
+    -o-transform: scale(1.1);
+    transform: scale(1.1);
+    padding-bottom: 30px;
+}
+
+h1,h2 {
+    font-size: 50px;
+}
+
+@media (min-width: 991px) {
+    h1,h2 {
+        font-size: 80px;
+    }
+
+    .visible-petit {
+        display: none;
+    }
+}
+
