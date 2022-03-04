@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% set current_title = "Connexion" %}
+{% block body %}
+<section class="section text-center ">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            <div class="col-md-12 p-0">
+                <div>
+                    <img src="images/page-header/entete.jpeg">
+                </div>
+                <div class="breadcrumb-wrapper p-4 color-gold">
+
+                    <ol class="breadcrumbs-custom">
+                        <li><a href="./">Accueil</a></li>
+                        <li>Connexion</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Log in-->
+    <section class="section section-lg bg-default">
+        <div class="container text-center">
+            <div class="row row-30 justify-content-sm-center">
+                <div class="col-md-10 col-xl-8">
+                    <h1 class="heading-decorative"><span>Connexion</span></h1>
+                    <!-- RD Mailform-->
+                    <form class="rd-mailform text-center text-md-center">
+                        <div class="form-wrap form-wrap-validation">
+                            <label class="form-label" for="forms-login-email">E-mail</label>
+                            <input class="form-input" id="forms-login-email" type="email" name="email" data-constraints="@Required">
+                        </div>
+                        <div class="form-wrap form-wrap-validation">
+                            <label class="form-label" for="forms-login-password">Mot de passe</label>
+                            <input class="form-input" id="forms-login-password" type="password" name="password" data-constraints="@Required">
+                        </div>
+                        <a href="/oublie">Mot de passe oublié ?</a></br>
+                        <button class="button button-block button-primary" type="submit">Se connecter</button>
+                        <p class="title-classic-subtitle">Si vous n'êtes pas déjà inscrit aller ici <a href="/inscription"> Inscription</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

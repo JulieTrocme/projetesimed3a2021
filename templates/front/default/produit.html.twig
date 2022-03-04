@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+{% set current_title = "produit" %}
+{% block body %}
+
+    <section class="section text-center ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-md-12 p-0">
+                    <div class="breadcrumb-wrapper p-4 color-gold">
+                        <ol class="breadcrumbs-custom">
+                            <li><a href="./">Accueil</a></li>
+                            <li><a href="/boutique">Catégorie</a></li>
+                            <li>Nom Produit</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Single Product-->
+    <section class="section section-lg bg-default">
+        <div class="container text-center">
+            <div class="row row-40 justify-content-center text-left">
+                <div class="col-md-9 col-lg-6">
+                    <div class="slider slider-for mb-3">
+                        <div><img src="images/produits/97777.jpg"></div>
+                        <div><img src="images/produits/97777-5.jpg"></div>
+                        <div><img src="images/produits/97777-4.jpg"></div>
+                        <div><img src="images/produits/97777-3.jpg"></div>
+                        <div><img src="images/produits/97777-2.jpg"></div>
+                    </div>
+                    <div class="slider slider-nav mt-3">
+                        <div><img src="images/produits/97777.jpg" style=" height: 150px;"></div>
+                        <div><img src="images/produits/97777-5.jpg" style=" height: 150px;"></div>
+                        <div><img src="images/produits/97777-4.jpg" style=" height: 150px;"></div>
+                        <div><img src="images/produits/97777-3.jpg" style=" height: 150px;"></div>
+                        <div><img src="images/produits/97777-2.jpg" style=" height: 150px;"></div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-lg-6 product-description">
+                    <h1 class="heading-decorative fs-40 mb-3"><span>FIGURINE NENDOROID HARRY POTTER</span></h1>
+                    <p class="fs-17">Harry Potter figurine Nendoroid Exclusive 10 cm</p>
+                    <p class="fs-17">Référence : GSC90648EX<br>
+                        EAN : 4580416907392</p>
+                    <div class="pricing mb-5">
+                        <p class="price fs-17"><chiffre>17.85</chiffre> € TTC</p>
+                    </div>
+                    <label for="qte" class="fs-20"> Qte : </label>
+                    <input id="qte" type="number" min="1" step="1" value="1" class="form-input mr-3 arvo" style="width: 18%;display: inline;height: 40px;">
+                    <a class="button button-primary mt-0" href="#">Acheter</a>
+                </div>
+                <div class="col-md-12">
+                    <h2 class="fs-30">Description</h2>
+                    <p class="big">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean turpis eros, pulvinar tempus nisl in, rutrum auctor purus. Sed dictum arcu est, ac malesuada urna tincidunt ac. Mauris aliquet nisl non diam laoreet posuere. Vivamus libero elit, volutpat nec nisi eget, bibendum accumsan magna. Vivamus pulvinar mauris lectus, eget euismod arcu fringilla eu. </p>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -23,18 +23,23 @@ body{
     font-family: "Benne-Regular" !important;
 }
 
-small,.price, chiffre {
+small {
     font-family: "Arvo" !important;
 }
 
 chiffre {
-    font-size: 12px;
+    font-family: "Arvo" !important;
+    font-size: 16px;
 }
 
-.list-marked a {
+footer .list-marked a {
     color: white;
 }
 .list-marked a:hover {
+    color: #ad8900;
+}
+
+a:hover,a.active {
     color: #ad8900;
 }
 
@@ -50,7 +55,7 @@ chiffre {
     background-color: #222222;;
 }
 
-.list-inline a {
+footer .list-inline a {
     padding-top: 10px;
     font-size: 25px;
     color: white;
@@ -100,5 +105,191 @@ h1,h2 {
     .visible-petit {
         display: none;
     }
+}
+
+.breadcrumbs-custom > li > a {
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.breadcrumbs-custom > li {
+    color: #ffffff;
+    font-size: 17px;
+}
+
+.color-red {
+    background-color: #71020b;
+}
+
+.color-gold {
+    background-color: #ad8900;
+}
+
+.fs-11 {
+    font-size: 11px;
+}
+.fs-12 {
+    font-size: 12px;
+}
+.fs-13 {
+    font-size: 13px;
+}
+.fs-14 {
+    font-size: 14px;
+}
+.fs-15 {
+    font-size: 15px;
+}
+.fs-16 {
+    font-size: 16px;
+}
+.fs-17 {
+    font-size: 17px;
+}
+.fs-18 {
+    font-size: 18px;
+}
+.fs-19 {
+    font-size: 19px;
+}
+
+.fs-20 {
+    font-size: 20px;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
+.fs-40 {
+    font-size: 40px;
+}
+
+.fs-50 {
+    font-size: 50px;
+}
+
+.fs-60 {
+    font-size: 60px;
+}
+
+.figure a img:hover {
+    box-shadow: 0px 0px 4px 7px rgb(173 137 0 / 30%);
+}
+
+
+.barre {
+    border-bottom: 1px solid #e1e1e1;
+}
+
+.Benne-Regular {
+    font-family: "Benne-Regular" !important;
+}
+
+.arvo {
+    font-family: "Arvo";
+}
+
+.price-box .title, .price-box-gray .title {
+    min-height: 90px;
+}
+
+.list-shop-filter li {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rd-navbar--is-stuck .rd-navbar-outer .rd-navbar-inner .rd-navbar-nav-wrap .menu-petit {
+    display: none !important;
+}
+.d-flex2 {
+    display: flex !important;
+}
+
+@media (max-width: 991px) {
+    .menu-petit {
+        display: none !important;
+    }
+    .d-flex2 {
+        display: block !important;
+    }
+}
+
+@media (min-width: 991px) and (max-width: 1199px){
+   .wrap {
+        flex-wrap: wrap;
+    }
+}
+
+.btn-recherche{
+    background-image: url('../images/icone/2730280_harry_harrys_potter_solid_wand_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+button:hover .btn-recherche, a:hover .btn-recherche{
+    background-image: url('../images/icone/2730280_harry_harrys_potter_solid_wand_icon_dore.png');
+}
+
+.btn-compte{
+    width: 35px;
+    height: 35px;
+    background-image: url('../images/icone/2730291_harry_map_marauders_potter_solid_icon.png');
+    background-size: cover;
+}
+button:hover .btn-compte, a:hover .btn-compte{
+    background-image: url('../images/icone/2730291_harry_map_marauders_potter_solid_icon_dore.png');
+}
+
+.btn-deconnexion{
+    background-image: url('../images/icone/2730273_harry_harrys_lightning_potter_scar_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+button:hover .btn-deconnexion,a:hover .btn-deconnexion{
+    background-image: url('../images/icone/2730273_harry_harrys_lightning_potter_scar_icon_dore.png');
+}
+
+.btn-panier{
+    background-image: url('../images/icone/2730276_cauldron_harry_magic_pot_potter_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+button:hover .btn-panier,a:hover .btn-panier{
+    background-image: url('../images/icone/2730276_cauldron_harry_magic_pot_potter_icon_dore.png');
+}
+
+.btn-modifier{
+    background-image: url('../images/icone/2730272_feather_harry_potter_quill_solid_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+button:hover .btn-modifier,a:hover .btn-modifier{
+    background-image: url('../images/icone/2730272_feather_harry_potter_quill_solid_icon_dore.png');
+}
+
+.btn-supprimer{
+    background-image: url('../images/icone/2730296_harry_potter_solid_time_turner_icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 35px;
+    height: 35px;
+}
+button:hover .btn-supprimer,a:hover .btn-supprimer{
+    background-image: url('../images/icone/2730296_harry_potter_solid_time_turner_icon_dore.png');
+}
+i {
+    font-style: normal;
+}
+
+body {
+    font-size: 16px;
 }
 

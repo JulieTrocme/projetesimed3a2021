@@ -1,0 +1,145 @@
+{% extends 'base.html.twig' %}
+{% set current_title = "Panier" %}
+{% block body %}
+    <section class="section text-center ">
+        <div class="container-fluid p-0">
+            <div class="row justify-content-center">
+                <div class="col-md-12 p-0">
+                    <div>
+                        <img src="images/page-header/entete2.jpg">
+                    </div>
+                    <div class="breadcrumb-wrapper p-4 color-gold">
+                        <ol class="breadcrumbs-custom">
+                            <li><a href="./">Accueil</a></li>
+                            <li>Panier</li>
+                        </ol>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Log in-->
+    <section class="section section-lg bg-default">
+        <div class="container">
+
+            <div class="table-responsive mt-4">
+                <table class="table table-cart" id="tableProduitPanier" style="text-align: center;text-transform: uppercase;border: 1px solid #e1e1e1;">
+                    <thead>
+                    <tr><!--class="d-none d-md-table-row"-->
+                        <th style="width:5%;">Supprimer</th>
+                        <th>Produit</th>
+                        <th></th>
+                        <th>prix</th>
+                        <th>quantité</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+
+                    <tr id="row">
+                        <td>
+                            <a href="#"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
+                        </td>
+                        <td>
+                            <a class="table-cart-figure" href="/produit">
+                                <img loading="lazy" src="images/produits/produit2.jpg" alt="image produit" style="width: 200px">
+                            </a>
+                        </td>
+                        <td class="text-center text-md-left">
+                            <a class="table-cart-link text-left" href="/produit">FIGURINE NENDOROID HARRY POTTER</a>
+
+                        </td>
+                        <td><chiffre>17.40</chiffre> €</td>
+                        <td style="width: 150px;">
+                            <div class="product-stepper">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" value="1" min="1" max="10">
+                            </div>
+                        </td>
+                        <td><div id="total "><chiffre>17.40</chiffre> € </div></td>
+                    </tr>
+                    <tr id="row">
+                        <td>
+                            <a href="#"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
+                        </td>
+                        <td>
+                            <a class="table-cart-figure" href="/produit">
+                                <img loading="lazy" src="images/produits/produit1.jpg" alt="image produit" style="width: 200px">
+                            </a>
+                        </td>
+                        <td class="text-center text-md-left">
+                            <a class="table-cart-link text-left" href="/produit">FIGURINE NENDOROID HARRY POTTER</a>
+
+                        </td>
+                        <td><chiffre>17.80</chiffre> €</td>
+                        <td style="width: 150px;">
+                            <div class="product-stepper">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" value="2" min="1" max="10">
+                            </div>
+                        </td>
+                        <td><div id="total "><chiffre>35.60</chiffre> € </div></td>
+                    </tr>
+
+                    <!--
+                    <tr><td colspan="6" class="text-center" style="display: table-cell;"><p>Aucun article dans le panier</p></td></tr>
+                    <tr><td colspan="6" class="text-center" style="display: table-cell;"><a href="/boutique">Accéder à la boutique</a></td></tr>
+                    -->
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-12" id="divFDP" style="text-align: left;">
+                <p class="fs-18">Dans xxx €, les frais de port vous seront offerts</p>
+            </div>
+
+
+        <div class="row justify-content-end">
+
+            <div class="col-12 col-lg-5 mb-5 mb-lg-0">
+                <form method="post" class="row" action="/script/shop_panier">
+                    <div class="col-7">
+                        <input type="text" class="form-input" name="code" style="border-radius: 6px;border-width: 1px 1px 1px 1px;min-height: 35px;height: 35px;padding: 17px 10px;" placeholder="Code promo">
+                    </div>
+                    <div class="col-5 text-left">
+                        <button type="submit" name="codePromo" class="button button-primary" style="height: 35px;padding: 0px 20px;">Valider</button>
+                    </div>
+                </form>
+            </div>
+
+
+            <div class="col-12 col-lg-7 text-center text-lg-right align-self-center"  id="blockTTCRemise">
+            <table class="table float-right">
+                <tbody>
+                <tr>
+                    <td style="border-top:0px;vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC :</div></td>
+                    <td style="border-top:0px;" class="text-right"><div class="heading-3 font-weight-normal" id="totalTTC1"><chifre>53.00</chifre> €</div></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Remise 10 % :</div></td>
+                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalRemise">- <chifre>5.30</chifre> €</div></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC avec remise :</div></td>
+                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalTTCRemise"><chifre>47.70</chifre> €</div></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+
+        <div class="col-12 col-lg-7 text-center text-lg-right align-self-center">
+
+        </div>
+
+        <div class="col-12 col-lg-5 mt-3">
+            <a class="button button-lg button-primary float-right mb-3" style="width: 100%;" href="/commande"><i class="fa fa-truck" aria-hidden="true"></i> Commander</a>
+
+        </div>
+        </div>
+
+        </div>
+    </section>
+
+
+{% endblock %}
