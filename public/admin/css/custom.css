@@ -1,0 +1,36 @@
+div .dt-buttons{
+    float : right;
+    margin-left: 25px;
+}
+
+.dt-buttons > button {
+    background-color: #198ae3;
+    border-color: #ffffff;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    border-radius: 3px;
+    color: white;
+    border: 1px solid transparent;
+    padding: 6px 12px;
+    font-size: 14px;
+    font-weight: 400;
+
+}
+
+.dt-buttons > button:hover {
+    cursor: pointer;
+}
+
+.dataTables_length{
+    float : left;
+}
+
+.toolbar {
+    float:left;
+    margin-left: 30px;
+}
+
+.webgrid-table-hidden
+{
+    display: none;
+}

@@ -1,0 +1,70 @@
+{% extends 'base.html.twig' %}
+{% set current_title = "Inscription" %}
+{% block body %}
+<section class="section text-center ">
+    <div class="container-fluid p-0">
+        <div class="row justify-content-center">
+            <div>
+                <img src="images/page-header/entete.jpeg">
+            </div>
+            <div class="col-md-12 p-0">
+                <div class="breadcrumb-wrapper p-4 color-gold">
+                    <ol class="breadcrumbs-custom">
+                        <li><a href="./">Accueil</a></li>
+                        <li>Inscription</li>
+                    </ol>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Log in-->
+    <section class="section section-lg bg-default">
+        <div class="container text-center">
+            <div class="row row-30 justify-content-sm-center">
+                <div class="col-md-10 col-xl-8">
+                    <h1 class="heading-decorative"><span>Inscription</span></h1>
+                    <!-- RD Mailform-->
+                    <form class="rd-mailform text-left" data-form-output="form-output-global" data-form-type="forms" method="post" action="bat/rd-mailform.php">
+                        <div class="row justify-content-end row-10 row-horizontal-10">
+                            <div class="col-md-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label" for="forms-register-name">Prénom</label>
+                                    <input class="form-input" id="forms-register-name" type="text" name="name" data-constraints="@Required">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label" for="forms-register-user-name">Nom</label>
+                                    <input class="form-input" id="forms-register-user-name" type="text" name="user-name" data-constraints="@Required">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label" for="forms-register-email">E-mail</label>
+                                    <input class="form-input" id="forms-register-email" type="email" name="email" data-constraints="@Email @Required">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label" for="forms-register-password">Mot de passe</label>
+                                    <input class="form-input" id="forms-register-password" type="password" name="password" data-constraints="@Required">
+                                </div>
+                            </div>
+                            <div class="col-md-12">
+                                <div class="form-wrap form-wrap-validation">
+                                    <label class="form-label" for="forms-register-password">Confirmer le mot de passe</label>
+                                    <input class="form-input" id="forms-register-password2" type="password" name="password2" data-constraints="@Required">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-button text-center">
+                            <button class="button button-primary" type="submit">Inscription</button>
+                        </div>
+                        <p class="text-center">Si vous êtes déjà inscrit aller ici <a href="/connexion"> Connexion</a></p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

@@ -1,3 +1,25 @@
 index:
     path: /
     controller: App\Controller\DefaultController::index
+boutique:
+    path: /boutique
+    controller: App\Controller\DefaultController::boutique
+produit:
+    path: /produit
+    controller: App\Controller\DefaultController::produit
+login:
+    path: /connexion
+    controller: App\Controller\DefaultController::login
+register:
+    path: /inscription
+    controller: App\Controller\DefaultController::register
+contact:
+    path: /contact
+    controller: App\Controller\DefaultController::contact
+
+panier:
+    path: /panier
+    controller: App\Controller\DefaultController::panier
+membre:
+    path: /membre
+    controller: App\Controller\DefaultController::membre
