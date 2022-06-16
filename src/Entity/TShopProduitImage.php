@@ -42,6 +42,28 @@ class TShopProduitImage
      */
     private $piOrder;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopProduit::class)
+     * @ORM\JoinColumn(name="pi_id_produit", referencedColumnName="pr_id")
+     */
+    private TShopProduit $produit;
+
+    /**
+     * @return TShopProduit
+     */
+    public function getProduit(): TShopProduit
+    {
+        return $this->produit;
+    }
+
+    /**
+     * @param TShopProduit $produit
+     */
+    public function setProduit(TShopProduit $produit): void
+    {
+        $this->produit = $produit;
+    }
+
     public function getPiId(): ?int
     {
         return $this->piId;

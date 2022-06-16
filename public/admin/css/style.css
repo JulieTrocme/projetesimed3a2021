@@ -10771,7 +10771,7 @@ input:focus {
   font-family: 'ubuntu-bold';
   src: url("../fonts/Ubuntu/Ubuntu-Bold.eot");
   /* IE9 Compat Modes */
-  src: url("../fonts/Ubuntu/Ubuntu-Bold.woff2") format("woff2"), url("../fonts/Ubuntu/Ubuntu-Bold.woff") format("woff"), url("../fonts/Ubuntu/Ubuntu-Bold.ttf") format("truetype"); }
+  src: url("../fonts/Ubuntu/Ubuntu-Bold.woff") format("woff2"), url("../fonts/Ubuntu/Ubuntu-Bold.woff") format("woff"), url("../fonts/Ubuntu/Ubuntu-Bold.ttf") format("truetype"); }
 
 /* Backgrounds  */
 .bg-gradient-primary, #theme-settings .settings-close {

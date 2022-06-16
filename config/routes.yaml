@@ -16,10 +16,30 @@ register:
 contact:
     path: /contact
     controller: App\Controller\DefaultController::contact
-
 panier:
     path: /panier
     controller: App\Controller\DefaultController::panier
 membre:
     path: /membre
     controller: App\Controller\DefaultController::membre
+administrateur:
+    path: /administrateur
+    controller: App\Controller\DefaultController::administrateur
+admin_boutique:
+    path: /administrateur/produit
+    controller: App\Controller\DefaultController::admin_produit
+admin_categorie:
+    path: /administrateur/categorie
+    controller: App\Controller\DefaultController::admin_categorie
+admin_souscategorie:
+    path: /administrateur/souscategorie
+    controller: App\Controller\DefaultController::admin_souscategorie
+produit_add:
+    path: /administrateur/produit/add
+    controller: App\Controller\DefaultController::produit_add
+categorie_add:
+    path: /administrateur/categorie/add
+    controller: App\Controller\DefaultController::categorie_add
+souscategorie_add:
+    path: /administrateur/souscategorie/add
+    controller: App\Controller\DefaultController::souscategorie_add

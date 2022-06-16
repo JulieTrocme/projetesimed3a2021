@@ -91,6 +91,28 @@ class TShopProduitCategorie2
      */
     private $caOrdre;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopProduitCategorie::class)
+     * @ORM\JoinColumn(name="ca_cat_id", referencedColumnName="ca_id")
+     */
+    private TShopProduitCategorie $cat;
+
+    /**
+     * @return TShopProduitCategorie
+     */
+    public function getCat(): TShopProduitCategorie
+    {
+        return $this->cat;
+    }
+
+    /**
+     * @param TShopProduitCategorie $cat
+     */
+    public function setCat(TShopProduitCategorie $cat): void
+    {
+        $this->cat = $cat;
+    }
+
     public function getCaId(): ?int
     {
         return $this->caId;

@@ -1,0 +1,76 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - ajout catégorie" %}
+{% block body %}
+
+    <div class="main-panel">
+
+        <div class="content-wrapper">
+
+            <div class="page-header">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-sitemap"></i></span>Ajout d'une catégorie
+                </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="page-famille">Catégorie</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Ajout d'une catégorie</li>
+                    </ul>
+                </nav>
+            </div>
+
+            <!-- CARD -->
+            <div class="card grid-margin">
+                <form method="POST" action="" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <h4 class="card-title">Gestion SEO</h4><br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label><strong>SEO - Url *</strong></label><br>
+                                    <p class="d-inline-block mb-0"><?php echo $siteParam['pa_domaine']?>rayon/</p>
+                                    <input type="text" style="border: 1px solid #ebedf2; font-family: 'ubuntu-regular',sans-serif;font-size: 0.8125rem;height: calc(2.25rem + 2px); width:50%" name="ca_seo_url"  maxlength="255" placeholder="Url" required>
+                                </div>
+                                <div class="form-group">
+                                    <label><strong>SEO - Titre *</strong></label>
+                                    <input type="text" name="ca_seo_titre" class="form-control" maxlength="255" placeholder="Titre SEO" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>SEO - description</label>
+                                    <input type="text" name="ca_seo_desc" class="form-control" maxlength="255" placeholder="Description SEO">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <h4 class="card-title">Gestion du bloc de contenu</h4><br>
+                        <div class="row">
+
+
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label><strong>Titre * </strong></label>
+                                    <input type="text" name="ca_titre" class="form-control" maxlength="255" placeholder="Titre de la catégorie" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Description</label>
+                                    <textarea id="ca_desc" name="ca_desc" class="form-text-short" placeholder="Description de la catégorie"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-gradient-info pull-right mr-3" name="add_categorie"><i class="fa fa-floppy-o mr-2" aria-hidden="true"></i> ENREGISTRER</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+
+{% endblock %}

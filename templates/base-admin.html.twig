@@ -2,16 +2,26 @@
 <html lang="fr">
 
 <!-- HEAD -->
-{% include 'front/default/_head.html.twig' %}
+{% include 'admin/_head.html.twig' %}
 
 <body>
 <!-- Page-->
 <div class="page">
-{% block body %}{% endblock %}
+    {% include 'admin/_header.html.twig' %}
+    <div class="container-fluid page-body-wrapper">
+        {% include 'admin/_header-left.html.twig' %}
+
+        {% block body %}{% endblock %}
+
+
+
+    </div>
+
+
 </div>
 
 <!-- Javascript-->
-{% include 'front/default/_script.html.twig' %}
+{% include 'admin/_script.html.twig' %}
 
 </body>
 </html>

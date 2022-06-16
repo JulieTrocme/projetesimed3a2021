@@ -1,0 +1,65 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste categories" %}
+{% block body %}
+
+    <div class="main-panel">
+
+        <div class="content-wrapper">
+
+            <div class="page-header">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Pages des catégories
+                </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Gestion des catégories</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="card-title float-left">Gestion des catégories</h4>
+                            <a href="/administrateur/categorie/add" class="btn btn-gradient-info float-right" style="margin-left: 10px;"><i class="fa fa-plus mr-2" aria-hidden="true"></i> AJOUTER</a>
+                        </div>
+                        <div class="col-12 mt-5">
+                            <div class="table-responsive">
+                                <table id="data_cdePay" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-wrap">#</th>
+                                        <th  class="no-wrap">Titre</th>
+                                        <th style="max-width: 200px">Description</th>
+                                        <th class="no-wrap">Actif</th>
+                                        <th style="min-width: 150px;"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for categorie in categories %}
+                                    <tr>
+                                            <td>{{ categorie.caId }}</td>
+                                            <td>{{ categorie.caTitre }}</td>
+                                            <td>{{ categorie.caDesc}}</td>
+                                            <td>{{ categorie.caActif ? 'actif' : 'non actif' }}
+                                                <?php</td>
+                                            <td class="text-center">
+                                                <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/produit" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
+                                                <a style="padding: 10px;" target="_blank" class="btn btn-gradient-success btn-rounded btn-icon mr-2" href="page-produit-edit.php?id=" title="Editer"><i class="fa fa-edit icon-btn"></i></a>
+                                                <a style="padding: 10px;" class="btn btn-gradient-danger btn-rounded btn-icon mr-2 text-white" title="Supprimer" data-toggle="modal" data-target="#del-produit" data-titre=""><i class="fa fa-trash icon-btn"></i></a>
+                                            </td>
+                                            </tr>
+
+                                        <?php } ?>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

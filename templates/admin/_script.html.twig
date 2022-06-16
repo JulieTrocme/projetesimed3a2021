@@ -1,31 +1,142 @@
 <!-- container-scroller -->
 <!-- plugins:js -->
-<script src="admin/vendors/js/vendor.bundle.base.js"></script>
-<script src="admin/vendors/js/vendor.bundle.addons.js"></script>
+<script src="/admin/vendors/js/vendor.bundle.base.js"></script>
+<script src="/admin/vendors/js/vendor.bundle.addons.js"></script>
 <!-- endinject -->
 <!-- Plugin js for this page-->
 <!-- End plugin js for this page-->
 <!-- inject:js -->
-<script src="admin/js/off-canvas.js"></script>
-<script src="admin/js/hoverable-collapse.js"></script>
-<script src="admin/js/misc.js"></script>
-<script src="admin/js/settings.js"></script>
-<script src="admin/js/todolist.js"></script>
-<script src="admin/vendors/cropper/cropper.min.js"></script>
-<script src="admin/js/data-table.js"></script>
+<script src="/admin/js/off-canvas.js"></script>
+<script src="/admin/js/hoverable-collapse.js"></script>
+<script src="/admin/js/misc.js"></script>
+<script src="/admin/js/settings.js"></script>
+<script src="/admin/js/todolist.js"></script>
+<script src="/admin/vendors/cropper/cropper.min.js"></script>
+<script src="/admin/js/data-table.js"></script>
 <!-- endinject -->
 
 <!-- Custom js for this page-->
-<script src="admin/js/dashboard.js"></script>
-<script src="admin/js/tooltips.js"></script>
-<script src="admin/js/popover.js"></script>
-<script src="admin/vendors/tinymce/tinymce.min.js"></script>
-<script src="admin/vendors/tinymce/themes/modern/theme.js"></script>
-<script src="admin/js/dragula.js"></script>
+<script src="/admin/js/dashboard.js"></script>
+<script src="/admin/js/tooltips.js"></script>
+<script src="/admin/js/popover.js"></script>
+<script src="/admin/vendors/tinymce/tinymce.min.js"></script>
+<script src="/admin/vendors/tinymce/themes/modern/theme.js"></script>
+<script src="/admin/js/dragula.js"></script>
 
 <!-- End custom js for this page-->
 
 <script src="https://cdn.jsdelivr.net/gh/gitbrent/bootstrap4-toggle@3.6.1/js/bootstrap4-toggle.min.js"></script>
 
 <!-- JqueryUi pour l'ordre -->
-<script src="admin/vendors/js/jqueryUI.js"></script>
+<script src="/admin/vendors/js/jqueryUI.js"></script>
+
+<script type="text/javascript">
+    $("#alert").fadeTo(5000, 500).slideUp(1200, function(){
+        $("#alert").slideUp(500);
+    });
+
+    (function($) {
+
+        $(function() {
+
+            $('.datatable').DataTable({
+                "aLengthMenu": [
+                    [10, 20, 50, 100, 250],
+                    [10, 20, 50, 100, 250]
+                ],
+                "columnDefs": [
+                    {
+                        "targets": [0],
+                        "visible": false,
+                        "searchable": false,
+                    }
+                ],
+                "iDisplayLength": 10,
+                "language": {
+                    "sProcessing": "Traitement en cours...",
+                    "sSearch": "Recherche",
+                    "sLengthMenu": "Afficher _MENU_ &eacute;l&eacute;ments",
+                    "sInfo": "Affichage des &eacute;l&eacute;ments _START_ &agrave; _END_ sur _TOTAL_",
+                    "sInfoEmpty": "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+                    "sInfoFiltered": "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+                    "sInfoPostFix": "",
+                    "sLoadingRecords": "Chargement en cours...",
+                    "sZeroRecords": "Aucun &eacute;l&eacute;ment &agrave; afficher",
+                    "sEmptyTable": "Aucune donn&eacute;e disponible dans le tableau",
+                    "oPaginate": {
+                        "sFirst": "Premier",
+                        "sPrevious": "Pr&eacute;c&eacute;dent",
+                        "sNext": "Suivant",
+                        "sLast": "Dernier"
+                    },
+                    "oAria": {
+                        "sSortAscending": ": activer pour trier la colonne par ordre croissant",
+                        "sSortDescending": ": activer pour trier la colonne par ordre d&eacute;croissant"
+                    },
+                    "select": {
+                        "rows": {
+                            _: "%d lignes séléctionnées",
+                            0: "Aucune ligne séléctionnée",
+                            1: "1 ligne séléctionnée"
+                        }
+                    }
+                }
+            });
+        });
+
+        'use strict';
+
+        tinymce.init({
+            selector: '.form-text',
+            height: 500,
+            theme: 'modern',
+            language: 'fr_FR',
+            plugins: [
+                'advlist autolink lists link image charmap print hr',
+                'searchreplace wordcount visualblocks visualchars code',
+                'insertdatetime save table contextmenu directionality media',
+                'paste textcolor colorpicker textpattern imagetools toc help'
+            ],
+            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print | forecolor backcolor | media',
+            toolbar2: '',
+            image_advtab: true,
+            content_css: [],
+            force_br_newlines : true,
+            force_p_newlines : false,
+            relative_urls: false,
+            convert_urls: false,
+        });
+
+        tinymce.init({
+            selector: '.form-text-short',
+            height: 150,
+            theme: 'modern',
+            language: 'fr_FR',
+            plugins: [
+                'advlist autolink lists link image charmap print hr',
+                'searchreplace wordcount visualblocks visualchars code',
+                'insertdatetime save table contextmenu directionality media',
+                'paste textcolor colorpicker textpattern imagetools toc help'
+            ],
+            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image | print | forecolor backcolor | media',
+            toolbar2: '',
+            image_advtab: true,
+            content_css: [],
+            force_br_newlines : true,
+            force_p_newlines : false,
+            relative_urls: false,
+            convert_urls: false,
+        });
+    })(jQuery);
+</script>
+
+<script src="/admin/vendors/tinymce/tinymce.min.js"></script>
+<script src="/admin/vendors/tinymce/themes/modern/theme.js"></script>
+
+<script src ="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src ="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js"></script>
+<script src ="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js"></script>
+<script src ="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>

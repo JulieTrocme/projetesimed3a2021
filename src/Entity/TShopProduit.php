@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -181,6 +183,79 @@ class TShopProduit
      * @ORM\Column(name="pr_popu", type="integer", nullable=false)
      */
     private $prPopu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopProduitCategorie::class)
+     * @ORM\JoinColumn(name="pr_id_cat1", referencedColumnName="ca_id")
+     */
+    private TShopProduitCategorie $cat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopProduitCategorie2::class)
+     * @ORM\JoinColumn(name="pr_id_cat2", referencedColumnName="ca_id")
+     */
+    private TShopProduitCategorie2 $cat2;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity=TShopProduitImage::class, mappedBy="produit", orphanRemoval=true)
+     *
+     */
+    private Collection $images;
+
+    /**
+     * @return Collection
+     */
+    public function getImages(): Collection
+    {
+        return $this->images;
+    }
+
+    /**
+     * @param Collection $images
+     */
+    public function setImages(Collection $images): void
+    {
+        $this->images = $images;
+    }
+
+
+    public function __construct()
+    {
+        $this->images = new ArrayCollection();
+    }
+
+    /**
+     * @return TShopProduitCategorie2
+     */
+    public function getCat2(): TShopProduitCategorie2
+    {
+        return $this->cat2;
+    }
+
+    /**
+     * @param TShopProduitCategorie2 $cat2
+     */
+    public function setCat2(TShopProduitCategorie2 $cat2): void
+    {
+        $this->cat2 = $cat2;
+    }
+
+    /**
+     * @return TShopProduitCategorie
+     */
+    public function getCat(): TShopProduitCategorie
+    {
+        return $this->cat;
+    }
+
+    /**
+     * @param TShopProduitCategorie $cat
+     */
+    public function setCat(TShopProduitCategorie $cat): void
+    {
+        $this->cat = $cat;
+    }
 
     public function getPrId(): ?int
     {

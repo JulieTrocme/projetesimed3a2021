@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -83,6 +85,34 @@ class TShopProduitCategorie
      * @ORM\Column(name="ca_ordre", type="integer", nullable=false)
      */
     private $caOrdre;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity=TShopProduitCategorie2::class, mappedBy="cat", orphanRemoval=true)
+     *
+     */
+    private Collection $souscats;
+
+    /**
+     * @return Collection
+     */
+    public function getSouscats(): Collection
+    {
+        return $this->souscats;
+    }
+
+    /**
+     * @param Collection $souscats
+     */
+    public function setSouscats(Collection $souscats): void
+    {
+        $this->souscats = $souscats;
+    }
+
+    public function __construct()
+    {
+        $this->souscats = new ArrayCollection();
+    }
 
     public function getCaId(): ?int
     {
