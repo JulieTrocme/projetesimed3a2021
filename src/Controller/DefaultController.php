@@ -119,19 +119,41 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function categorie_add()
+    public function categorie_add(Request $request,ManagerRegistry $doctrine)
     {
+        $id = $request->query->get('id');
+        if($id != null){
+            $categorie = $doctrine
+                ->getRepository(TShopProduitCategorie::class)
+                ->findOneBy(['caId'=>$id]);
+        }
+        else{
+            $categorie = null;
+        }
+
         return $this->render('admin/categorie_add.html.twig', [
+            'categorie' => $categorie
         ]);
     }
 
-    public function souscategorie_add(ManagerRegistry $doctrine)
+    public function souscategorie_add(Request $request,ManagerRegistry $doctrine)
     {
+        $id = $request->query->get('id');
+        if($id != null){
+            $souscategorie = $doctrine
+                ->getRepository(TShopProduitCategorie2::class)
+                ->findOneBy(['caId'=>$id]);
+        }
+        else{
+            $souscategorie = null;
+        }
+
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
         return $this->render('admin/souscategorie_add.html.twig', [
             'categories' => $categories,
+            'souscategorie' => $souscategorie
         ]);
     }
 

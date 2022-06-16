@@ -17,7 +17,13 @@ class SousCategorieController extends AbstractController
      */
     public function addSouscategorie(Request $request,ManagerRegistry $doctrine){
         if($request->isMethod('post')){
-            $souscategorie = new TShopProduitCategorie2();
+            $id = $request->request->get('ca_id');
+            if($id == 0) {
+                $souscategorie = new TShopProduitCategorie2();
+            }
+            else{
+                $souscategorie = $doctrine->getRepository(TShopProduitCategorie2::class)->findOneBy(['caId'=>$id]);
+            }
             $souscategorie->setCaTitre($request->request->get('ca_titre'));
             $souscategorie->setCaDesc($request->request->get('ca_desc'));
             $souscategorie->setCaSeoUrl($request->request->get('ca_seo_url'));
@@ -26,11 +32,25 @@ class SousCategorieController extends AbstractController
             $souscategorie->setCaCatId($request->request->get('categorie'));
             $souscategorie->setCat($doctrine->getManager()->find(TShopProduitCategorie::class,$souscategorie->getCaCatId()));
             $souscategorie->setCaDateUpdate(new \DateTime());
-            $souscategorie->setCaOrdre(0);
-            $souscategorie->setCaActif(1);
-            $doctrine->getManager()->persist($souscategorie);
+            if($id == 0){
+                $souscategorie->setCaOrdre(0);
+                $souscategorie->setCaActif(1);
+                $doctrine->getManager()->persist($souscategorie);
+            }
             $doctrine->getManager()->flush();
             return $this->redirectToRoute('admin_souscategorie');
         }
+    }
+
+    /**
+     * @Route("/administration/souscategorie/delete", methods={"POST"})
+     */
+    public function souscategorie_delete(Request $request,ManagerRegistry $doctrine): Response
+    {
+        $categorie = $doctrine->getManager()->find(TShopProduitCategorie2::class,$request->request->get('ca_id'));
+        $categorie->setCaActif(0);
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('admin_souscategorie');
     }
 }

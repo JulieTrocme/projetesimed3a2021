@@ -18,18 +18,41 @@ class CategorieController extends AbstractController
      */
     public function addCategorie(Request $request,ManagerRegistry $doctrine){
         if($request->isMethod('post')){
-            $categorie = new TShopProduitCategorie();
+            $id = $request->request->get('ca_id');
+            if($id == 0) {
+                $categorie = new TShopProduitCategorie();
+            }
+            else{
+                $categorie = $doctrine->getRepository(TShopProduitCategorie::class)->findOneBy(['caId'=>$id]);
+            }
             $categorie->setCaTitre($request->request->get('ca_titre'));
             $categorie->setCaDesc($request->request->get('ca_desc'));
             $categorie->setCaSeoUrl($request->request->get('ca_seo_url'));
             $categorie->setCaSeoTitre($request->request->get('ca_seo_titre'));
             $categorie->setCaSeoDesc($request->request->get('ca_seo_desc'));
             $categorie->setCaDateUpdate(new \DateTime());
-            $categorie->setCaOrdre(0);
-            $categorie->setCaActif(1);
-            $doctrine->getManager()->persist($categorie);
+            if($id == 0){
+                $categorie->setCaOrdre(0);
+                $categorie->setCaActif(1);
+                $doctrine->getManager()->persist($categorie);
+            }
             $doctrine->getManager()->flush();
             return $this->redirectToRoute('admin_categorie');
         }
+    }
+
+    /**
+     * @Route("/administration/categorie/delete", methods={"POST"})
+     */
+    public function categorie_delete(Request $request,ManagerRegistry $doctrine): Response
+    {
+        $categorie = $doctrine->getManager()->find(TShopProduitCategorie::class,$request->request->get('ca_id'));
+        $categorie->setCaActif(0);
+        foreach ($categorie->getSouscats() as $souscat){
+            $souscat->setCaActif(0);
+        }
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('admin_categorie');
     }
 }

@@ -40,9 +40,15 @@ produit_add:
 categorie_add:
     path: /administrateur/categorie/add
     controller: App\Controller\DefaultController::categorie_add
+categorie_delete:
+    path: /administrateur/categorie/delete
+    controller: App\Controller\CategorieController::categorie_delete
 souscategorie_add:
     path: /administrateur/souscategorie/add
     controller: App\Controller\DefaultController::souscategorie_add
+souscategorie_delete:
+    path: /administrateur/souscategorie/delete
+    controller: App\Controller\SousCategorieController::souscategorie_delete
 addCategorie:
     path: /administrateur/categorie/addCategorie
     controller: App\Controller\CategorieController::addCategorie

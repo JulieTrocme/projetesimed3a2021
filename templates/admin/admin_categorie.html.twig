@@ -45,9 +45,12 @@
                                                 <?php</td>
                                             <td class="text-center">
                                                 <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/produit" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
-                                                <a style="padding: 10px;" target="_blank" class="btn btn-gradient-success btn-rounded btn-icon mr-2" href="page-produit-edit.php?id=" title="Editer"><i class="fa fa-edit icon-btn"></i></a>
-                                                <a style="padding: 10px;" class="btn btn-gradient-danger btn-rounded btn-icon mr-2 text-white" title="Supprimer" data-toggle="modal" data-target="#del-produit" data-titre=""><i class="fa fa-trash icon-btn"></i></a>
-                                            </td>
+                                                <a style="padding: 10px;" target="_blank" class="btn btn-gradient-success btn-rounded btn-icon mr-2" href="/administrateur/categorie/add?id={{ categorie.caId }}" title="Editer"><i class="fa fa-edit icon-btn"></i></a>
+                                            <form method="post" action="/administration/categorie/delete" onsubmit="return confirm('Voulez vous vraiment supprimer cette catégorie et ses sous-catégories ?');">
+                                                <input hidden name="ca_id" value="{{ categorie.caId }}">
+                                                <button type="submit" style="padding: 10px;" class="btn btn-gradient-danger btn-rounded btn-icon mr-2 text-white" title="Supprimer" data-toggle="modal" data-target="#del-produit" data-titre=""><i class="fa fa-trash icon-btn"></i></button>
+                                            </form>
+                                        </td>
                                             </tr>
 
                                         <?php } ?>

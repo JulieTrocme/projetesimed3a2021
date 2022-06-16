@@ -8,12 +8,12 @@
 
             <div class="page-header">
                 <h3 class="page-title">
-                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-sitemap"></i></span>Ajout d'une catégorie
+                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-sitemap"></i></span>{{ categorie != null ? 'Modification' : 'Ajout' }} d'une catégorie
                 </h3>
                 <nav aria-label="breadcrumb">
                     <ul class="breadcrumb">
                         <li class="breadcrumb-item" aria-current="page"><a href="/administration/categorie">Catégorie</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Ajout d'une catégorie</li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ categorie != null ? 'Modification' : 'Ajout' }} d'une catégorie</li>
                     </ul>
                 </nav>
             </div>
@@ -21,6 +21,7 @@
             <!-- CARD -->
             <div class="card grid-margin">
                 <form method="POST" action="addCategorie" enctype="multipart/form-data">
+                    <input hidden name="ca_id" value="{{ categorie != null ? categorie.caId : 0}}">
                     <div class="card-body">
                         <h4 class="card-title">Gestion SEO</h4><br>
                         <div class="row">
@@ -28,16 +29,16 @@
                                 <div class="form-group">
                                     <label><strong>SEO - Url *</strong></label><br>
                                     <p class="d-inline-block mb-0"><?php echo $siteParam['pa_domaine']?>rayon/</p>
-                                    <input type="text" style="border: 1px solid #ebedf2; font-family: 'ubuntu-regular',sans-serif;font-size: 0.8125rem;height: calc(2.25rem + 2px); width:50%" name="ca_seo_url"  maxlength="255" placeholder="Url" required>
+                                    <input type="text" style="border: 1px solid #ebedf2; font-family: 'ubuntu-regular',sans-serif;font-size: 0.8125rem;height: calc(2.25rem + 2px); width:50%" name="ca_seo_url"  maxlength="255" placeholder="Url" value="{{ categorie != null ? categorie.caSeoUrl : '' }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label><strong>SEO - Titre *</strong></label>
-                                    <input type="text" name="ca_seo_titre" class="form-control" maxlength="255" placeholder="Titre SEO" required>
+                                    <input type="text" name="ca_seo_titre" class="form-control" maxlength="255" placeholder="Titre SEO" value="{{ categorie != null ? categorie.caSeoTitre : '' }}" required>
                                 </div>
 
                                 <div class="form-group">
                                     <label>SEO - description</label>
-                                    <input type="text" name="ca_seo_desc" class="form-control" maxlength="255" placeholder="Description SEO">
+                                    <input type="text" name="ca_seo_desc" class="form-control" maxlength="255" placeholder="Description SEO" value="{{ categorie != null ? categorie.caSeoDesc : '' }}">
                                 </div>
                             </div>
                         </div>
@@ -50,11 +51,11 @@
                             <div class="col-md-12">
                                 <div class="form-group">
                                     <label><strong>Titre * </strong></label>
-                                    <input type="text" name="ca_titre" class="form-control" maxlength="255" placeholder="Titre de la catégorie" required>
+                                    <input type="text" name="ca_titre" class="form-control" maxlength="255" placeholder="Titre de la catégorie" value="{{ categorie != null ? categorie.caTitre : '' }}" required>
                                 </div>
                                 <div class="form-group">
                                     <label>Description</label>
-                                    <textarea id="ca_desc" name="ca_desc" class="form-text-short" placeholder="Description de la catégorie"></textarea>
+                                    <textarea id="ca_desc" name="ca_desc" class="form-text-short" placeholder="Description de la catégorie" >{{ categorie != null ? categorie.caDesc : '' }}</textarea>
                                 </div>
                             </div>
                         </div>
