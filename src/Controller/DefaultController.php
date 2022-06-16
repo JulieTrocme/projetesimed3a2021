@@ -134,4 +134,6 @@ class DefaultController extends AbstractController
             'categories' => $categories,
         ]);
     }
+
+
 }

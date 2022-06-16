@@ -20,7 +20,7 @@
 
             <!-- CARD -->
             <div class="card grid-margin">
-                <form method="POST" action="" enctype="multipart/form-data">
+                <form method="POST" action="addSouscategorie" enctype="multipart/form-data">
                     <div class="card-body">
                         <h4 class="card-title">Gestion SEO</h4><br>
                         <div class="row">
@@ -48,7 +48,7 @@
                             <div class="col-md-6 mt-3">
                                 <div class="form-group">
                                     <label style="font-weight: bold;">Catégorie *</label><br>
-                                    <select class="form-control" id="rayon" name="pr_ray" required>
+                                    <select class="form-control" id="categorie" name="categorie" required>
                                         <option value="">--Choisir une catégorie--</option>
                                         {% for categorie in categories %}
                                                 <option value="{{ categorie.caId }}">{{ categorie.caTitre }}</option>

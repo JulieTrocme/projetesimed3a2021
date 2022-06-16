@@ -77,7 +77,7 @@ class TShopProduitCategorie
      *
      * @ORM\Column(name="ca_date_update", type="datetime", nullable=false, options={"default"="current_timestamp()"})
      */
-    private $caDateUpdate = 'current_timestamp()';
+    private $caDateUpdate = null;
 
     /**
      * @var int

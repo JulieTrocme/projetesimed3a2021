@@ -43,3 +43,9 @@ categorie_add:
 souscategorie_add:
     path: /administrateur/souscategorie/add
     controller: App\Controller\DefaultController::souscategorie_add
+addCategorie:
+    path: /administrateur/categorie/addCategorie
+    controller: App\Controller\CategorieController::addCategorie
+addSouscategorie:
+    path: /administrateur/souscategorie/addSouscategorie
+    controller: App\Controller\SousCategorieController::addSouscategorie
