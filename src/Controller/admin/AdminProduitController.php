@@ -20,7 +20,16 @@ class AdminProduitController extends AbstractController
      */
     public function addProduit(Request $request,ManagerRegistry $doctrine){
         if($request->isMethod('post')){
-            $produit = new TShopProduit();
+
+            $id = $request->request->get('pr_id');
+
+            if($id == 0) {
+                $produit = new TShopProduit();
+            }
+            else{
+                $produit = $doctrine->getRepository(TShopProduit::class)->findOneBy(['prId'=>$id]);
+            }
+
             $produit->setPrIdCat1($request->request->get('pr_id_cat1'));
             $produit->setCat($doctrine->getManager()->find(TShopProduitCategorie::class,$produit->getPrIdCat1()));
 
@@ -42,10 +51,25 @@ class AdminProduitController extends AbstractController
             $produit->setPrParticularite($request->request->get('pr_particularite'));
             $produit->setPrActif($request->request->get('pr_actif'));
             $produit->setPrPopu($request->request->get('pr_popu'));
+            $produit->setPrPrix($request->request->get('pr_prix'));
             $produit->setPrDateCreation(new \DateTime());
             $doctrine->getManager()->persist($produit);
             $doctrine->getManager()->flush();
-            return $this->redirectToRoute('admin_boutique');
+
+            return $this->redirectToRoute('admin_produit');
         }
+    }
+
+    /**
+     * @Route("/administration/produit/deleteProduit", methods={"POST"})
+     */
+    public function delProduit(Request $request,ManagerRegistry $doctrine): Response
+    {
+        $produit = $doctrine->getManager()->find(TShopProduit::class,$request->request->get('pr_id'));
+        $produit->setPrArchive(1);
+
+        $doctrine->getManager()->flush();
+
+        return $this->redirectToRoute('admin_produit');
     }
 }

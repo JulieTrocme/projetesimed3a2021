@@ -2,279 +2,248 @@
 {% set current_title = "Admin - ajout produit" %}
 {% block body %}
 
-<div class="main-panel">
-    <div class="content-wrapper">
-        <div class="page-header">
-            <h3 class="page-title">
-                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Ajout d'un produit
-            </h3>
-            <nav aria-label="breadcrumb">
-                <ul class="breadcrumb">
-                    <li class="breadcrumb-item" aria-current="page"><a href="administrateur/produit">Produits</a></li>
-                    <li class="breadcrumb-item active" aria-current="page">ajout produit</li>
-                </ul>
-            </nav>
-        </div>
+    <div class="main-panel">
+        <div class="content-wrapper">
+            <div class="page-header">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Ajout d'un produit
+                </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item" aria-current="page"><a href="/administrateur/produit">Produits</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">{{ produit != null ? 'Modification' : 'Ajout' }} produit</li>
+                    </ul>
+                </nav>
+            </div>
 
-        <!-- CARD -->
-        <div class="card grid-margin">
-            <form method="POST" action="#" enctype="multipart/form-data">
-                <div class="card-body">
-                    <h4 class="card-title">SEO</h4><br>
-                    <div class="row">
-                        <div class="col-12">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">SEO - Url *</label><br>
-                                <p class="d-inline-block mb-0"><?php echo $siteParam['pa_domaine']?>produit/</p>
-                                <input type="text" style="border: 1px solid #ebedf2; font-family: 'ubuntu-regular',sans-serif;font-size: 0.8125rem;height: calc(2.25rem + 2px); width:50%" name="pr_seo_url"  maxlength="255" placeholder="Url" required>
-                            </div>
-                            <div class="form-group">
-                                <label style="font-weight: bold;">SEO - Titre *</label>
-                                <input type="text" name="pr_seo_titre" class="form-control" maxlength="255" placeholder="Titre SEO" required>
-                            </div>
+            <!-- CARD -->
+            <div class="card grid-margin">
+                <form method="POST" action="addProduit" enctype="multipart/form-data">
+                    <input hidden name="pr_id" value="{{ produit != null ? produit.prId : 0}}">
+                    <div class="card-body">
+                        <h4 class="card-title">SEO</h4><br>
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">SEO - Url *</label><br>
+                                    <p class="d-inline-block mb-0">/produit/</p>
+                                    <input type="text" style="border: 1px solid #ebedf2; font-family: 'ubuntu-regular',sans-serif;font-size: 0.8125rem;height: calc(2.25rem + 2px); width:50%" name="pr_seo_url"  maxlength="255" placeholder="Url" value="{{ produit != null ? produit.prSeoUrl : '' }}" required>
+                                </div>
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">SEO - Titre *</label>
+                                    <input type="text" name="pr_seo_titre" class="form-control" maxlength="255" placeholder="Titre SEO"  value="{{ produit != null ? produit.prSeoTitre : '' }}" required>
+                                </div>
 
-                            <div class="form-group">
-                                <label>SEO - description</label>
-                                <input type="text" name="pr_seo_desc" class="form-control" maxlength="255" placeholder="Description SEO">
+                                <div class="form-group">
+                                    <label>SEO - description</label>
+                                    <input type="text" name="pr_seo_desc" class="form-control" maxlength="255" placeholder="Description SEO"  value="{{ produit != null ? produit.prSeoDesc : '' }}" >
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">fiche produit</h4><br>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Image</label><br>
-                                <input type="file" class="file-upload-default cropInput" name="image" accept="image/*" data-shellid="" data-cropratio="1.5" data-choix='script/cropperProduitAdd.php' data-width='1200'>
-                                <div class="input-group col-xs-12">
-                                    <input type="text" readonly class="form-control file-upload-success" placeholder="Sélectionner un fichier" style="height: 42px;">
-                                    <span class="input-group-append">
+                    <div class="card-body">
+                        <h4 class="card-title">fiche produit</h4><br>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Image</label><br>
+                                    <input type="file" class="file-upload-default cropInput" name="image" accept="image/*" data-shellid="" data-cropratio="1.5" data-choix='script/cropperProduitAdd.php' data-width='1200'>
+                                    <div class="input-group col-xs-12">
+                                        <input type="text" readonly class="form-control file-upload-success" placeholder="Sélectionner un fichier" style="height: 42px;">
+                                        <span class="input-group-append">
                                         <button class="file-upload-browse btn btn-gradient-success" type="button">Choisir un fichier</button>
                                 </span>
-                                </div>
+                                    </div>
 
-                                <input type="hidden" name="pr_image" id="pr_image">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>État du produit</label><br>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_actif" value="1"> Actif </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_actif" value="0" checked> Inactif </label>
+                                    <input type="hidden" name="pr_image" id="pr_image">
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Produit populaire</label><br>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_popu" value="1" > Actif </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_popu" value="0" checked> Inactif </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Produit à mettre en avant</label><br>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant" value="1" > Actif </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant" value="0" checked> Inactif </label>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>État du produit</label><br>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_actif" value="1"  {{ produit != null? produit.prActif == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                    </div>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_actif" value="0"  {{ produit != null? produit.prActif == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Produit à mettre en avant dans le panier</label><br>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="1" > Actif </label>
-                                </div>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="0" checked> Inactif </label>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Particularité du produit</label><br>
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_particularite" value="0" checked> Aucune </label>
-                                </div>
-                                <!--<div class="form-check d-inline">
-                                    <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_particularite" value="1"> Nouveau </label>
-                                </div>-->
-                                <div class="form-check d-inline">
-                                    <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_particularite" value="2"> Promo </label>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Produit populaire</label><br>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_popu" value="1"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                    </div>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_popu" value="0"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Produit à mettre en avant</label><br>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant" value="1"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                    </div>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant" value="0"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Produit à mettre en avant dans le panier</label><br>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="1"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                    </div>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="0"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label>Particularité du produit</label><br>
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_particularite" value="0"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : 'checked' }} > Aucune </label>
+                                    </div>
+                                    <!--<div class="form-check d-inline">
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_particularite" value="1"> Nouveau </label>
+                                    </div>-->
+                                    <div class="form-check d-inline">
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_particularite" value="2"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : '' }} > Promo </label>
+                                    </div>
+                                </div>
+                            </div>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Référence</label>
-                                <input type="text" name="pr_ref" class="form-control" maxlength="255" placeholder="Référence">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Référence</label>
+                                    <input type="text" name="pr_ref" class="form-control" maxlength="255" placeholder="Référence"  value="{{ produit != null ? produit.prRef : '' }}">
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Id de la caisse (Obligatoire pour la mise a jour du stock automatique) <small>(si le champ est vide le stock se mettra jamais a jour avec le systeme automatique)</small></label>
-                                <input type="text" name="pr_id_caisse" class="form-control" maxlength="255" placeholder="Id de la maison">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">Prix TTC (€) *</label><br>
+                                    <input type="number" name="pr_prix" class="form-control" maxlength="255" step="0.01" placeholder="Prix du produit"  value="{{ produit != null ? produit.prPrix : 0.00 }}" required>
+                                </div>
                             </div>
-                        </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Taux Tva (%)</label><br>
+                                    <select class="form-control" id="tva" name="pr_tva">
+                                        <option value="20" {{ produit != null ? produit.prTva == 20 ? 'selected' : '' }} >20 %</option>
+                                        <option value="5.5"  {{ produit != null ? produit.prTva == 5.5 ? 'selected' : '' }} >5.5 %</option>
+                                    </select>
 
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>EAN</label>
-                                <input type="text" name="pr_ean" class="form-control" maxlength="255" placeholder="Référence erp du produit" >
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Taux Tva (%)</label><br>
-                                <select class="form-control" id="tva" name="pr_tva">
-                                    <option value="20">20 %</option>
-                                    <option value="5.5">5.5 %</option>
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label>Tag</label><br>
+                                    <select class="form-control" id="maison" name="pr_id_maison">
+                                        <option value="0">--Nom de la maison--</option>
+                                        {% for maison in maisons %}
+                                            <option value="{{ maison.pmid }}"  {{ produit != null? maison.pmid == produit.prIdMaison ? 'selected' : '' : '' }} >{{ maison.pmLibelle }}</option>
+                                            } ?>
+                                        {% endfor %}
 
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label>Tag</label><br>
-                                <select class="form-control" id="maison" name="pr_id_maison">
-                                    <option value="0">--Nom de la maison--</option>
-                                    <?php foreach ($tags as $tag ) {
-                                    echo '<option value="'.$tag['pm_id'].'"';
-                                    echo '>'.$tag['pm_libelle'].'</option>';
-                                    } ?>
-
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="font-weight: bold;">Catégorie *</label><br>
+                                    <select class="form-control" id="rayon" name="pr_id_cat1"  required>
+                                        <option value="">--Choisir une catégorie--</option>
+                                        {% for categorie in categories %}
+                                            <option value="{{ categorie.caId }}"   {{ produit != null? categorie.caId == produit.prIdCat1 ? 'selected' : '' : '' }} >{{ categorie.caTitre }}</option>
+                                            } ?>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Rayon *</label><br>
-                                <select class="form-control" id="rayon" name="pr_ray" onchange="getSousCategorie()" required>
-                                    <option value="">--Choisir un rayon--</option>
-                                    <?php
-                                foreach ($categories as $categorie) {
-                                    echo '<option value="'.$categorie['ca_id'].'">'.$categorie['ca_titre'].'</option>';
-                                    }
-                                    ?>
-                                </select>
+                            <div class="col-md-6" id="blocFamille">
+                                <div class="form-group">
+                                    <label>Sous catégorie</label><br>
+                                    <select class="form-control" id="famille" name="pr_id_cat2">
+                                        <option value="">--Choisir une sous catégorie--</option>
+                                        {% for sscategorie in souscategories %}
+                                            <option value="{{ sscategorie.caId }}"  {{ produit != null? sscategorie.caId == produit.prIdCat2 ? 'selected' : '' : '' }} >{{ sscategorie.caTitre }}</option>
+                                            } ?>
+                                        {% endfor %}
+                                    </select>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6" style="display:none;" id="blocFamille">
-                            <div class="form-group">
-                                <label>Famille</label><br>
-                                <select class="form-control" id="famille" name="pr_fam">
-
-                                </select>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="font-weight:bold;">Stock *</label>
+                                    <input type="number" name="pr_stock" class="form-control" maxlength="255" placeholder="stock du produit"   value="{{ produit != null ? produit.prStock : 0 }}" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label style="font-weight:bold;">Stock *</label>
-                                <input type="number" name="pr_stock" class="form-control" maxlength="255" placeholder="stock du produit" value="0" required>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label style="font-weight:bold;">Titre *</label>
+                                    <input type="text" name="pr_titre" class="form-control" maxlength="255" placeholder="Titre du produit"  value="{{ produit != null ? produit.prTitre : 0 }}" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label style="font-weight:bold;">Titre *</label>
-                                <input type="text" name="pr_titre" class="form-control" maxlength="255" placeholder="Titre du produit" required>
-                            </div>
-                        </div>
 
 
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Description courte</label>
-                                <textarea id="pr_desc_short" name="pr_desc_short" class="form-text-short" placeholder="Texte du contenu"></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description courte</label>
+                                    <textarea id="pr_desc_short" name="pr_desc_short" class="form-text-short" placeholder="Texte du contenu">{{ produit != null ? produit.prDescShort : '' }}</textarea>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Titre description longue</label>
-                                <input type="text" name="pr_desc1_titre" class="form-control" maxlength="255" placeholder="Titre de la description 1">
-                            </div>
-                        </div>
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label>Description longue</label>
-                                <textarea id="pr_desc1" name="pr_desc1" class="form-text" placeholder="Texte pour la description 1"></textarea>
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <label>Description longue</label>
+                                    <textarea id="pr_desc1" name="pr_desc" class="form-text" placeholder="Texte pour la description 1">{{ produit != null ? produit.prDesc : '' }}</textarea>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="card-body">
-                    <h4 class="card-title">tarif et options</h4><br>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Prix TTC (€) *</label><br>
-                                <input type="number" name="pr_prix" class="form-control" maxlength="255" step="0.01" placeholder="Prix du produit" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label style="font-weight: bold;">Nombre de pièces *</label><br>
-                                <input type="number" name="pr_unite" class="form-control" maxlength="255" placeholder="Nb produit" value="1" required>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label>Libelle du prix</label><br>
-                                <input type="text" name="pr_libelle" class="form-control" maxlength="255" placeholder="Libelle du prix du produit">
-                            </div>
-                        </div>
 
-                    </div>
-                <div class="card-footer">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <p class="pull-left">* Champs obligatoires</p>
-                                <button type="submit" class="btn btn-gradient-info pull-right mr-3" name="add_produit"><i class="fa fa-plus mr-2" aria-hidden="true"></i> AJOUTER</button>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <p class="pull-left">* Champs obligatoires</p>
+                                    <button type="submit" class="btn btn-gradient-info pull-right mr-3" name="add_produit">{{ produit != null ? '<i class="fa fa-plus mr-2" aria-hidden="true"></i> Modifier' : '<i class="fa fa-plus mr-2" aria-hidden="true"></i> AJOUTER' }}</button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+
         </div>
 
     </div>
 
-</div>
-
-<!-- Modal Cropper image -->
-<div class="modal fade" id="modalCropp" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document" style="margin-top:30px;">
-        <div class="modal-content">
-            <div class="modal-header" style="padding-bottom: 10px;">
-                <h5 class="modal-title" id="exampleModalLabel-2" >Découper l'image</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body" style="padding-top:10px;padding-bottom: 10px;">
-                <div class="img-container" style="max-height: 548px;">
-                    <img id="imageCropper" src="#" class="img-fluid">
+    <!-- Modal Cropper image -->
+    <div class="modal fade" id="modalCropp" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document" style="margin-top:30px;">
+            <div class="modal-content">
+                <div class="modal-header" style="padding-bottom: 10px;">
+                    <h5 class="modal-title" id="exampleModalLabel-2" >Découper l'image</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-            </div>
-            <div class="modal-footer" style="padding-top:10px;">
-                <button type="button" class="btn btn-dark float-left" style="position: absolute;left: 20px;" data-dismiss="modal">ANNULER</button>
-                <button type="button" class="btn btn-gradient-info" id="crop1">VALIDER</button>
+                <div class="modal-body" style="padding-top:10px;padding-bottom: 10px;">
+                    <div class="img-container" style="max-height: 548px;">
+                        <img id="imageCropper" src="#" class="img-fluid">
+                    </div>
+                </div>
+                <div class="modal-footer" style="padding-top:10px;">
+                    <button type="button" class="btn btn-dark float-left" style="position: absolute;left: 20px;" data-dismiss="modal">ANNULER</button>
+                    <button type="button" class="btn btn-gradient-info" id="crop1">VALIDER</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
 {% endblock %}

@@ -85,7 +85,7 @@ class DefaultController extends AbstractController
     {
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findAll();
+            ->findBy(['prArchive'=>0]);
 
         return $this->render('admin/admin_produit.html.twig', [
             'produits' => $produits,
@@ -114,8 +114,19 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function produit_add(ManagerRegistry $doctrine)
+    public function produit_add()
     {
+        $id = $request->query->get('id');
+
+        if($id != null){
+            $produit = $doctrine
+                ->getRepository(TShopProduit::class)
+                ->findOneBy(['prId'=>$id]);
+        }
+        else{
+            $produit = null;
+        }
+
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
@@ -129,7 +140,8 @@ class DefaultController extends AbstractController
         return $this->render('admin/produit_add.html.twig', [
             'categories' => $categories,
             'souscategories' => $souscategories,
-            'maisons' => $maisons
+            'maisons' => $maisons,
+            'produit' => $produit
 
         ]);
     }
@@ -171,8 +183,6 @@ class DefaultController extends AbstractController
             'souscategorie' => $souscategorie
         ]);
     }
-
-
 
 
 }

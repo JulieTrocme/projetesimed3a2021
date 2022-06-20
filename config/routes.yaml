@@ -55,3 +55,10 @@ addCategorie:
 addSouscategorie:
     path: /administrateur/souscategorie/addSouscategorie
     controller: App\Controller\admin\SousCategorieController::addSouscategorie
+addProduit:
+    path: /administrateur/produit/addProduit
+    controller: App\Controller\admin\AdminProduitController::addProduit
+
+deleteProduit:
+    path: /administrateur/produit/deleteProduit
+    controller: App\Controller\admin\AdminProduitController::delProduit
