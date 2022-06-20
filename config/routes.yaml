@@ -25,7 +25,7 @@ membre:
 administrateur:
     path: /administrateur
     controller: App\Controller\DefaultController::administrateur
-admin_boutique:
+admin_produit:
     path: /administrateur/produit
     controller: App\Controller\DefaultController::admin_produit
 admin_categorie:
@@ -55,3 +55,10 @@ addCategorie:
 addSouscategorie:
     path: /administrateur/souscategorie/addSouscategorie
     controller: App\Controller\SousCategorieController::addSouscategorie
+addProduit:
+    path: /administrateur/produit/addProduit
+    controller: App\Controller\admin\AdminProduitController::addProduit
+
+deleteProduit:
+    path: /administrateur/produit/deleteProduit
+    controller: App\Controller\admin\AdminProduitController::delProduit

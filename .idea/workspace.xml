@@ -20,14 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="ajout categorie et souscategorie">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Controller/admin/AdminProduitController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/admin_produit.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/CategorieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/BoutiqueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/front/BoutiqueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/CategorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/CategorieController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SousCategorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SousCategorieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/front/ProduitController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/SousCategorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/SousCategorieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/_head.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/_head.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/admin_categorie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_categorie.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/categorie_add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/categorie_add.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/admin/produit_add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/produit_add.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/souscategorie_add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/souscategorie_add.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -38,6 +43,13 @@
   <component name="ComposerSettings" doNotAsk="true" synchronizationState="SYNCHRONIZE">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="HTML File" />
+      </list>
+    </option>
   </component>
   <component name="Git.Pull.Settings">
     <option name="BRANCH" value="master" />
@@ -193,11 +205,18 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../page html" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\Esimed\projetesimed3a2021\src\Controller\front" />
+      <recent name="D:\Esimed\projetesimed3a2021\src\Controller\admin" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="phpunit.xml.dist" type="PHPUnitRunConfigurationType" factoryName="PHPUnit">
@@ -227,6 +246,7 @@
       <workItem from="1655190010494" duration="12034000" />
       <workItem from="1655276546816" duration="15277000" />
       <workItem from="1655363501719" duration="13171000" />
+      <workItem from="1655727572702" duration="471000" />
     </task>
     <task id="LOCAL-00001" summary="fdsfsdf">
       <created>1638453990695</created>
@@ -309,10 +329,11 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1655364185723" />
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655380159441">
-      <screen x="0" y="0" width="1600" height="860" />
+    <state x="636" y="222" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655727877589">
+      <screen x="0" y="0" width="1920" height="1032" />
     </state>
     <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655380159441" />
+    <state x="636" y="222" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1655727877589" />
     <state x="-1608" y="-24" key="DiffContextDialog" timestamp="1655192550541">
       <screen x="-1920" y="-182" width="1920" height="1040" />
     </state>
@@ -329,6 +350,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655371248631" />
+    <state x="1308" y="443" key="NewPhpFileDialog" timestamp="1655727718069">
+      <screen x="0" y="0" width="1920" height="1032" />
+    </state>
+    <state x="1308" y="443" key="NewPhpFileDialog/0.0.1920.1032@0.0.1920.1032" timestamp="1655727718069" />
     <state x="615" y="133" key="RollbackChangesDialog" timestamp="1655103870919">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

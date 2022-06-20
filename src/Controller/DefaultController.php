@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
+use App\Entity\TShopProduitMaison;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -84,7 +85,7 @@ class DefaultController extends AbstractController
     {
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findAll();
+            ->findBy(['prArchive'=>0]);
 
         return $this->render('admin/admin_produit.html.twig', [
             'produits' => $produits,
@@ -115,7 +116,33 @@ class DefaultController extends AbstractController
 
     public function produit_add()
     {
+        $id = $request->query->get('id');
+
+        if($id != null){
+            $produit = $doctrine
+                ->getRepository(TShopProduit::class)
+                ->findOneBy(['prId'=>$id]);
+        }
+        else{
+            $produit = null;
+        }
+
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+        $souscategories = $doctrine
+            ->getRepository(TShopProduitCategorie2::class)
+            ->findAll();
+        $maisons = $doctrine
+            ->getRepository(TShopProduitMaison::class)
+            ->findAll();
+
         return $this->render('admin/produit_add.html.twig', [
+            'categories' => $categories,
+            'souscategories' => $souscategories,
+            'maisons' => $maisons,
+            'produit' => $produit
+
         ]);
     }
 
