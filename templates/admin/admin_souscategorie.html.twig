@@ -29,9 +29,9 @@
                                     <thead>
                                     <tr>
                                         <th class="no-wrap">#</th>
-                                        <th  class="no-wrap">Catégorie</th>
                                         <th  class="no-wrap">Titre</th>
                                         <th style="max-width: 200px">Description</th>
+                                        <th  class="no-wrap">Catégorie associé</th>
                                         <th class="no-wrap">Actif</th>
                                         <th style="min-width: 150px;"></th>
                                     </tr>
@@ -40,10 +40,10 @@
                                     {% for souscategorie in souscategories %}
                                         <tr>
                                             <td>{{ souscategorie.caId }}</td>
-                                            <td>{{ souscategorie.cat.caTitre }}</td>
                                             <td>{{ souscategorie.caTitre }}</td>
                                             <td>{{ souscategorie.caDesc}}</td>
-                                            <td>{{ souscategorie.caActif ? 'actif' : 'non actif' }}
+                                            <td>{{ souscategorie.cat.caTitre }}</td>
+                                            <td>{{ souscategorie.caActif ? '<p style="color:green">actif</p>' : '<p style="color:red">Inactif</p>' }}
                                                 <?php</td>
                                             <td class="text-center">
                                                 <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/produit" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>

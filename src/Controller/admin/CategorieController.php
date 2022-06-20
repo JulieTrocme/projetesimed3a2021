@@ -4,6 +4,7 @@
 namespace App\Controller;
 
 
+use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -46,11 +47,28 @@ class CategorieController extends AbstractController
      */
     public function categorie_delete(Request $request,ManagerRegistry $doctrine): Response
     {
+        //On cherche l'id de la catégorie
         $categorie = $doctrine->getManager()->find(TShopProduitCategorie::class,$request->request->get('ca_id'));
-        $categorie->setCaActif(0);
+
+
+        //Pour chaque souscategorie relié à la categorie
         foreach ($categorie->getSouscats() as $souscat){
-            $souscat->setCaActif(0);
+
+            //On supprime la souscatégorie
+            $doctrine->getManager()->remove($souscat);
         }
+
+        //On cherche tous les produits qui appartient a cette catégorie et on va les mettre a zero
+        $produits = $doctrine->getRepository(TShopProduit::class)->findBy(['prIdCat1' => $categorie->getCaId()]);
+
+        foreach ($produits as $pro){
+            $pro->setPrIdCat1(0);
+            $pro->setPrIdCat2(0);
+        }
+
+
+        //Maintenant on peut supprimer la catégorie
+        $doctrine->getManager()->remove($categorie);
         $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('admin_categorie');

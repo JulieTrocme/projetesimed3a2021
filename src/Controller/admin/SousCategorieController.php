@@ -2,6 +2,7 @@
 
 
 namespace App\Controller;
+use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,8 +48,17 @@ class SousCategorieController extends AbstractController
      */
     public function souscategorie_delete(Request $request,ManagerRegistry $doctrine): Response
     {
-        $categorie = $doctrine->getManager()->find(TShopProduitCategorie2::class,$request->request->get('ca_id'));
-        $categorie->setCaActif(0);
+        $souscategorie = $doctrine->getManager()->find(TShopProduitCategorie2::class,$request->request->get('ca_id'));
+
+        //On cherche tous les produits qui appartient a cette catégorie et on va les mettre a zero
+        $produits = $doctrine->getRepository(TShopProduit::class)->findBy(['prIdCat2' => $souscategorie->getCaId()]);
+
+        foreach ($produits as $pro){
+            $pro->setPrIdCat2(0);
+        }
+
+        $doctrine->getManager()->remove($souscategorie);
+
         $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('admin_souscategorie');
