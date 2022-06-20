@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * TAdmin
  *
  * @ORM\Table(name="t_admin")
  * @ORM\Entity
+ * @method string getUserIdentifier()
  */
-class TAdmin
+class TAdmin implements UserInterface
 {
     /**
      * @var int
@@ -65,4 +67,39 @@ class TAdmin
     }
 
 
+    /**
+     * @see UserInterface
+     */
+    public function getRoles(): array
+    {
+        $roles[] = 'ROLE_ADMIN';
+
+        return array_unique($roles);
+    }
+
+
+    public function getPassword()
+    {
+        return (string) $this->getAdPassword();
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUsername()
+    {
+        return (string) $this->getAdLogin();
+    }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
+    }
 }

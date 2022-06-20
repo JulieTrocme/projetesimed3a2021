@@ -25,8 +25,11 @@
             <div class="row row-30 justify-content-sm-center">
                 <div class="col-md-10 col-xl-8">
                     <h1 class="heading-decorative"><span>Connexion</span></h1>
+                    {% if error %}
+                        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+                    {% endif %}
                     <!-- RD Mailform-->
-                    <form class="rd-mailform text-center text-md-center">
+                    <form class="rd-mailform text-center text-md-center" action="#" method="POST">
                         <div class="form-wrap form-wrap-validation">
                             <label class="form-label" for="forms-login-email">E-mail</label>
                             <input class="form-input" id="forms-login-email" type="email" name="email" data-constraints="@Required">
@@ -36,6 +39,9 @@
                             <input class="form-input" id="forms-login-password" type="password" name="password" data-constraints="@Required">
                         </div>
                         <a href="/oublie">Mot de passe oublié ?</a></br>
+                        <input type="hidden" name="_csrf_token"
+                               value="{{ csrf_token('authenticate') }}"
+                        >
                         <button class="button button-block button-primary" type="submit">Se connecter</button>
                         <p class="title-classic-subtitle">Si vous n'êtes pas déjà inscrit aller ici <a href="/inscription"> Inscription</a></p>
                     </form>

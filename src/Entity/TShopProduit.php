@@ -49,14 +49,14 @@ class TShopProduit
      *
      * @ORM\Column(name="pr_cat_order", type="integer", nullable=false)
      */
-    private $prCatOrder;
+    private $prCatOrder = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_stock", type="integer", nullable=false)
      */
-    private $prStock;
+    private $prStock = 0;
 
     /**
      * @var string
@@ -84,7 +84,7 @@ class TShopProduit
      *
      * @ORM\Column(name="pr_tva", type="integer", nullable=false)
      */
-    private $prTva;
+    private $prTva = 0;
 
     /**
      * @var \DateTime
@@ -98,7 +98,7 @@ class TShopProduit
      *
      * @ORM\Column(name="pr_date_modification", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $prDateModification = 'NULL';
+    private $prDateModification;
 
     /**
      * @var string
@@ -133,56 +133,56 @@ class TShopProduit
      *
      * @ORM\Column(name="pr_mise_avant", type="integer", nullable=false)
      */
-    private $prMiseAvant;
+    private $prMiseAvant = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_mise_avant_panier", type="integer", nullable=false)
      */
-    private $prMiseAvantPanier;
+    private $prMiseAvantPanier = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_nouveaux", type="integer", nullable=false)
      */
-    private $prNouveaux;
+    private $prNouveaux = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_particularite", type="integer", nullable=false)
      */
-    private $prParticularite;
+    private $prParticularite = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_archive", type="integer", nullable=false)
      */
-    private $prArchive;
+    private $prArchive = 0;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="pr_date_archive", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $prDateArchive = 'NULL';
+    private $prDateArchive;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_actif", type="integer", nullable=false)
      */
-    private $prActif;
+    private $prActif = 0;
 
     /**
      * @var int
      *
      * @ORM\Column(name="pr_popu", type="integer", nullable=false)
      */
-    private $prPopu;
+    private $prPopu = 0;
 
     /**
      * @ORM\ManyToOne(targetEntity=TShopProduitCategorie::class)

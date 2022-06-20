@@ -1,18 +1,46 @@
 security:
+    encoders:
+        App\Entity\TAdmin:
+            algorithm: auto
+        App\Entity\TShopUser:
+            algorithm: auto
     enable_authenticator_manager: true
     # https://symfony.com/doc/current/security.html#registering-the-user-hashing-passwords
     password_hashers:
         Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface: 'auto'
     # https://symfony.com/doc/current/security.html#loading-the-user-the-user-provider
     providers:
-        users_in_memory: { memory: null }
+        app_admin_provider:
+            entity:
+                class: App\Entity\TAdmin
+                property: adLogin
+        app_user_provider:
+            entity:
+                class: App\Entity\TShopUser
+                property: uEmail
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         main:
             lazy: true
-            provider: users_in_memory
+            provider: app_admin_provider
+            custom_authenticator:
+                - App\Security\AdminFormAuthenticator
+
+            logout:
+                path: app_logout
+                target: administrateur
+        user:
+            lazy: true
+            provider: app_user_provider
+            custom_authenticator:
+                - App\Security\UserFormAuthenticator
+
+            logout:
+                path: app_logout
+                target: membre
+
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#the-firewall
@@ -23,5 +51,6 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
+         - { path: ^/administrateur/, roles: ROLE_ADMIN }
+         - { path: ^/membre, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

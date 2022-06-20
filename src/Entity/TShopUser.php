@@ -3,14 +3,16 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * TShopUser
  *
  * @ORM\Table(name="t_shop_user")
  * @ORM\Entity
+ * @method string getUserIdentifier()
  */
-class TShopUser
+class TShopUser implements UserInterface
 {
     /**
      * @var int
@@ -198,4 +200,35 @@ class TShopUser
     }
 
 
+    public function getRoles()
+    {
+        $roles[] = 'ROLE_ADMIN';
+
+        return array_unique($roles);
+    }
+
+    public function getPassword()
+    {
+        return $this->getUPassword();
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUsername()
+    {
+        return $this->getUsername();
+    }
+
+    public function __call($name, $arguments)
+    {
+        // TODO: Implement @method string getUserIdentifier()
+    }
 }

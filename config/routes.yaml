@@ -9,7 +9,7 @@ produit:
     controller: App\Controller\DefaultController::produit
 login:
     path: /connexion
-    controller: App\Controller\DefaultController::login
+    controller: App\Controller\UserSecurityController::login
 register:
     path: /inscription
     controller: App\Controller\DefaultController::register
@@ -24,7 +24,7 @@ membre:
     controller: App\Controller\DefaultController::membre
 administrateur:
     path: /administrateur
-    controller: App\Controller\DefaultController::administrateur
+    controller: App\Controller\SecurityController::login
 admin_boutique:
     path: /administrateur/produit
     controller: App\Controller\DefaultController::admin_produit
@@ -42,16 +42,16 @@ categorie_add:
     controller: App\Controller\DefaultController::categorie_add
 categorie_delete:
     path: /administrateur/categorie/delete
-    controller: App\Controller\CategorieController::categorie_delete
+    controller: App\Controller\admin\CategorieController::categorie_delete
 souscategorie_add:
     path: /administrateur/souscategorie/add
     controller: App\Controller\DefaultController::souscategorie_add
 souscategorie_delete:
     path: /administrateur/souscategorie/delete
-    controller: App\Controller\SousCategorieController::souscategorie_delete
+    controller: App\Controller\admin\SousCategorieController::souscategorie_delete
 addCategorie:
     path: /administrateur/categorie/addCategorie
-    controller: App\Controller\CategorieController::addCategorie
+    controller: App\Controller\admin\CategorieController::addCategorie
 addSouscategorie:
     path: /administrateur/souscategorie/addSouscategorie
-    controller: App\Controller\SousCategorieController::addSouscategorie
+    controller: App\Controller\admin\SousCategorieController::addSouscategorie

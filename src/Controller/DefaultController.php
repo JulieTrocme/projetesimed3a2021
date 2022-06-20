@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
+use App\Entity\TShopProduitMaison;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -113,9 +114,23 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function produit_add()
+    public function produit_add(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+        $souscategories = $doctrine
+            ->getRepository(TShopProduitCategorie2::class)
+            ->findAll();
+        $maisons = $doctrine
+            ->getRepository(TShopProduitMaison::class)
+            ->findAll();
+
         return $this->render('admin/produit_add.html.twig', [
+            'categories' => $categories,
+            'souscategories' => $souscategories,
+            'maisons' => $maisons
+
         ]);
     }
 
@@ -156,6 +171,8 @@ class DefaultController extends AbstractController
             'souscategorie' => $souscategorie
         ]);
     }
+
+
 
 
 }
