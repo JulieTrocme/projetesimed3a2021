@@ -1,0 +1,109 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste produits" %}
+{% block body %}
+
+    <div class="main-panel">
+
+        <div class="content-wrapper">
+
+            <div class="page-header">
+                <h3 class="page-title">
+                    <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Pages des produits
+                </h3>
+                <nav aria-label="breadcrumb">
+                    <ul class="breadcrumb">
+                        <li class="breadcrumb-item active" aria-current="page">Gestion des produits</li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="card grid-margin">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <h4 class="card-title float-left">Gestion des produits</h4>
+                            <a href="/administrateur/produit/add" class="btn btn-gradient-info float-right" style="margin-left: 10px;"><i class="fa fa-plus mr-2" aria-hidden="true"></i> AJOUTER</a>
+                        </div>
+                        <div class="col-12 mt-5">
+                            <div class="table-responsive">
+                                <table id="data_cdePay" class="table table-bordered table-hover">
+                                    <thead>
+                                    <tr>
+                                        <th class="no-wrap">#</th>
+                                        <th class="no-wrap">Image</th>
+                                        <th class="no-wrap">Ref</th>
+                                        <th class="no-wrap">Ean</th>
+                                        <th  class="no-wrap">Titre</th>
+                                        <th style="max-width: 200px">Desc courte</th>
+                                        <th class="no-wrap">Création</th>
+                                        <th class="no-wrap">Status</th>
+                                        <th class="no-wrap">Catégorie</th>
+                                        <th class="no-wrap">Sous catégorie</th>
+                                        <th class="no-wrap">Actif</th>
+                                        <th class="no-wrap">Stock</th>
+                                        <th style="min-width: 150px;"></th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    {% for produit in produits %}
+                                    <tr>
+                                        <td>{{ produit.prId }}</td>
+                                        <td>
+                                            <img loading="lazy" src="{{ produit.images.count > 0 ? produit.images[0].piImg : ''}}" style="height: 70px;width: auto;border-radius: 0;">
+
+                                        </td>
+                                        <td>{{ produit.prRef }}</td>
+                                        <td></td>
+                                        <td>{{ produit.prTitre }}</td>
+                                        <td>{{ produit.prDescShort}}</td>
+                                        <td>{{ produit.prDateCreation|date('Y-m-d h:i:s') }}</td>
+                                        <td></td>
+                                        <td>{{ produit.cat.caTitre }}</td>
+                                        <td>{{ produit.cat2.caTitre }}</td>
+                                        <td>{{ produit.prActif ? 'actif' : 'non actif' }}</td>
+                                        <td>{{ produit.prStock }}
+                                            <?php</td>
+                                        <td class="text-center">
+                                            <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/produit?id={{ produit.prId }}" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
+                                            <a style="padding: 10px;" target="_blank" class="btn btn-gradient-success btn-rounded btn-icon mr-2" href="page-produit-edit.php?id=" title="Editer"><i class="fa fa-edit icon-btn"></i></a>
+                                            <a style="padding: 10px;" class="btn btn-gradient-danger btn-rounded btn-icon mr-2 text-white" title="Supprimer" data-toggle="modal" data-target="#del-produit" data-titre=""><i class="fa fa-trash icon-btn"></i></a>
+                                        </td>
+                                    </tr>
+                                    <?php } ?>
+                                    {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card grid-margin">
+                <form method="POST" action="#" enctype="multipart/form-data">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-12">
+                                <h4 class="card-title float-left">Gestion du stock des produits</h4>
+                            </div>
+                            <div class="col-12 mt-5">
+                                <label>Nouveau fichier de stock</label><br>
+                                <input type="file" id="pr_stock" name="pr_stock" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-gradient-info pull-right mr-3" name="update_stock"><i class="fa fa-floppy-o mr-2" aria-hidden="true"></i> ENREGISTRER</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
