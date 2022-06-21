@@ -11,6 +11,7 @@ class BoutiqueController extends AbstractController
 
     public function boutique()
     {
+
         return $this->render('front/default/produits.html.twig', [
 
         ]);

@@ -185,6 +185,29 @@ class TShopProduit
     private $prPopu = 0;
 
     /**
+     * @var double
+     *
+     * @ORM\Column(name="pr_prix", type="decimal",precision=2, scale=1, nullable=false)
+     */
+    private $prPrix;
+
+    /**
+     * @return float
+     */
+    public function getPrPrix(): float
+    {
+        return $this->prPrix;
+    }
+
+    /**
+     * @param float $prPrix
+     */
+    public function setPrPrix(float $prPrix): void
+    {
+        $this->prPrix = $prPrix;
+    }
+
+    /**
      * @ORM\ManyToOne(targetEntity=TShopProduitCategorie::class)
      * @ORM\JoinColumn(name="pr_id_cat1", referencedColumnName="ca_id")
      */

@@ -84,10 +84,10 @@
                                 <div class="form-group">
                                     <label>Produit à mettre en avant</label><br>
                                     <div class="form-check d-inline">
-                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant" value="1"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant" value="1"  {{ produit != null? produit.prMiseAvant == 1 ? 'checked' : '' : '' }} > Actif </label>
                                     </div>
                                     <div class="form-check d-inline">
-                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant" value="0"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant" value="0"  {{ produit != null? produit.prMiseAvant == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
                                     </div>
                                 </div>
                             </div>
@@ -95,10 +95,10 @@
                                 <div class="form-group">
                                     <label>Produit à mettre en avant dans le panier</label><br>
                                     <div class="form-check d-inline">
-                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="1"  {{ produit != null? produit.prPopu == 1 ? 'checked' : '' : '' }} > Actif </label>
+                                        <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="1"  {{ produit != null? produit.prMiseAvantPanier == 1 ? 'checked' : '' : '' }} > Actif </label>
                                     </div>
                                     <div class="form-check d-inline">
-                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="0"  {{ produit != null? produit.prPopu == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
+                                        <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="pr_mise_avant_panier" value="0"  {{ produit != null? produit.prMiseAvantPanier == 0 ? 'checked' : '' : 'checked' }} > Inactif </label>
                                     </div>
                                 </div>
                             </div>

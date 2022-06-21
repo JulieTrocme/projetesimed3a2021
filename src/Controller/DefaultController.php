@@ -15,10 +15,17 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends AbstractController
 {
 
-    public function index()
+    public function index(ManagerRegistry $doctrine)
     {
+        $newProduit =  $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findBy(['prNouveaux'=>1]);
+        $popuProduit =  $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findBy(['prPopu'=>1]);
         return $this->render('front/default/index.html.twig', [
-
+            'newProduit'=>$newProduit,
+            'popuProduit'=>$popuProduit
         ]);
     }
 
@@ -114,7 +121,7 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function produit_add()
+    public function produit_add(Request $request,ManagerRegistry $doctrine)
     {
         $id = $request->query->get('id');
 

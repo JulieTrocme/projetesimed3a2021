@@ -25,7 +25,7 @@ membre:
 administrateur:
     path: /administrateur
     controller: App\Controller\SecurityController::login
-admin_boutique:
+admin_produit:
     path: /administrateur/produit
     controller: App\Controller\DefaultController::admin_produit
 admin_categorie:
