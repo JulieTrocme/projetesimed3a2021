@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Controller;
+namespace App\Controller\admin;
 use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;

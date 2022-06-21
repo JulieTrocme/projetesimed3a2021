@@ -7,7 +7,7 @@ boutique:
 produit:
     path: /produit
     controller: App\Controller\DefaultController::produit
-login:
+connexion:
     path: /connexion
     controller: App\Controller\UserSecurityController::login
 register:

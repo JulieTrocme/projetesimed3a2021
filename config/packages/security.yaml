@@ -22,24 +22,27 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        main:
+
+        admin:
+            pattern:   ^/administrateur
             lazy: true
             provider: app_admin_provider
             custom_authenticator:
                 - App\Security\AdminFormAuthenticator
-
             logout:
                 path: app_logout
                 target: administrateur
+
         user:
+            pattern:   ^/
             lazy: true
             provider: app_user_provider
             custom_authenticator:
                 - App\Security\UserFormAuthenticator
-
             logout:
                 path: app_logout
                 target: membre
+
 
 
             # activate different ways to authenticate
@@ -52,5 +55,5 @@ security:
     # Note: Only the *first* access control that matches will be used
     access_control:
          - { path: ^/administrateur/, roles: ROLE_ADMIN }
-         - { path: ^/membre, roles: ROLE_USER }
+         #- { path: ^/membre, roles: ROLE_USER }
         # - { path: ^/profile, roles: ROLE_USER }

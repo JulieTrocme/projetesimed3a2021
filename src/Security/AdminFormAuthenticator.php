@@ -38,7 +38,7 @@ class AdminFormAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $adLogin = $request->request->get('username', '');
-        dd($adLogin);
+
         $request->getSession()->set(Security::LAST_USERNAME, $adLogin);
 
         return new Passport(

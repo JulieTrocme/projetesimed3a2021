@@ -2,10 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\TShopPays;
 use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
 use App\Entity\TShopProduitMaison;
+use App\Entity\TShopUser;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -46,13 +48,6 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function login()
-    {
-        return $this->render('front/default/login.html.twig', [
-
-        ]);
-    }
-
     public function register()
     {
         return $this->render('front/default/register.html.twig', [
@@ -74,10 +69,17 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function membre()
+    public function membre(ManagerRegistry $doctrine)
     {
-        return $this->render('front/default/membre.html.twig', [
+        $user = $doctrine
+            ->getRepository(TShopUser::class)
+            ->findOneBy(['uId'=>1]);
 
+        $pays = $doctrine->getRepository(TShopPays::class)->findAll();
+
+        return $this->render('front/default/membre.html.twig', [
+            'user' => $user,
+            'listepays' => $pays
         ]);
     }
 

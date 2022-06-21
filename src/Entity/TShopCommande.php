@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -125,6 +126,51 @@ class TShopCommande
      * @ORM\Column(name="cde_num", type="integer", nullable=true, options={"default"="NULL"})
      */
     private $cdeNum = NULL;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity=TShopCommandeLigne::class, mappedBy="commande", orphanRemoval=true)
+     *
+     */
+    private Collection $lignes;
+
+    /**
+     * @return Collection
+     */
+    public function getLignes(): Collection
+    {
+        return $this->lignes;
+    }
+
+    /**
+     * @param Collection $lignes
+     */
+    public function setLignes(Collection $lignes): void
+    {
+        $this->lignes = $lignes;
+    }
+
+    /**
+     * @return TShopUser
+     */
+    public function getUser(): TShopUser
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param TShopUser $user
+     */
+    public function setUser(TShopUser $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopUser::class)
+     * @ORM\JoinColumn(name="cde_cli_id", referencedColumnName="u_id")
+     */
+    private TShopUser $user;
 
     public function getCdeId(): ?int
     {
