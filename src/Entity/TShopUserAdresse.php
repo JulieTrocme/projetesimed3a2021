@@ -103,14 +103,58 @@ class TShopUserAdresse
      *
      * @ORM\Column(name="a_date_creation", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $aDateCreation = 'NULL';
+    private $aDateCreation;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="a_date_modification", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $aDateModification = 'NULL';
+    private $aDateModification;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopUser::class)
+     * @ORM\JoinColumn(name="a_id_user", referencedColumnName="u_id")
+     */
+    private TShopUser $user;
+
+    /**
+     * @return TShopUser
+     */
+    public function getUser(): TShopUser
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param TShopUser $user
+     */
+    public function setUser(TShopUser $user): void
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return TShopPays
+     */
+    public function getPays(): TShopPays
+    {
+        return $this->pays;
+    }
+
+    /**
+     * @param TShopPays $pays
+     */
+    public function setPays(TShopPays $pays): void
+    {
+        $this->pays = $pays;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopPays::class)
+     * @ORM\JoinColumn(name="a_id_pays", referencedColumnName="p_id")
+     */
+    private TShopPays $pays;
 
     public function getAId(): ?int
     {

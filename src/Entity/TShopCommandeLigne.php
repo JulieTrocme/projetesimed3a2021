@@ -56,6 +56,50 @@ class TShopCommandeLigne
      */
     private $clMtn;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopCommande::class)
+     * @ORM\JoinColumn(name="cl_cde_id", referencedColumnName="cde_id")
+     */
+    private TShopCommande $commande;
+
+    /**
+     * @return TShopCommande
+     */
+    public function getCommande(): TShopCommande
+    {
+        return $this->commande;
+    }
+
+    /**
+     * @param TShopCommande $commande
+     */
+    public function setCommande(TShopCommande $commande): void
+    {
+        $this->commande = $commande;
+    }
+
+    /**
+     * @return TShopProduit
+     */
+    public function getArticle(): TShopProduit
+    {
+        return $this->article;
+    }
+
+    /**
+     * @param TShopProduit $article
+     */
+    public function setArticle(TShopProduit $article): void
+    {
+        $this->article = $article;
+    }
+
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopProduit::class)
+     * @ORM\JoinColumn(name="cl_art_id", referencedColumnName="pr_id")
+     */
+    private TShopProduit $article;
+
     public function getClId(): ?int
     {
         return $this->clId;

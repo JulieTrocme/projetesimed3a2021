@@ -27,7 +27,7 @@
                     <div class="form-wrap">
                         <div class="row">
                             <div class="col-md-3"><p>Email : </p></div>
-                            <div class="col-md-4"><p>toto.dupont@gmail.com</p></div>
+                            <div class="col-md-4"><p>{{user.uEmail}}</p></div>
                             <div class="col-md-5">
                                 <button type="button" class="rd-navbar-basket" data-toggle="modal" data-target="#modalEmail">
                                     <img src="images/icone/2730272_feather_harry_potter_quill_solid_icon.png" style="width: 35px;">
@@ -82,22 +82,135 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
-                            <td  style="display: none;" class="id">1</td>
-                            <td  style="display: none;" class="nom">Dupont</td>
-                            <td  style="display: none;" class="prenom">Toto</td>
-                            <td>Dupont toto</td>
-                            <td class="adresse"><chiffre>115 </allée des verriers</td>
-                            <td class="complement">Villa azzuro, batiment A</td>
-                            <td class="ville">Marseille</td>
-                            <td class="code"><chiffre>13009</chiffre></td>
-                            <td class="pays">France</td>
-                            <td  style="display: none;" class="tel1">04 90 57 48 31</td>
-                            <td  style="display: none;" class="tel2">06 90 57 48 31</td>
-                            <td><chiffre>04 90 57 48 31<br>06 90 57 48 31</chiffre></td>
-                            <td><button type="button" id="del-adresse"  class="rd-navbar-basket" data-toggle="modal" data-target="#modalDelAdresse" onclick=""><img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" style="width: 35px;"></button>
-                                <button type="button" id="upd-adresse"  class="rd-navbar-basket" data-toggle="modal" data-target="#modalUpdAdresse" onclick=""><img src="images/icone/2730272_feather_harry_potter_quill_solid_icon.png" style="width: 35px;"></button></td>
-                        </tr>
+                        {% for adresse in user.adresses %}
+                            {% if adresse.aActif == 1 %}
+                            <tr>
+                                <td  style="display: none;" class="id">{{ adresse.aId }}</td>
+                                <td  style="display: none;" class="nom">{{ adresse.aNom }}</td>
+                                <td  style="display: none;" class="prenom">{{ adresse.aPrenom }}</td>
+                                <td>{{ adresse.aNom }} {{ adresse.aPrenom }}</td>
+                                <td class="adresse">{{ adresse.aAdresse1 }}</td>
+                                <td class="complement">{{ adresse.aAdresse2 }}</td>
+                                <td class="ville">{{ adresse.aVille }}</td>
+                                <td class="code">{{ adresse.aCode }}</td>
+                                <td class="pays">{{ adresse.pays.pLibelle }}</td>
+                                <td  style="display: none;" class="tel1">{{ adresse.aTelephone1 }}</td>
+                                <td  style="display: none;" class="tel2">{{ adresse.aTelephone2 }}</td>
+                                <td><chiffre>{{ adresse.aTelephone1 }}<br>{{ adresse.aTelephone2 }}</chiffre></td>
+                                <td><button type="button" id="del-adresse"  class="rd-navbar-basket" data-toggle="modal" data-target="#modalDelAdresse{{ adresse.aId }}" onclick=""><img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" style="width: 35px;"></button>
+                                    <button type="button" id="upd-adresse"  class="rd-navbar-basket" data-toggle="modal" data-target="#modalUpdAdresse{{ adresse.aId }}" onclick=""><img src="images/icone/2730272_feather_harry_potter_quill_solid_icon.png" style="width: 35px;"></button></td>
+                            </tr>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalUpdAdresse{{ adresse.aId }}" tabindex="-1" role="dialog" aria-labelledby="modalUpdAdresseLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalUpdAdresseLabel">Modification d'adresse</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form class="rd-form mt-0" method="post" action="/membre/addAdresse">
+                                            <div class="modal-body">
+                                                <div class="row row-15">
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input type="hidden" name="id" class="idAdresseUpd" value="{{ adresse.aId }}">
+                                                            <input class="form-input nomUpd" id="checkout-first-name-1" type="text" name="nom" value="{{ adresse.aNom }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-first-name-1" id="labelNom">Nom</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input prenomUpd" id="checkout-last-name-1" type="text" name="prenom" value="{{ adresse.aPrenom }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-last-name-1" id="labelPrenom">Prénom</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input tel1Upd" id="checkout-phone-1" type="text" name="telephone1" value="{{ adresse.aTelephone1 }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-phone-1" id="labelTel">Téléphone</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input tel1Upd" id="checkout-phone-2" type="text" name="telephone2" value="{{ adresse.aTelephone2 }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-phone-2" id="labelTel2">Téléphone</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input adresseUpd" id="checkout-address-1" type="text" name="adresse1" value="{{ adresse.aAdresse1 }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-address-1" id="labelAdresse">Adresse</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input complementUpd" id="checkout-address-2" type="text" name="adresse2"  value="{{ adresse.aAdresse2 }}">
+                                                            <label class="form-label rd-input-label" for="checkout-address-2" id="labelCompl">Complement d'adresse</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input villeUpd" id="checkout-city-1" type="text" name="ville" value="{{ adresse.aVille }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-city-1" id="labelVille">Ville</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-wrap">
+                                                            <input class="form-input cpUpd" id="checkout-cp-1" type="text" name="cp" value="{{ adresse.aCode }}" required>
+                                                            <label class="form-label rd-input-label" for="checkout-cp-1" id="labelcp">Code postal</label>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-12">
+                                                        <div class="form-wrap">
+                                                            <select name="pays" id="pays" class="form-input paysUpd" required>
+                                                                {% for pays in listepays %}
+                                                                    <option value="{{ pays.pId }}" {{ adresse.aIdPays == 75 ? 'selected' : ''}}>{{ pays.pLibelle }}</option>
+                                                                {% endfor %}
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="button button-secondary" data-dismiss="modal">Fermer</button>
+                                                <button type="submit" name="upd-adresse" class="button button-primary">Enregistrer</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Modal -->
+                            <div class="modal fade" id="modalDelAdresse{{ adresse.aId }}" tabindex="-1" role="dialog" aria-labelledby="modalDelAdresseLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="modalDelAdresseLabel">Suppression d'adresse</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <form class="rd-form" method="post" action="/membre/adresse/delete">
+                                            <div class="modal-body">
+                                                <div class="row row-30">
+                                                    <div class="col-md-12">
+                                                        <p>Confirmer la suppression de cette adresse ?</p>
+                                                        <input type="hidden" id="id" name="id" value="{{ adresse.aId }}">
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="button button-secondary" data-dismiss="modal">Non</button>
+                                                <button type="submit" name="del-adresse" class="button button-primary">Oui</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                         </tbody>
                     </table>
                 </div>
@@ -112,12 +225,14 @@
                     <h2 class="fs-40">Mes commandes</h2>
                     <!-- Bootstrap collapse-->
                     <div class="card-custom-group text-left" id="accordion1" role="tablist" aria-multiselectable="true">
+                        {% for commande in user.commandes %}
                         <!-- Bootstrap card-->
                         <article class="card card-custom card-custom-default">
                             <div class="card-custom-heading" role="tab">
                                 <p class="card-custom-title">
                                     <a id="accordion1-card-head-qtpwelxd" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-agesbltr" aria-controls="accordion1-card-body-agesbltr" aria-expanded="true" role="button">
-                                        Commande N°<chiffre>1</chiffre> du <chiffre>02/03/2022</chiffre>, Total TTC : <chiffre>35.78</chiffre> €
+                                        Commande N°<chiffre>{{ commande.cdeId }}</chiffre> du <chiffre>{{ commande.cdeDate|date('d/m/Y') }}</chiffre>, Total TTC : <chiffre>
+                                        {{ commande.cdeMtn }}</chiffre> €
                                     </a>
                                 </p>
                             </div>
@@ -134,71 +249,21 @@
                                         </tr>
                                         </thead>
                                         <tbody>
-
+                                        {% for ligne in commande.lignes %}
                                         <tr>
-                                            <td><img loading="lazy" style="height: 70px;" src="images/produits/produit1.jpg" alt="titre produit"> </td>
-                                            <td>FIGURINE NENDOROID HARRY POTTER</td>
-                                            <td><chiffre>17.58</chiffre> €</td>
-                                            <td>1</td>
-                                            <td><chiffre>17.58</chiffre> €</td>
+                                            <td><img loading="lazy" style="height: 70px;" src="{{ ligne.article.images.count > 0 ? ligne.article.images[0].piImg : ''}}" > </td>
+                                            <td>{{ ligne.article.prTitre }}</td>
+                                            <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
+                                            <td>{{ ligne.clQte }}</td>
+                                            <td><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> €</td>
                                         </tr>
-                                        <tr>
-                                            <td><img loading="lazy" style="height: 70px;" src="images/produits/produit2.jpg" alt="titre produit"> </td>
-                                            <td>FIGURINE NENDOROID HARRY POTTER</td>
-                                            <td><chiffre>17.80</chiffre> €</td>
-                                            <td>1</td>
-                                            <td><chiffre>35.60</chiffre> €</td>
-                                        </tr>
-
-
+                                        {% endfor %}
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
                         </article>
-                        <!-- Bootstrap card-->
-                        <article class="card card-custom card-custom-default">
-                            <div class="card-custom-heading" role="tab">
-                                <p class="card-custom-title">
-                                    <a class="collapsed" id="accordion1-card-head-aegajsmu" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-ufabbdti" aria-controls="accordion1-card-body-ufabbdti" aria-expanded="false" role="button">
-                                        Commande N°<chiffre>2</chiffre> du <chiffre>05/03/2022</chiffre>, Total TTC : <chiffre>35.78</chiffre> €
-                                    </a></p>
-                            </div>
-                            <div class="card-custom-collapse collapse" id="accordion1-card-body-ufabbdti" aria-labelledby="accordion1-card-head-aegajsmu" data-parent="#accordion1">
-                                <div class="card-custom-body">
-                                    <table class="table table-cart">
-                                        <thead>
-                                        <tr>
-                                            <th>Produit</th>
-                                            <th></th>
-                                            <th>Prix unitaire</th>
-                                            <th>Quantité</th>
-                                            <th>Total</th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-
-                                        <tr>
-                                            <td><img loading="lazy" style="height: 70px;" src="images/produits/produit1.jpg" alt="titre produit"> </td>
-                                            <td>FIGURINE NENDOROID HARRY POTTER</td>
-                                            <td><chiffre>17.58</chiffre> €</td>
-                                            <td>1</td>
-                                            <td><chiffre>17.58</chiffre> €</td>
-                                        </tr>
-                                        <tr>
-                                            <td><img loading="lazy" style="height: 70px;" src="images/produits/produit2.jpg" alt="titre produit"> </td>
-                                            <td>FIGURINE NENDOROID HARRY POTTER</td>
-                                            <td><chiffre>17.80</chiffre> €</td>
-                                            <td>1</td>
-                                            <td><chiffre>35.60</chiffre> €</td>
-                                        </tr>
-
-
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                        </article>
+                        {% endfor %}
 
                     </div>
                 </div>
@@ -218,12 +283,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="rd-form" method="post" action="#">
+                <form class="rd-form" method="post" action="/membre/edit">
                     <div class="modal-body">
                         <div class="form-wrap">
                             <input class="form-input form-control-has-validation" id="email" type="email" name="email"  value="" required><span class="form-validation"></span>
                             <label class="form-label rd-input-label" for="email">E-mail</label>
-                            <input type="hidden" name="id" value="">
+                            <input type="hidden" name="id" value="{{ user.uId }}">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -245,12 +310,12 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="rd-form" method="post" action="#">
+                <form class="rd-form" method="post" action="/membre/edit">
                     <div class="modal-body">
                         <div class="form-wrap">
                             <input class="form-input form-control-has-validation" id="password" type="password" name="password" required><span class="form-validation"></span>
                             <label class="form-label rd-input-label" for="password">Taper ici le nouveau mot de passe</label>
-                            <input type="hidden" name="id" value="">
+                            <input type="hidden" name="id" value="{{ user.uId }}">
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -272,7 +337,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <form class="rd-form mt-0" method="post" action="#">
+                <form class="rd-form mt-0" method="post" action="/membre/addAdresse">
                     <div class="modal-body">
                         <div class="row row-15">
                             <div class="col-6">
@@ -289,14 +354,14 @@
                             </div>
                             <div class="col-6">
                                 <div class="form-wrap">
-                                    <input class="form-input" id="checkout-company-2" type="text" name="societe">
-                                    <label class="form-label rd-input-label" for="checkout-company-2">Société</label>
+                                    <input class="form-input" id="checkout-phone-3" type="text" name="telephone1" required>
+                                    <label class="form-label rd-input-label" for="checkout-phone-3">Téléphone</label>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-wrap">
-                                    <input class="form-input" id="checkout-phone-3" type="text" name="telephone1" required>
-                                    <label class="form-label rd-input-label" for="checkout-phone-3">Téléphone</label>
+                                    <input class="form-input" id="checkout-phone-4" type="text" name="telephone2" required>
+                                    <label class="form-label rd-input-label" for="checkout-phone-4">Téléphone</label>
                                 </div>
                             </div>
                             <div class="col-12">
@@ -327,8 +392,9 @@
                                 <div class="form-wrap">
                                     <select name="pays" id="pays1" class="form-input" required>
                                         <option value="">--Choisir un pays--</option>
-
-                                        <option value="75">France</option>
+                                        {% for pays in listepays %}
+                                            <option value="{{ pays.pId }}" >{{ pays.pLibelle }}</option>
+                                        {% endfor %}
 
                                     </select>
                                 </div>
@@ -345,116 +411,9 @@
         </div>
     </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalDelAdresse" tabindex="-1" role="dialog" aria-labelledby="modalDelAdresseLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalDelAdresseLabel">Suppression d'adresse</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="rd-form" method="post" action="#">
-                    <div class="modal-body">
-                        <div class="row row-30">
-                            <div class="col-md-12">
-                                <p>Confirmer la suppression de cette adresse ?</p>
-                                <input type="hidden" id="idAdresse" name="idAdresse">
-                            </div>
 
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="button button-secondary" data-dismiss="modal">Non</button>
-                        <button type="submit" name="del-adresse" class="button button-primary">Oui</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
-    <!-- Modal -->
-    <div class="modal fade" id="modalUpdAdresse" tabindex="-1" role="dialog" aria-labelledby="modalUpdAdresseLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="modalUpdAdresseLabel">Modification d'adresse</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <form class="rd-form mt-0" method="post" action="#">
-                    <div class="modal-body">
-                        <div class="row row-15">
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input type="hidden" name="idAdresse" class="idAdresseUpd">
-                                    <input class="form-input nomUpd" id="checkout-first-name-1" type="text" name="nomUpd" required>
-                                    <label class="form-label rd-input-label" for="checkout-first-name-1" id="labelNom">Nom</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input class="form-input prenomUpd" id="checkout-last-name-1" type="text" name="prenomUpd" required>
-                                    <label class="form-label rd-input-label" for="checkout-last-name-1" id="labelPrenom">Prénom</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input class="form-input societeUpd" id="checkout-company-1" type="text" name="societeUpd">
-                                    <label class="form-label rd-input-label" for="checkout-company-1" id="labelSociete">Société</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input class="form-input tel1Upd" id="checkout-phone-1" type="text" name="telephone1Upd" required>
-                                    <label class="form-label rd-input-label" for="checkout-phone-1" id="labelTel">Téléphone</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-wrap">
-                                    <input class="form-input adresseUpd" id="checkout-address-1" type="text" name="adresse1Upd" required>
-                                    <label class="form-label rd-input-label" for="checkout-address-1" id="labelAdresse">Adresse</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-wrap">
-                                    <input class="form-input complementUpd" id="checkout-address-2" type="text" name="adresse2Upd">
-                                    <label class="form-label rd-input-label" for="checkout-address-2" id="labelCompl">Complement d'adresse</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input class="form-input villeUpd" id="checkout-city-1" type="text" name="villeUpd" required>
-                                    <label class="form-label rd-input-label" for="checkout-city-1" id="labelVille">Ville</label>
-                                </div>
-                            </div>
-                            <div class="col-6">
-                                <div class="form-wrap">
-                                    <input class="form-input cpUpd" id="checkout-cp-1" type="text" name="cpUpd" required>
-                                    <label class="form-label rd-input-label" for="checkout-cp-1" id="labelcp">Code postal</label>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <div class="form-wrap">
-                                    <select name="paysUpd" id="pays" class="form-input paysUpd" required>
-                                        <select name="pays" id="pays" class="form-input" required>
-                                            <option value="75">France</option>
-                                        </select>
-                                    </select>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="button button-secondary" data-dismiss="modal">Fermer</button>
-                        <button type="submit" name="upd-adresse" class="button button-primary">Enregistrer</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 
 
 {% endblock %}

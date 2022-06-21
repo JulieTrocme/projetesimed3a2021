@@ -19,23 +19,22 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="modification et suppression categorie et souscategorie">
+    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="connexion/déconnexion admin">
+      <change afterPath="$PROJECT_DIR$/src/Controller/front/CompteController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/packages/security.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/packages/security.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/BoutiqueController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/CategorieController.php" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/ProduitController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SousCategorieController.php" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TAdmin.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TAdmin.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TShopProduit.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopProduit.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/admin/SousCategorieController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/admin/SousCategorieController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/front/ProduitController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/front/ProduitController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopCommande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopCommandeLigne.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopCommandeLigne.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Entity/TShopUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_categorie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_categorie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/categorie_add.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/categorie_add.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/default/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/login.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopUserAdresse.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopUserAdresse.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/AdminFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/AdminFormAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Security/UserFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UserFormAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/default/membre.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/membre.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -241,7 +240,8 @@
       <workItem from="1655276546816" duration="15277000" />
       <workItem from="1655363501719" duration="18494000" />
       <workItem from="1655712355050" duration="5304000" />
-      <workItem from="1655717822336" duration="5479000" />
+      <workItem from="1655717822336" duration="12601000" />
+      <workItem from="1655795863193" duration="12948000" />
     </task>
     <task id="LOCAL-00001" summary="fdsfsdf">
       <created>1638453990695</created>
@@ -292,7 +292,21 @@
       <option name="project" value="LOCAL" />
       <updated>1655381112740</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="connexion/déconnexion admin">
+      <created>1655728331320</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1655728331320</updated>
+    </task>
+    <task id="LOCAL-00009" summary="connexion/déconnexion admin">
+      <created>1655728439358</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1655728439358</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -317,7 +331,8 @@
     <MESSAGE value="page des catégorie et sous catégories" />
     <MESSAGE value="ajout categorie et souscategorie" />
     <MESSAGE value="modification et suppression categorie et souscategorie" />
-    <option name="LAST_COMMIT_MESSAGE" value="modification et suppression categorie et souscategorie" />
+    <MESSAGE value="connexion/déconnexion admin" />
+    <option name="LAST_COMMIT_MESSAGE" value="connexion/déconnexion admin" />
   </component>
   <component name="WindowStateProjectService">
     <state x="426" y="108" key="#Inspections" timestamp="1655295788904">
@@ -328,47 +343,54 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="540" y="232" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1600.860@0.0.1600.860" timestamp="1655212103513" />
-    <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser" timestamp="1655725428100">
+    <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser" timestamp="1655801659475">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1655725428100" />
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655725420980">
+    <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1655801659475" />
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655814999382">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655725420980" />
-    <state x="-1608" y="-24" key="DiffContextDialog" timestamp="1655192550541">
-      <screen x="-1920" y="-182" width="1920" height="1040" />
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655814999382" />
+    <state x="260" y="131" width="1280" height="716" key="DiffContextDialog" timestamp="1655817808744">
+      <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="-1608" y="-24" key="DiffContextDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655192550541" />
-    <state x="-1608" y="-24" key="MergeDialog" timestamp="1655196749202">
-      <screen x="-1920" y="-182" width="1920" height="1040" />
-    </state>
-    <state x="-1608" y="-24" key="MergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196749202" />
-    <state x="-1322" y="99" key="MultipleFileMergeDialog" timestamp="1655196759296">
-      <screen x="-1920" y="-182" width="1920" height="1040" />
-    </state>
-    <state x="-1322" y="99" key="MultipleFileMergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196759296" />
-    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1655371248632">
+    <state x="260" y="131" width="1280" height="716" key="DiffContextDialog/0.0.1600.860@0.0.1600.860" timestamp="1655817808744" />
+    <state x="260" y="131" key="MergeDialog" timestamp="1655728741122">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655371248631" />
+    <state x="-1608" y="-24" key="MergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196749202" />
+    <state x="260" y="131" key="MergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728741122" />
+    <state x="498" y="232" key="MultipleFileMergeDialog" timestamp="1655728743241">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="-1322" y="99" key="MultipleFileMergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196759296" />
+    <state x="498" y="232" key="MultipleFileMergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728743241" />
+    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1655804078270">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655804078270" />
     <state x="615" y="133" key="RollbackChangesDialog" timestamp="1655103870919">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="615" y="133" key="RollbackChangesDialog/0.0.1600.860/1600.0.1920.1040@0.0.1600.860" timestamp="1655103870919" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655381123935">
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655728860222">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="-1368" y="71" key="Vcs.Push.Dialog.v2/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655197955865" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655381123935" />
-    <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1655295732925">
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655728860222" />
+    <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1655728423372">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1600.860@0.0.1600.860" timestamp="1655295732925" />
-    <state x="556" y="98" width="555" height="663" key="find.popup" timestamp="1655212091713">
+    <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728423372" />
+    <state x="556" y="98" width="555" height="663" key="find.popup" timestamp="1655734035944">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="-1253" y="-63" width="585" height="801" key="find.popup/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655194170561" />
-    <state x="556" y="98" width="555" height="663" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1655212091713" />
+    <state x="556" y="98" width="555" height="663" key="find.popup/0.0.1600.860@0.0.1600.860" timestamp="1655734035944" />
+    <state x="610" y="329" key="git4idea.ui.GitStashDialog" timestamp="1655728271042">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="610" y="329" key="git4idea.ui.GitStashDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728271042" />
   </component>
 </project>

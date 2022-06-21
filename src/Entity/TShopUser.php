@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -85,6 +86,53 @@ class TShopUser implements UserInterface
      * @ORM\Column(name="u_actif", type="boolean", nullable=false)
      */
     private $uActif = '0';
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity=TShopUserAdresse::class, mappedBy="user", orphanRemoval=true)
+     *
+     */
+    private Collection $adresses;
+
+    /**
+     * @var Collection
+     * @ORM\OneToMany(targetEntity=TShopCommande::class, mappedBy="user", orphanRemoval=true)
+     *
+     */
+    private Collection $commandes;
+
+    /**
+     * @return Collection
+     */
+    public function getCommandes(): Collection
+    {
+        return $this->commandes;
+    }
+
+    /**
+     * @param Collection $commandes
+     */
+    public function setCommandes(Collection $commandes): void
+    {
+        $this->commandes = $commandes;
+    }
+
+    /**
+     * @return Collection
+     */
+    public function getAdresses(): Collection
+    {
+        return $this->adresses;
+    }
+
+    /**
+     * @param Collection $adresses
+     */
+    public function setAdresses(Collection $adresses): void
+    {
+        $this->adresses = $adresses;
+    }
+
 
     public function getUId(): ?int
     {
@@ -202,7 +250,7 @@ class TShopUser implements UserInterface
 
     public function getRoles()
     {
-        $roles[] = 'ROLE_ADMIN';
+        $roles[] = 'ROLE_USER';
 
         return array_unique($roles);
     }
@@ -224,7 +272,7 @@ class TShopUser implements UserInterface
 
     public function getUsername()
     {
-        return $this->getUsername();
+        return $this->getUEmail();
     }
 
     public function __call($name, $arguments)
