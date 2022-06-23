@@ -29,7 +29,7 @@ class TShopUser implements UserInterface
      *
      * @ORM\Column(name="u_id_rang", type="integer", nullable=false)
      */
-    private $uIdRang;
+    private $uIdRang = 0;
 
     /**
      * @var string|null
@@ -50,21 +50,21 @@ class TShopUser implements UserInterface
      *
      * @ORM\Column(name="u_date_creation", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $uDateCreation = 'NULL';
+    private $uDateCreation;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="u_date_modification", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $uDateModification = 'NULL';
+    private $uDateModification;
 
     /**
      * @var \DateTime|null
      *
      * @ORM\Column(name="u_date_connexion", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $uDateConnexion = 'NULL';
+    private $uDateConnexion;
 
     /**
      * @var string|null

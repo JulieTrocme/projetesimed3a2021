@@ -75,7 +75,7 @@ class CompteController extends AbstractController
         $user = $doctrine->getManager()->find(TShopUser::class,$request->request->get('id'));
 
         if($request->request->get('email') != null)$user->setUEmail($request->request->get('email'));
-        if($request->request->get('password') != null)$user->setPassword($passwordEncoder->encodePassword( $user, $request->request->get('password')));
+        if($request->request->get('password') != null)$user->setUPassword($passwordEncoder->encodePassword( $user, $request->request->get('password')));
 
         $doctrine->getManager()->flush();
 

@@ -24,19 +24,26 @@
             <div class="row row-30 justify-content-sm-center">
                 <div class="col-md-10 col-xl-8">
                     <h1 class="heading-decorative"><span>Inscription</span></h1>
+                    {% for type, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ type }}" role="alert">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     <!-- RD Mailform-->
-                    <form class="rd-mailform text-left" data-form-output="form-output-global" data-form-type="forms" method="post" action="bat/rd-mailform.php">
+                    <form class="rd-mailform text-left" data-form-output="form-output-global" data-form-type="forms" method="post" action="/register">
                         <div class="row justify-content-end row-10 row-horizontal-10">
                             <div class="col-md-12">
                                 <div class="form-wrap form-wrap-validation">
                                     <label class="form-label" for="forms-register-name">Prénom</label>
-                                    <input class="form-input" id="forms-register-name" type="text" name="name" data-constraints="@Required">
+                                    <input class="form-input" id="forms-register-name" type="text" name="prenom" data-constraints="@Required">
                                 </div>
                             </div>
                             <div class="col-md-12">
                                 <div class="form-wrap form-wrap-validation">
                                     <label class="form-label" for="forms-register-user-name">Nom</label>
-                                    <input class="form-input" id="forms-register-user-name" type="text" name="user-name" data-constraints="@Required">
+                                    <input class="form-input" id="forms-register-user-name" type="text" name="nom" data-constraints="@Required">
                                 </div>
                             </div>
                             <div class="col-md-12">

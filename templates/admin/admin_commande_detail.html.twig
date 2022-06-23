@@ -1,0 +1,133 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - détail commande" %}
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Page détail commande
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/administrateur/commande">Gestion des commandes</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Détail commande</li>
+                </ul>
+                </ul>
+            </nav>
+        </div>
+        <div class="card grid-margin">
+            <div class="card-body">
+                <div class="row">
+
+                    <div class="col-12">
+                        <h4 class="card-title float-left">Info commande</h4>
+                    </div>
+
+                    <div class="col-3 mt-3">
+                        <h4>Adresse de Facturation</h4><br>
+                        <p>{{ adressePaiement.aPrenom }} {{ adressePaiement.aNom }}<br>
+                            {{ adressePaiement.aAdresse1 }}<br>
+                            {{ adressePaiement.aAdresse2 }}<br>
+                            {{ adressePaiement.aCode }}<br>
+                            {{ adressePaiement.aVille }}<br>
+                            {{ adressePaiement.aTelephone1 }}<br>
+                        </p>
+                    </div>
+
+                    <div class="col-3 mt-3">
+                        <h4>Adresse de livraison</h4><br>
+                        <p style="font-weight: bold;">
+                            {{ adresseLivraison.aPrenom }} {{ adressePaiement.aNom }}<br>
+                            {{ adresseLivraison.aAdresse1 }}<br>
+                            {{ adresseLivraison.aAdresse2 }}<br>
+                            {{ adresseLivraison.aCode }}<br>
+                            {{ adresseLivraison.aVille }}<br>
+                            {{ adressePaiement.aTelephone1 }}<br>
+                        </p>
+                    </div>
+
+                    <div class="col-3 mt-3">
+                        <h4>Client</h4><br>
+                        <a href="/administration/detail_client?id={{commande.user.uId}}">
+                            {{commande.user.uEmail}}
+                        </a>
+                        <br><br><br>
+                        <h4>Date de la commande</h4><br>
+                        <p>{{ commande.cdeDate|date('d/m/Y H:i:s') }}</p><br>
+                    </div>
+                    <div class="col-3 mt-3">
+                        <h4>Code promo : {{ commande.cdeCodePromo }}</h4><br><br>
+                        <h4>État de la commande</h4><br>
+                        {% if commande.cdeEtatId == 2 %}
+                        <p name="cde_traite" class="btn btn-gradient-success" style="cursor:default">Commande payée</p><br>
+                        <form method="POST" action="/administrateur/commande/valider">
+                            <input hidden name="cde_id" value="{{ commande.cdeId }}">
+                            <button type="submit" name="cde_traite" class="btn btn-gradient-info mb-3">VALIDER COMMANDE</button><br>
+                        </form>
+                        <form method="POST" action="/administrateur/commande/annuler">
+                            <input hidden name="cde_id" value="{{ commande.cdeId }}">
+                            <button type="submit" name="cde_annule" class="btn btn-gradient-danger">ANNULER COMMANDE</button>
+                        </form>
+                        {% endif %}
+                        {% if commande.cdeEtatId == 3 %}
+                        <p name="cde_traite" class="btn btn-gradient-success" style="cursor:default">Commande traitée</p>
+                        {% endif %}
+                        {% if commande.cdeEtatId == 4 %}
+                        <p name="cde_traite" class="btn btn-gradient-danger" style="cursor:default">Commande annulée</p>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- tableau client -->
+        <div class="card grid-margin">
+            <div class="card-body">
+                <h4 class="card-title">Détail commande</h4><br>
+
+                <!-- SLIDES -->
+                <div class="row" >
+                    <div class="col-12 mt-5 mb-5 table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th>Produit</th>
+                                <th></th>
+                                <th>Prix unitaire</th>
+                                <th>Quantité</th>
+                                <th>Total</th>
+
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for ligne in commande.lignes %}
+                            <tr>
+                                <td><img loading="lazy" style="height: 70px;" src="{{ ligne.article.images.count > 0 ? ligne.article.images[0].piImg : ''}}" > </td>
+                                <td>{{ ligne.article.prTitre }}</td>
+                                <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
+                                <td>{{ ligne.clQte }}</td>
+                                <td><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> €</td>
+                            </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div class="col-md-6">
+                        <h2 class="m-text25 p-t-15 p-b-10">Commentaire</h2>
+                        <p>{{ commande.cdeCom }}</p>
+                    </div>
+                    <div class="col-md-6 mt-3 table-responsive">
+                        <h2 class="m-text25 p-t-15 p-b-10">Total panier</h2>
+                        <p>{{ commande.cdeMtn }} €</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

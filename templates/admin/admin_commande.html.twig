@@ -1,0 +1,69 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste commandes" %}
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Pages des commandes
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Gestion des commandes</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="card grid-margin">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="card-title float-left">Gestion des Commandes</h4>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <div class="table-responsive">
+                            <table id="data_cdePay" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th class="no-wrap">N° Cde</th>
+                                    <th class="no-wrap">Client</th>
+                                    <th class="no-wrap">Montant TTC</th>
+                                    <th class="no-wrap">Date</th>
+                                    <th class="no-wrap">Etat</th>
+                                    <th class="no-wrap text-right"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for commande in commandes %}
+                                <tr>
+                                    <td>{{ commande.cdeId }}</td>
+                                    <td>{{ commande.user.uEmail }}</td>
+                                    <td>{{commande.cdeMtn}}  €</td>
+                                    <td>{{ commande.cdeDate|date('d/m/Y H:i:s') }}</td>
+                                    {% if commande.cdeEtatId == 2 %}
+                                        <td><p style="color:orange">Payée</p></td>
+                                    {% endif %}
+                                    {% if commande.cdeEtatId == 3 %}
+                                        <td><p style="color:green">Validée</p></td>
+                                    {% endif %}
+                                    {% if commande.cdeEtatId == 4 %}
+                                        <td><p style="color:red">Annulée</p></td>
+                                    {% endif %}
+                                    <td class="text-center">
+                                        <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/administrateur/detail_commande?id={{ commande.cdeId }}" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

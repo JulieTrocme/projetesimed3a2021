@@ -28,6 +28,18 @@ administrateur:
 admin_produit:
     path: /administrateur/produit
     controller: App\Controller\DefaultController::admin_produit
+admin_commande:
+    path: /administrateur/commande
+    controller: App\Controller\DefaultController::admin_commande
+detail_commande:
+    path: /administrateur/detail_commande
+    controller: App\Controller\DefaultController::detail_commande
+detail_client:
+    path: /administrateur/detail_client
+    controller: App\Controller\DefaultController::detail_client
+admin_client:
+    path: /administrateur/client
+    controller: App\Controller\DefaultController::admin_client
 admin_categorie:
     path: /administrateur/categorie
     controller: App\Controller\DefaultController::admin_categorie

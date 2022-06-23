@@ -1,0 +1,65 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste clients" %}
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Pages des clients
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Gestion des clients</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="card grid-margin">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-12">
+                        <h4 class="card-title float-left">Gestion des clients</h4>
+                    </div>
+                    <div class="col-12 mt-5">
+                        <div class="table-responsive">
+                            <table id="data_pro" class="table table-bordered table-hover" style="width:100%;">
+                                <thead>
+                                <tr>
+                                    <th class="no-wrap">#</th>
+                                    <th class="no-wrap">Email</th>
+                                    <th class="no-wrap">Inscription</th>
+                                    <th class="no-wrap">Dernière connexion</th>
+
+                                    <th class="no-wrap text-right"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for client in clients %}
+                                <tr>
+                                    <td>#{{ client.uId }}</td>
+                                    <td class="no-wrap">{{client.uEmail}}</td>
+                                    <td>{{ client.uDateCreation|date('Y-m-d h:i:s') }}</td>
+                                    <td>{{ client.uDateConnexion|date('Y-m-d h:i:s') }}</td>
+                                    <td class="text-center">
+                                        <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/administrateur/detail_client?id={{ client.uId }}" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
+                                        <form method="post" action="/administration/client/delete" onsubmit="return confirm('Voulez vous vraiment supprimer ce client et toutes les données liées ?');">
+                                            <input hidden name="u_id" value="{{ client.uId }}">
+                                            <button type="submit" style="padding: 10px;" class="btn btn-gradient-danger btn-rounded btn-icon mr-2 text-white" title="Supprimer" ><i class="fa fa-trash icon-btn"></i></button>
+                                        </form>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

@@ -29,10 +29,10 @@
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                     <!-- RD Mailform-->
-                    <form class="rd-mailform text-center text-md-center" action="#" method="POST">
+                    <form class="rd-mailform text-center text-md-center" action="/login" method="POST">
                         <div class="form-wrap form-wrap-validation">
                             <label class="form-label" for="forms-login-email">E-mail</label>
-                            <input class="form-input" id="forms-login-email" type="email" name="email" data-constraints="@Required">
+                            <input class="form-input" id="forms-login-email" type="email" name="username" data-constraints="@Required">
                         </div>
                         <div class="form-wrap form-wrap-validation">
                             <label class="form-label" for="forms-login-password">Mot de passe</label>

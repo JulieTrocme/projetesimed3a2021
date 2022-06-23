@@ -58,7 +58,7 @@ class AdminFormAuthenticator extends AbstractLoginFormAuthenticator
             return new RedirectResponse($targetPath);
         }
 
-        return new RedirectResponse($this->urlGenerator->generate('admin_boutique'));
+        return new RedirectResponse($this->urlGenerator->generate('admin_produit'));
     }
 
     protected function getLoginUrl(Request $request): string

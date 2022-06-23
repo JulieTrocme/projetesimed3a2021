@@ -1,0 +1,148 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste clients" %}
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Page détail client
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page"><a href="/administrateur/client">Gestion des clients</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Détail client</li>
+                </ul>
+            </nav>
+        </div>
+
+        <section class="section section-sm bg-default text-md-left">
+            <div class="container">
+                <h2 class="fs-40">Identifiant de connexion</h2>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-wrap">
+                            <div class="row">
+                                <div class="col-md-3"><p>Email : </p></div>
+                                <div class="col-md-4"><p>{{user.uEmail}}</p></div>
+                                <div class="col-md-5">
+                                    <button type="button" class="rd-navbar-basket" data-toggle="modal" data-target="#modalEmail">
+                                        <img src="images/icone/2730272_feather_harry_potter_quill_solid_icon.png" style="width: 35px;">
+                                    </button>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-sm bg-default text-md-left">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-10"><h2 class="fs-40">Adresses</h2></div>
+                </div>
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
+                                <th>Nom/Prénom</th>
+                                <th>Adresse</th>
+                                <th>Complément</th>
+                                <th>Ville</th>
+                                <th>C.P</th>
+                                <th style="display: none;"></th>
+                                <th>Pays</th>
+                                <th style="display: none;"></th>
+                                <th style="display: none;"></th>
+                                <th>Téléphone</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for adresse in user.adresses %}
+                                {% if adresse.aActif == 1 %}
+                                    <tr>
+                                        <td  style="display: none;" class="id">{{ adresse.aId }}</td>
+                                        <td  style="display: none;" class="nom">{{ adresse.aNom }}</td>
+                                        <td  style="display: none;" class="prenom">{{ adresse.aPrenom }}</td>
+                                        <td>{{ adresse.aNom }} {{ adresse.aPrenom }}</td>
+                                        <td class="adresse">{{ adresse.aAdresse1 }}</td>
+                                        <td class="complement">{{ adresse.aAdresse2 }}</td>
+                                        <td class="ville">{{ adresse.aVille }}</td>
+                                        <td class="code">{{ adresse.aCode }}</td>
+                                        <td class="pays">{{ adresse.pays.pLibelle }}</td>
+                                        <td  style="display: none;" class="tel1">{{ adresse.aTelephone1 }}</td>
+                                        <td  style="display: none;" class="tel2">{{ adresse.aTelephone2 }}</td>
+                                        <td><chiffre>{{ adresse.aTelephone1 }}<br>{{ adresse.aTelephone2 }}</chiffre></td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-lg bg-default">
+            <div class="container text-left">
+                <div class="row ">
+                    <div class="col-md-12">
+                        <h2 class="fs-40">Commandes</h2>
+                        <!-- Bootstrap collapse-->
+                        <div class="card-custom-group text-left" id="accordion1" role="tablist" aria-multiselectable="true">
+                            {% for commande in user.commandes %}
+                                <!-- Bootstrap card-->
+                                <article class="card card-custom card-custom-default">
+                                    <div class="card-custom-heading" role="tab">
+                                        <p class="card-custom-title">
+                                            <a id="accordion1-card-head-qtpwelxd" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-agesbltr" aria-controls="accordion1-card-body-agesbltr" aria-expanded="true" role="button">
+                                                Commande N°<chiffre>{{ commande.cdeId }}</chiffre> du <chiffre>{{ commande.cdeDate|date('d/m/Y') }}</chiffre>, Total TTC : <chiffre>
+                                                    {{ commande.cdeMtn }}</chiffre> €
+                                            </a>
+                                        </p>
+                                    </div>
+                                    <div class="card-custom-collapse collapse show" id="accordion1-card-body-agesbltr" aria-labelledby="accordion1-card-head-qtpwelxd" data-parent="#accordion1">
+                                        <div class="card-custom-body">
+                                            <table class="table table-bordered table-hover">
+                                                <thead>
+                                                <tr>
+                                                    <th>Produit</th>
+                                                    <th></th>
+                                                    <th>Prix unitaire</th>
+                                                    <th>Quantité</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                                </thead>
+                                                <tbody>
+                                                {% for ligne in commande.lignes %}
+                                                    <tr>
+                                                        <td><img loading="lazy" style="height: 70px;" src="{{ ligne.article.images.count > 0 ? ligne.article.images[0].piImg : ''}}" > </td>
+                                                        <td>{{ ligne.article.prTitre }}</td>
+                                                        <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
+                                                        <td>{{ ligne.clQte }}</td>
+                                                        <td><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> €</td>
+                                                    </tr>
+                                                {% endfor %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </article>
+                            {% endfor %}
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+</div>
+{% endblock %}
