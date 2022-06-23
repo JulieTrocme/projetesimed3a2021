@@ -47,7 +47,7 @@ class TShopPromo
      *
      * @ORM\Column(name="p_type", type="integer", nullable=false)
      */
-    private $pType;
+    private $pType = 0;
 
     /**
      * @var string|null

@@ -8,6 +8,7 @@ use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
 use App\Entity\TShopProduitMaison;
+use App\Entity\TShopPromo;
 use App\Entity\TShopUser;
 use App\Entity\TShopUserAdresse;
 use Doctrine\Persistence\ManagerRegistry;
@@ -103,6 +104,17 @@ class DefaultController extends AbstractController
 
         return $this->render('admin/admin_produit.html.twig', [
             'produits' => $produits,
+        ]);
+    }
+
+    public function admin_promo(ManagerRegistry $doctrine)
+    {
+        $promos = $doctrine
+            ->getRepository(TShopPromo::class)
+            ->findBy(['pDelete'=>0]);
+
+        return $this->render('admin/admin_code_promo.html.twig', [
+            'promos' => $promos,
         ]);
     }
 
@@ -226,6 +238,23 @@ class DefaultController extends AbstractController
 
         return $this->render('admin/categorie_add.html.twig', [
             'categorie' => $categorie
+        ]);
+    }
+
+    public function promo_add(Request $request,ManagerRegistry $doctrine)
+    {
+        $id = $request->query->get('id');
+        if($id != null){
+            $promo = $doctrine
+                ->getRepository(TShopPromo::class)
+                ->findOneBy(['pId'=>$id]);
+        }
+        else{
+            $promo = null;
+        }
+
+        return $this->render('admin/promo_add.html.twig', [
+            'promo' => $promo
         ]);
     }
 

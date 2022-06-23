@@ -12,7 +12,7 @@ class UserSecurityController extends AbstractController
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function connexion(AuthenticationUtils $authenticationUtils): Response
+    public function login(AuthenticationUtils $authenticationUtils): Response
     {
         if ($this->getUser()) {
             return $this->redirectToRoute('membre');

@@ -28,6 +28,9 @@ administrateur:
 admin_produit:
     path: /administrateur/produit
     controller: App\Controller\DefaultController::admin_produit
+admin_promo:
+    path: /administrateur/promo
+    controller: App\Controller\DefaultController::admin_promo
 admin_commande:
     path: /administrateur/commande
     controller: App\Controller\DefaultController::admin_commande
@@ -49,6 +52,9 @@ admin_souscategorie:
 produit_add:
     path: /administrateur/produit/add
     controller: App\Controller\DefaultController::produit_add
+promo_add:
+    path: /administrateur/promo/add
+    controller: App\Controller\DefaultController::promo_add
 categorie_add:
     path: /administrateur/categorie/add
     controller: App\Controller\DefaultController::categorie_add
@@ -64,6 +70,9 @@ souscategorie_delete:
 addCategorie:
     path: /administrateur/categorie/addCategorie
     controller: App\Controller\admin\CategorieController::addCategorie
+addPromo:
+    path: /administrateur/promo/addPromo
+    controller: App\Controller\admin\PromoController::addPromo
 addSouscategorie:
     path: /administrateur/souscategorie/addSouscategorie
     controller: App\Controller\admin\SousCategorieController::addSouscategorie

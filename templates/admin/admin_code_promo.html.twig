@@ -1,0 +1,96 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - liste codes promo" %}
+{% block body %}
+
+<div class="main-panel">
+
+    <div class="content-wrapper">
+
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>Pages des codes promo
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item active" aria-current="page">Gestion des codes promo</li>
+                </ul>
+            </nav>
+        </div>
+        <div class="card grid-margin">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="card-title float-left">Gestion des codes promo</h4>
+                        <a href="/administrateur/promo/add" class="btn btn-gradient-info float-right" style="margin-left: 10px;"><i class="fa fa-plus mr-2" aria-hidden="true"></i> AJOUTER</a>
+                    </div>
+                    <div class="col-md-12 mt-5">
+                        <div class="table-responsive">
+                            <table class="table table-hover table-bordered" style="width: 100%;">
+                                <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Code</th>
+                                    <th>Description</th>
+                                    <th>Remise %</th>
+                                    <th>A partir de</th>
+                                    <th>Livraison offerte</th>
+                                    <th>Periode</th>
+                                    <th>Actif</th>
+                                    <th style="min-width: 100px;"></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for promo in promos %}
+
+                                <tr>
+                                    <td>#</td>
+                                    <td>{{promo.pLibelle}}</td>
+                                    <td>{{promo.pDesc}}</td>
+                                    <td>{{promo.pRemise}} %</td>
+                                    <td>{{promo.pAPartir}} €</td>
+                                    <td>{{promo.pLivraison == 0 ? 'non' : 'oui'}}</td>
+                                    <td>{{promo.pDateBegin|date('d/m/Y')}} - {{promo.pDateEnd|date('d/m/Y')}}</td>
+                                    <td>{{ promo.pActif == 1 ? '<p style="padding: 5px 5px 5px 15px;color: green;font-weight: bold;">actif</p>' : '<p style="padding: 5px 5px 5px 15px;color: red;font-weight: bold;">inactif</p>' }}</td>
+                                    <td class="text-center">
+                                        <a style="padding: 10px;" href="/administrateur/promo/add?id={{promo.pId}}" class="btn btn-gradient-success btn-rounded btn-icon mr-2"><i class="fa fa-edit icon-btn"></i></a>
+                                        <button style="padding: 10px;"data-toggle="modal" data-target="#del-promo{{ promo.pId }}" class="btn btn-gradient-danger btn-rounded btn-icon" id="{{ promo.pId }}" data-titre="{{promo.pLibelle}}" onclick="delpromo({{promo.pId}})"><i class="fa fa-trash icon-btn"></i></button>
+                                    </td>
+                                    <div class="modal fade" id="del-promo{{ promo.pId }}" tabindex="-1" role="dialog">
+                                        <div class="modal-dialog" role="document">
+                                            <form method="POST" action="/administrateur/promo/delete">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h5 class="modal-title" id="exampleModalLabel-2">Attention !</h5>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <p class="lead">Confirmez-vous la suppression du code promo ?</p>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-light float-left" data-dismiss="modal">NON</button>
+                                                        <form action="/administrateur/promo/delete" method="POST">
+                                                            <input type="hidden" name="p_id" id="p_id" value="{{promo.pId}}" required>
+                                                            <button type="submit" class="btn btn-gradient-info" name="delete_promo">OUI</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </tr>
+
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{% endblock %}

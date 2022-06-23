@@ -19,26 +19,16 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="page membre">
-      <change afterPath="$PROJECT_DIR$/src/Controller/admin/ClientController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Controller/admin/CommandeController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_client.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_client_detail.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_commande.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_commande_detail.html.twig" afterDir="false" />
+    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="liste des clients, gestion des commandes, début d'inscription">
+      <change afterPath="$PROJECT_DIR$/src/Controller/admin/PromoController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/admin_code_promo.html.twig" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/admin/promo_add.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/SecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/SecurityController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/front/CompteController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/front/CompteController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TShopUser.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopUser.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/AdminFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/AdminFormAuthenticator.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Security/UserFormAuthenticator.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Security/UserFormAuthenticator.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopPromo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopPromo.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/admin/_header-left.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/_header-left.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/admin_souscategorie.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/default/login.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/login.html.twig" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/front/default/register.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/register.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -246,7 +236,7 @@
       <workItem from="1655712355050" duration="5304000" />
       <workItem from="1655717822336" duration="12601000" />
       <workItem from="1655795863193" duration="17240000" />
-      <workItem from="1655881346999" duration="9562000" />
+      <workItem from="1655881346999" duration="14938000" />
     </task>
     <task id="LOCAL-00001" summary="fdsfsdf">
       <created>1638453990695</created>
@@ -318,7 +308,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655818204467</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="liste des clients, gestion des commandes, début d'inscription">
+      <created>1655969029926</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1655969029926</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -345,7 +342,8 @@
     <MESSAGE value="modification et suppression categorie et souscategorie" />
     <MESSAGE value="connexion/déconnexion admin" />
     <MESSAGE value="page membre" />
-    <option name="LAST_COMMIT_MESSAGE" value="page membre" />
+    <MESSAGE value="liste des clients, gestion des commandes, début d'inscription" />
+    <option name="LAST_COMMIT_MESSAGE" value="liste des clients, gestion des commandes, début d'inscription" />
   </component>
   <component name="WindowStateProjectService">
     <state x="426" y="108" key="#Inspections" timestamp="1655295788904">
@@ -360,10 +358,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1655801659475" />
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655968514612">
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655973475024">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655968514612" />
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655973475024" />
     <state x="260" y="131" width="1280" height="716" key="DiffContextDialog" timestamp="1655818227470">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -379,19 +377,19 @@
     </state>
     <state x="-1322" y="99" key="MultipleFileMergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196759296" />
     <state x="498" y="232" key="MultipleFileMergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728743241" />
-    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1655968474660">
+    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1655971228181">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655968474660" />
+    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655971228181" />
     <state x="615" y="133" key="RollbackChangesDialog" timestamp="1655103870919">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="615" y="133" key="RollbackChangesDialog/0.0.1600.860/1600.0.1920.1040@0.0.1600.860" timestamp="1655103870919" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655818206992">
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655969035627">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="-1368" y="71" key="Vcs.Push.Dialog.v2/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655197955865" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655818206992" />
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655969035627" />
     <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1655818183576">
       <screen x="0" y="0" width="1600" height="860" />
     </state>

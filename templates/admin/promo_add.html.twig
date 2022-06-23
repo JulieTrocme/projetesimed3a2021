@@ -1,0 +1,87 @@
+{% extends 'base-admin.html.twig' %}
+{% set current_title = "Admin - ajout code promo" %}
+{% block body %}
+
+<div class="main-panel">
+    <div class="content-wrapper">
+        <div class="page-header">
+            <h3 class="page-title">
+                <span class="page-title-icon bg-gradient-info text-white mr-2"><i class="fa fa-dropbox"></i></span>{{ promo != null ? 'Modification' : 'Ajout' }} d'un code promo
+            </h3>
+            <nav aria-label="breadcrumb">
+                <ul class="breadcrumb">
+                    <li class="breadcrumb-item" aria-current="page"><a href="/administrateur/promo">Codes promo</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">{{ promo != null ? 'Modification' : 'Ajout' }} code promo</li>
+                </ul>
+            </nav>
+        </div>
+
+        <div class="card grid-margin col-md-8">
+            <form method="POST" action="/administrateur/promo/addPromo" enctype="multipart/form-data">
+                <input hidden name="p_id" value="{{ promo != null ? promo.pId : 0}}">
+                <div class="card-body">
+                    <h4 class="card-title">{{ promo != null ? 'Modifier' : 'Ajouter' }} un code promo</h4><br>
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <label>Code</label>
+                            <input type="text" name="p_libelle" class="form-control" maxlength="255" placeholder="Code" value="{{ promo != null ? promo.pLibelle : '' }}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Description</label>
+                            <input type="text" name="p_desc" class="form-control" maxlength="255" placeholder="Description" value="{{ promo != null ? promo.pDesc : '' }}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Montant remise (en %)</label>
+                            <input type="text" name="p_remise" class="form-control" maxlength="255" placeholder="Montant remise" value="{{ promo != null ? promo.pRemise : '' }}" required>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>À partir de</label>
+                            <input type="number" name="p_a_partir" class="form-control" maxlength="255" placeholder="0.00" min="0.00" step="0.01"  value="{{ promo != null ? promo.pAPartir : '' }}">
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Livraison offerte</label><br>
+                            <div class="form-check d-inline">
+                                <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="p_livraison" value="1" {{ promo != null? promo.pLivraison == 1 ? 'checked' : '' : '' }}> Actif </label>
+                            </div>
+                            <div class="form-check d-inline">
+                                <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="p_livraison" value="0" {{ promo != null? promo.pLivraison == 0 ? 'checked' : '' : 'checked' }}> Inactif </label>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <label>Actif / Inactif</label><br>
+                            <div class="form-check d-inline">
+                                <label class="form-check-label d-inline mr-3"><input type="radio" class="form-check-input" name="p_actif" value="1" {{ promo != null? promo.pActif == 1 ? 'checked' : '' : 'checked' }}> Actif </label>
+                            </div>
+                            <div class="form-check d-inline">
+                                <label class="form-check-label d-inline"><input type="radio" class="form-check-input" name="p_actif" value="0" {{ promo != null? promo.pActif == 0 ? 'checked' : '' : '' }}> Inactif </label>
+                            </div>
+                        </div>
+
+                        <div class="form-group col-md-6">
+                            <label>Date de début</label>
+                            <input type="date" name="p_date_begin" class="form-control"  value="{{ promo != null ? promo.pDateBegin|date('Y-m-d') : '' }}">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label>Date de fin</label>
+                            <input type="date" name="p_date_end" class="form-control"  value="{{ promo != null ? promo.pDateEnd|date('Y-m-d') : '' }}">
+                        </div>
+
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-gradient-info pull-right mr-3" name="add_promo"><i class="fa fa-floppy-o mr-2" aria-hidden="true"></i> {{ promo != null ? 'MODIFIER' : 'AJOUTER' }}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
