@@ -34,10 +34,13 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function boutique()
+    public function boutique(ManagerRegistry $doctrine)
     {
+        $produits = $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findAll();
         return $this->render('front/default/produits.html.twig', [
-
+            'produits'=>$produits
         ]);
     }
 

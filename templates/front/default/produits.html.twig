@@ -62,60 +62,20 @@
                     </div>
                 </div>
                 <div class="row row-50">
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit1.jpg" alt="" width="270" height="233"/></a></div>
+                    {% for prod in produits %}
+                        <div class="col-sm-6 col-lg-4">
+                        <div class="price-box text-center">
+                            <div class="figure">
+                                <a href="/produit?id={{ prod.prId }}">
+                                    <img src="{{ prod.images.count > 0 ? prod.images[0].piImg : '' }}" alt="" style="height: 210px;width: auto;"/></a></div>
                             <div class="caption">
-                                <div class="title"><a href="/produit">FIGURINE NENDOROID HARRY POTTER</a></div>
-                                <p class="price"> <chiffre> 17.40</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
+                                <div class="title"><a href="/produit?id={{ prod.prId }}">{{ prod.prTitre }}</a></div>
+                                <p class="price"> <chiffre>{{ prod.prPrix}}</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit2.jpg" alt="" width="270" height="233"/></a></div>
-                            <div class="caption">
-                                <div class="title"><a href="/produit">FIGURINE HERMIONE QPOSKET</a></div>
-                                <p class="price"> <chiffre> 17.85</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit3.png" alt="" width="270" height="233"/></a></div>
-                            <div class="caption">
-                                <div class="title"><a href="/produit">BAGUETTE DE BELLATRIX BLISTER</a></div>
-                                <p class="price"> <chiffre> 16.10</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit4.jpg" alt="" width="270" height="233"/></a></div>
-                            <div class="caption">
-                                <div class="title"><a href="/produit">CREATURES MAGIQUES - FUMSECK LE PHENIX</a></div>
-                                <p class="price"> <chiffre> 16.70</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit5.jpg" alt="" width="270" height="233"/></a></div>
-                            <div class="caption">
-                                <div class="title"><a href="/produit">MUG 3D HEDWIGE</a></div>
-                                <p class="price"> <chiffre> 19.99</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6 col-lg-4">
-                        <div class="price-box">
-                            <div class="figure"><a href="/produit"><img src="images/produits/produit6.jpg" alt="" width="270" height="233"/></a></div>
-                            <div class="caption">
-                                <div class="title"><a href="/produit">HOUSSE DE COUETTE 240*220+TAIE OREILLER POUDLARD</a></div>
-                                <p class="price"> <chiffre> 30.10</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
-                            </div>
-                        </div>
-                    </div>
+                    {% endfor %}
+
                     <div class="col-md-12 arvo">
                         <ul class="pagination-custom text-center">
                             <li class="disabled"><a class="pager-custom pager-prev" href="#"></a></li>
