@@ -21,7 +21,7 @@
     <!-- Log in-->
     <section class="section section-lg bg-default">
         <div class="container">
-
+            {% set somme = 0 %}
             <div class="table-responsive mt-4">
                 <table class="table table-cart" id="tableProduitPanier" style="text-align: center;text-transform: uppercase;border: 1px solid #e1e1e1;">
                     <thead>
@@ -35,63 +35,46 @@
                     </tr>
                     </thead>
                     <tbody>
-
-
-                    <tr id="row">
-                        <td>
-                            <a href="#"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
-                        </td>
-                        <td>
-                            <a class="table-cart-figure" href="/produit">
-                                <img loading="lazy" src="images/produits/produit2.jpg" alt="image produit" style="width: 200px">
-                            </a>
-                        </td>
-                        <td class="text-center text-md-left">
-                            <a class="table-cart-link text-left" href="/produit">FIGURINE NENDOROID HARRY POTTER</a>
-
-                        </td>
-                        <td><chiffre>17.40</chiffre> €</td>
-                        <td style="width: 150px;">
-                            <div class="product-stepper">
-                                <input class="form-input arvo" id="more" type="number" data-zeros="true" value="1" min="1" max="10">
-                            </div>
-                        </td>
-                        <td><div id="total "><chiffre>17.40</chiffre> € </div></td>
-                    </tr>
-                    <tr id="row">
-                        <td>
-                            <a href="#"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
-                        </td>
-                        <td>
-                            <a class="table-cart-figure" href="/produit">
-                                <img loading="lazy" src="images/produits/produit1.jpg" alt="image produit" style="width: 200px">
-                            </a>
-                        </td>
-                        <td class="text-center text-md-left">
-                            <a class="table-cart-link text-left" href="/produit">FIGURINE NENDOROID HARRY POTTER</a>
-
-                        </td>
-                        <td><chiffre>17.80</chiffre> €</td>
-                        <td style="width: 150px;">
-                            <div class="product-stepper">
-                                <input class="form-input arvo" id="more" type="number" data-zeros="true" value="2" min="1" max="10">
-                            </div>
-                        </td>
-                        <td><div id="total "><chiffre>35.60</chiffre> € </div></td>
-                    </tr>
-
-                    <!--
+                    {% if commande == null or commande.lignes == null or commande.lignes.count == 0 %}
                     <tr><td colspan="6" class="text-center" style="display: table-cell;"><p>Aucun article dans le panier</p></td></tr>
                     <tr><td colspan="6" class="text-center" style="display: table-cell;"><a href="/boutique">Accéder à la boutique</a></td></tr>
-                    -->
+                    {% else %}
+                    {% for ligne in commande.lignes %}
+                    <tr id="row">
+                        <td>
+                            <a href="/panier/deleteLigne/{{ ligne.clId }}"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
+                        </td>
+                        <td>
+                            <a class="table-cart-figure" href="/produit?id={{ligne.article.prId }}">
+                                <img loading="lazy" src="{{ ligne.article.images.count > 0 ? ligne.article.images[0].piImg : ''}}" alt="image produit" style="width: 200px">
+                            </a>
+                        </td>
+                        <td class="text-center text-md-left">
+                            <a class="table-cart-link text-left" href="/produit?id={{ligne.article.prId }}">{{ ligne.article.prTitre }}</a>
 
+                        </td>
+                        <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
+                        <td style="width: 150px;">
+                            <div class="product-stepper">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="1" max="10" value="{{ ligne.clQte }}">
+                            </div>
+                        </td>
+                        <td><div id="total "><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> € </div></td>
+                        {% set somme = somme + (ligne.clMtn * ligne.clQte) %}
+                    </tr>
+                    {% endfor %}
+                    {% endif %}
                     </tbody>
                 </table>
             </div>
-
+            {% if commande != null and commande.lignes != null and commande.lignes.count > 0%}
+            {% if 70 - somme > 0 %}
             <div class="col-12" id="divFDP" style="text-align: left;">
-                <p class="fs-18">Dans xxx €, les frais de port vous seront offerts</p>
+                <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
             </div>
+            {% else %}
+                <p class="fs-18">Les frais de port vous sont offerts</p>
+            {% endif %}
 
 
         <div class="row justify-content-end">
@@ -113,31 +96,34 @@
                 <tbody>
                 <tr>
                     <td style="border-top:0px;vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC :</div></td>
-                    <td style="border-top:0px;" class="text-right"><div class="heading-3 font-weight-normal" id="totalTTC1"><chifre>53.00</chifre> €</div></td>
+                    <td style="border-top:0px;" class="text-right"><div class="heading-3 font-weight-normal" id="totalTTC1"><chifre>{{ somme }}</chifre> €</div></td>
                 </tr>
+                {% if promo is defined%}
                 <tr>
                     <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Remise 10 % :</div></td>
                     <td class="text-right"><div class="heading-3 font-weight-normal" id="totalRemise">- <chifre>5.30</chifre> €</div></td>
                 </tr>
+
                 <tr>
                     <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC avec remise :</div></td>
                     <td class="text-right"><div class="heading-3 font-weight-normal" id="totalTTCRemise"><chifre>47.70</chifre> €</div></td>
                 </tr>
+                {% endif %}
                 </tbody>
             </table>
+                {%endif%}
         </div>
 
 
         <div class="col-12 col-lg-7 text-center text-lg-right align-self-center">
 
         </div>
-
+            {% if commande != null and commande.lignes != null  and commande.lignes.count > 0%}
         <div class="col-12 col-lg-5 mt-3">
             <a class="button button-lg button-primary float-right mb-3" style="width: 100%;" href="/commande"><i class="fa fa-truck" aria-hidden="true"></i> Commander</a>
-
+{%endif%}
         </div>
         </div>
-
         </div>
     </section>
 

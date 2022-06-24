@@ -70,7 +70,12 @@
                                     <img src="{{ prod.images.count > 0 ? prod.images[0].piImg : '' }}" alt="" style="height: 210px;width: auto;"/></a></div>
                             <div class="caption">
                                 <div class="title"><a href="/produit?id={{ prod.prId }}">{{ prod.prTitre }}</a></div>
-                                <p class="price"> <chiffre>{{ prod.prPrix}}</chiffre> € TTC</p><a class="button button-primary" href="#">Acheter</a>
+                                <p class="price"> <chiffre>{{ prod.prPrix}}</chiffre> € TTC</p>
+                                <a class="button button-primary" href="/produit?id={{ prod.prId }}">Voir</a><br>
+                                <form method="post" action="{{ path("addPanier", {'id': prod.prId}) }}">
+                                    <input hidden name="quantite" value="1">
+                                    <button type="submit" class="button button-primary" >Acheter</button>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -93,4 +98,5 @@
         </div>
     </div>
 </section>
+    {% include 'front/default/modalPanier.html.twig' %}
 {% endblock %}

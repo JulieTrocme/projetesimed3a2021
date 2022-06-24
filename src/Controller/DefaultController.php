@@ -21,8 +21,12 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class DefaultController extends AbstractController
 {
 
+
     public function index(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         $newProduit =  $doctrine
             ->getRepository(TShopProduit::class)
             ->findBy(['prNouveaux'=>1]);
@@ -31,52 +35,80 @@ class DefaultController extends AbstractController
             ->findBy(['prPopu'=>1]);
         return $this->render('front/default/index.html.twig', [
             'newProduit'=>$newProduit,
-            'popuProduit'=>$popuProduit
+            'popuProduit'=>$popuProduit,
+            'categories'=>$categories
         ]);
     }
 
     public function boutique(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
             ->findAll();
         return $this->render('front/default/produits.html.twig', [
-            'produits'=>$produits
+            'produits'=>$produits,
+            'categories'=>$categories,
         ]);
     }
 
     public function produit(Request $request,ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         $produit = $doctrine
             ->getRepository(TShopProduit::class)
             ->findOneBy(['prId'=>$request->query->get('id')]);
         return $this->render('front/default/produit.html.twig', [
             'produit' => $produit,
+            'categories'=>$categories
         ]);
     }
 
-    public function register()
+    public function register(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         return $this->render('front/default/register.html.twig', [
+            'categories'=>$categories
         ]);
     }
 
-    public function contact()
+    public function contact(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         return $this->render('front/default/contact.html.twig', [
-
+            'categories'=>$categories
         ]);
     }
 
-    public function panier()
+    public function panier(ManagerRegistry $doctrine)
     {
-        return $this->render('front/default/panier.html.twig', [
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+        $idUser = $this->get('session')->get('user');
+        $commande = $doctrine
+            ->getRepository(TShopCommande::class)
+            ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
 
+        return $this->render('front/default/panier.html.twig', [
+            'categories'=>$categories,
+            'commande'=>$commande,
         ]);
     }
 
     public function membre(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         $user = $doctrine
             ->getRepository(TShopUser::class)
             ->findOneBy(['uId'=>1]);
@@ -85,12 +117,14 @@ class DefaultController extends AbstractController
 
         return $this->render('front/default/membre.html.twig', [
             'user' => $user,
-            'listepays' => $pays
+            'listepays' => $pays,
+            'categories'=>$categories
         ]);
     }
 
-    public function administrateur()
+    public function administrateur(ManagerRegistry $doctrine)
     {
+
         return $this->render('admin/login.html.twig', [
 
         ]);
@@ -101,6 +135,7 @@ class DefaultController extends AbstractController
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
             ->findBy(['prArchive'=>0]);
+
 
         return $this->render('admin/admin_produit.html.twig', [
             'produits' => $produits,

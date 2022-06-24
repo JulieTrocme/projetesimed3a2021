@@ -83,7 +83,7 @@ class TShopCommande
      *
      * @ORM\Column(name="cde_pay_date", type="datetime", nullable=true, options={"default"="NULL"})
      */
-    private $cdePayDate = 'NULL';
+    private $cdePayDate;
 
     /**
      * @var int|null

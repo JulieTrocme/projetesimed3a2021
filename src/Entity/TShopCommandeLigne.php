@@ -40,7 +40,7 @@ class TShopCommandeLigne
      *
      * @ORM\Column(name="cl_art_prix_id", type="integer", nullable=false)
      */
-    private $clArtPrixId;
+    private $clArtPrixId=0;
 
     /**
      * @var int

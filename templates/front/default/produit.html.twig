@@ -41,9 +41,11 @@
                     <div class="pricing mb-5">
                         <p class="price fs-17"><chiffre>17.85</chiffre> € TTC</p>
                     </div>
-                    <label for="qte" class="fs-20"> Qte : </label>
-                    <input id="qte" type="number" min="1" step="1" value="1" class="form-input mr-3 arvo" style="width: 18%;display: inline;height: 40px;">
-                    <a class="button button-primary mt-0" href="#">Acheter</a>
+                    <form method="post" action="{{ path("addPanier", {'id': produit.prId}) }}">
+                        <label for="qte" class="fs-20"> Qte : </label>
+                        <input id="qte" type="number" min="1" step="1" value="1" class="form-input mr-3 arvo" style="width: 18%;display: inline;height: 40px;" name="quantite">
+                        <button type="submit" class="button button-primary mt-0" >Acheter</button>
+                    </form>
                 </div>
                 <div class="col-md-12">
                     <h2 class="fs-30">Description</h2>

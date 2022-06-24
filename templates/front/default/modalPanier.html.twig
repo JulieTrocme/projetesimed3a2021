@@ -1,0 +1,58 @@
+<div class="modal" id="modalPanier" tabindex="-1" role="dialog" aria-labelledby="modalPanierLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="modalPanierLabel">Panier</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="table-responsive mt-4">
+                <table class="table table-cart" id="tableProduitPanier" style="text-align: center;text-transform: uppercase;border: 1px solid #e1e1e1;">
+                    <thead>
+                    <tr><!--class="d-none d-md-table-row"-->
+                        <th>Produit</th>
+                        <th></th>
+                        <th>prix</th>
+                        <th>quantité</th>
+                        <th>Total</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% if commande is not defined or commande.lignes == null%}
+                        <tr><td colspan="6" class="text-center" style="display: table-cell;"><p>Aucun article dans le panier</p></td></tr>
+                        <tr><td colspan="6" class="text-center" style="display: table-cell;"><a href="/boutique">Accéder à la boutique</a></td></tr>
+                    {% else %}
+                        {% for ligne in commande.lignes %}
+                            <tr id="row">
+                                <td>
+                                    <a class="table-cart-figure" href="/produit?id={{ ligne.article.prId }}">
+                                        <img loading="lazy" src="{{ ligne.article.images.count > 0 ? ligne.article.images[0].piImg : ''}}" alt="image produit" style="width: 200px">
+                                    </a>
+                                </td>
+                                <td class="text-center text-md-left">
+                                    <a class="table-cart-link text-left" href="/produit?id={{ ligne.article.prId }}">{{ ligne.article.prTitre }}</a>
+
+                                </td>
+                                <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
+                                <td style="width: 150px;">
+                                    <div class="product-stepper">
+                                        <input class="form-input arvo" id="more" type="number" data-zeros="true" min="1" max="10" value="{{ ligne.clQte }}">
+                                    </div>
+                                </td>
+                                <td><div id="total "><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> € </div></td>
+                                {% set somme = somme + (ligne.clMtn * ligne.clQte) %}
+                            </tr>
+                        {% endfor %}
+                    {% endif %}
+                    </tbody>
+                </table>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="button button-secondary" data-dismiss="modal">Continuer</button>
+                <button type="button" href="/panier" class="button button-primary">Commander</button>
+            </div>
+        </div>
+    </div>
+</div>
+

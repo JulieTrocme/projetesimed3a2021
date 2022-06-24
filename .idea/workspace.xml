@@ -19,16 +19,17 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="liste des clients, gestion des commandes, début d'inscription">
-      <change afterPath="$PROJECT_DIR$/src/Controller/admin/PromoController.php" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/admin_code_promo.html.twig" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/admin/promo_add.html.twig" afterDir="false" />
+    <list default="true" id="9ffda21b-d93d-444f-a489-fcb8cc2f93af" name="Default Changelist" comment="gestion codes promo">
+      <change afterPath="$PROJECT_DIR$/src/Controller/front/PanierController.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/templates/front/default/modalPanier.html.twig" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config/routes.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/config/routes.yaml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Controller/DefaultController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/DefaultController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/UserSecurityController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Entity/TShopPromo.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopPromo.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/admin/_header-left.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/admin/_header-left.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controller/front/BoutiqueController.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controller/front/BoutiqueController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopCommande.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopCommande.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Entity/TShopCommandeLigne.php" beforeDir="false" afterPath="$PROJECT_DIR$/src/Entity/TShopCommandeLigne.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/default/panier.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/panier.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/default/produit.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/produit.html.twig" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/front/default/produits.html.twig" beforeDir="false" afterPath="$PROJECT_DIR$/templates/front/default/produits.html.twig" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -236,7 +237,7 @@
       <workItem from="1655712355050" duration="5304000" />
       <workItem from="1655717822336" duration="12601000" />
       <workItem from="1655795863193" duration="17240000" />
-      <workItem from="1655881346999" duration="14938000" />
+      <workItem from="1655881346999" duration="31818000" />
     </task>
     <task id="LOCAL-00001" summary="fdsfsdf">
       <created>1638453990695</created>
@@ -315,7 +316,14 @@
       <option name="project" value="LOCAL" />
       <updated>1655969029926</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="gestion codes promo">
+      <created>1655974444541</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1655974444544</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -343,7 +351,8 @@
     <MESSAGE value="connexion/déconnexion admin" />
     <MESSAGE value="page membre" />
     <MESSAGE value="liste des clients, gestion des commandes, début d'inscription" />
-    <option name="LAST_COMMIT_MESSAGE" value="liste des clients, gestion des commandes, début d'inscription" />
+    <MESSAGE value="gestion codes promo" />
+    <option name="LAST_COMMIT_MESSAGE" value="gestion codes promo" />
   </component>
   <component name="WindowStateProjectService">
     <state x="426" y="108" key="#Inspections" timestamp="1655295788904">
@@ -358,10 +367,10 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="593" y="139" key="#com.intellij.ide.util.MemberChooser/0.0.1600.860@0.0.1600.860" timestamp="1655801659475" />
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1655973475024">
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog" timestamp="1656059000684">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1655973475024" />
+    <state x="530" y="185" key="#com.jetbrains.php.actions.copyPaste.importReferences.PhpImportReferencesDialog/0.0.1600.860@0.0.1600.860" timestamp="1656059000684" />
     <state x="260" y="131" width="1280" height="716" key="DiffContextDialog" timestamp="1655818227470">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -377,19 +386,19 @@
     </state>
     <state x="-1322" y="99" key="MultipleFileMergeDialog/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655196759296" />
     <state x="498" y="232" key="MultipleFileMergeDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728743241" />
-    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1655971228181">
+    <state x="567" y="153" key="NewPhpClassDialog" timestamp="1656058955244">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
-    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1655971228181" />
+    <state x="567" y="153" key="NewPhpClassDialog/0.0.1600.860@0.0.1600.860" timestamp="1656058955244" />
     <state x="615" y="133" key="RollbackChangesDialog" timestamp="1655103870919">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="615" y="133" key="RollbackChangesDialog/0.0.1600.860/1600.0.1920.1040@0.0.1600.860" timestamp="1655103870919" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655969035627">
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2" timestamp="1655974447772">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="-1368" y="71" key="Vcs.Push.Dialog.v2/0.0.1600.860/-1920.-182.1920.1040@-1920.-182.1920.1040" timestamp="1655197955865" />
-    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655969035627" />
+    <state x="460" y="209" key="Vcs.Push.Dialog.v2/0.0.1600.860@0.0.1600.860" timestamp="1655974447772" />
     <state x="633" y="164" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1655818183576">
       <screen x="0" y="0" width="1600" height="860" />
     </state>
@@ -403,5 +412,9 @@
       <screen x="0" y="0" width="1600" height="860" />
     </state>
     <state x="610" y="329" key="git4idea.ui.GitStashDialog/0.0.1600.860@0.0.1600.860" timestamp="1655728271042" />
+    <state x="456" y="195" key="run.anything.popup" timestamp="1656058315765">
+      <screen x="0" y="0" width="1600" height="860" />
+    </state>
+    <state x="456" y="195" key="run.anything.popup/0.0.1600.860@0.0.1600.860" timestamp="1656058315765" />
   </component>
 </project>
