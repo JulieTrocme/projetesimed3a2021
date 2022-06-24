@@ -18,14 +18,38 @@ use Symfony\Component\HttpFoundation\Response;
 class BoutiqueController extends AbstractController
 {
 
-    public function boutique(ManagerRegistry $doctrine)
+    public function boutique(Request $request, ManagerRegistry $doctrine)
     {
+        $prixMin = $request->request->get('prixMin');
+        $prixMax = $request->request->get('prixMax');
+        $tri = $request->request->get('tri');
+        if($tri == null){
+            $tri = 'order';
+        }
+        $orderby = [];
+        switch ($tri){
+            case 'order':
+                $orderby = ['prId' => 'DESC'];
+                break;
+            case 'priceAsc':
+                $orderby = ['prPrix' => 'ASC'];
+                break;
+            case 'priceDesc':
+                $orderby = ['prPrix' => 'DESC'];
+                break;
+            case 'nameAsc':
+                $orderby = ['prTitre' => 'ASC'];
+                break;
+            case 'nameDesc':
+                $orderby = ['prTitre' => 'DESC'];
+                break;
+        }
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findAll();
+            ->findBy([],$orderby);
 
         $catAfficher = $doctrine
             -> getRepository(TShopProduitCategorie::class)
@@ -37,15 +61,42 @@ class BoutiqueController extends AbstractController
             'catAfficher'=>$catAfficher,
             'catActuel'=>null,
             'url1' => null,
-            'url2' => null
+            'url2' => null,
+            'tri' => $tri,
+            'prixMin' => $prixMin,
+            'prixMax' => $prixMax,
         ]);
     }
 
     /**
      * @Route("/boutique/{cat}", name="boutiqueCat")
      */
-    public function boutiqueCat(string $cat, ManagerRegistry $doctrine)
+    public function boutiqueCat(Request $request, string $cat, ManagerRegistry $doctrine)
     {
+        $prixMin = $request->request->get('prixMin');
+        $prixMax = $request->request->get('prixMax');
+        $tri = $request->request->get('tri');
+        if($tri == null){
+            $tri = 'order';
+        }
+        $orderby = [];
+        switch ($tri){
+            case 'order':
+                $orderby = ['prId' => 'DESC'];
+                break;
+            case 'priceAsc':
+                $orderby = ['prPrix' => 'ASC'];
+                break;
+            case 'priceDesc':
+                $orderby = ['prPrix' => 'DESC'];
+                break;
+            case 'nameAsc':
+                $orderby = ['prTitre' => 'ASC'];
+                break;
+            case 'nameDesc':
+                $orderby = ['prTitre' => 'DESC'];
+                break;
+        }
         $catURL = $cat;
         $categorie = $doctrine
             -> getRepository(TShopProduitCategorie::class)
@@ -54,7 +105,7 @@ class BoutiqueController extends AbstractController
         if ($categorie != null) {
             $produits = $doctrine
                 ->getRepository(TShopProduit::class)
-                ->findBy(['prIdCat1'=>$categorie->getCaId()]);
+                ->findBy(['prIdCat1'=>$categorie->getCaId()],$orderby);
 
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie2::class)
@@ -66,7 +117,7 @@ class BoutiqueController extends AbstractController
 
             $produits = $doctrine
                 ->getRepository(TShopProduit::class)
-                ->findBy(['prIdMaison'=>$categorieMaison->getPmId()]);
+                ->findBy(['prIdMaison'=>$categorieMaison->getPmId()],$orderby);
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie::class)
                 -> findAll();
@@ -82,7 +133,10 @@ class BoutiqueController extends AbstractController
             'catAfficher'=>$catAfficher,
             'catActuel'=>$categorie,
             'url1' => $catURL,
-            'url2' => null
+            'url2' => null,
+            'tri' => $tri,
+            'prixMin' => $prixMin,
+            'prixMax' => $prixMax,
         ]);
     }
 
@@ -90,8 +144,32 @@ class BoutiqueController extends AbstractController
     /**
      * @Route("/boutique/{cat}/{sscat}", name="boutiqueSousCat")
      */
-    public function boutiqueSousCat(string $cat, string $sscat, ManagerRegistry $doctrine)
+    public function boutiqueSousCat(Request $request, string $cat, string $sscat, ManagerRegistry $doctrine)
     {
+        $prixMin = $request->request->get('prixMin');
+        $prixMax = $request->request->get('prixMax');
+        $tri = $request->request->get('tri');
+        if($tri == null){
+            $tri = 'order';
+        }
+        $orderby = [];
+        switch ($tri){
+            case 'order':
+                $orderby = ['prId' => 'DESC'];
+                break;
+            case 'priceAsc':
+                $orderby = ['prPrix' => 'ASC'];
+                break;
+            case 'priceDesc':
+                $orderby = ['prPrix' => 'DESC'];
+                break;
+            case 'nameAsc':
+                $orderby = ['prTitre' => 'ASC'];
+                break;
+            case 'nameDesc':
+                $orderby = ['prTitre' => 'DESC'];
+                break;
+        }
         $catURL = $cat;
         $sscatURL = $sscat;
 
@@ -101,7 +179,7 @@ class BoutiqueController extends AbstractController
 
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findBy(['prIdCat2'=>$sscategorie->getCaId()]);
+            ->findBy(['prIdCat2'=>$sscategorie->getCaId()],$orderby);
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
@@ -111,13 +189,16 @@ class BoutiqueController extends AbstractController
             'catAfficher'=>null,
             'catActuel'=>$sscategorie,
             'url1' => $catURL,
-            'url2' => $sscatURL
+            'url2' => $sscatURL,
+            'tri' => 'order',
+            'prixMin' => $prixMin,
+            'prixMax' => $prixMax,
         ]);
 
     }
 
     /**
-     * @Route("/boutique/addPanier/{id}", name="addPanier")
+     * @Route("/addPanier/{id}", name="addPanier")
      */
     public function addPanier(Request $request, ManagerRegistry $doctrine, int $id){
         $quantite = $request->request->get('quantite');

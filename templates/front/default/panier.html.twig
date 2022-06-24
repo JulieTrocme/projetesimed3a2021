@@ -56,7 +56,9 @@
                         <td><chiffre>{{ ligne.clMtn }}</chiffre> €</td>
                         <td style="width: 150px;">
                             <div class="product-stepper">
-                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="1" max="10" value="{{ ligne.clQte }}">
+                                <form method="post" action="{{ path('changeQuantite', {'id' : ligne.clId }) }}">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="0" max="10" value="{{ ligne.clQte }}" name="quantite" onchange="form.submit()">
+                                </form>
                             </div>
                         </td>
                         <td><div id="total "><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> € </div></td>

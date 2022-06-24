@@ -29,11 +29,16 @@ class PanierController extends AbstractController
     /**
      * @Route("/panier/quantite/{id}", name="changeQuantite")
      */
-    public function changeQuantite(Request $request, ManagerRegistry $doctrine, int $id, int $quantite)
+    public function changeQuantite(Request $request, ManagerRegistry $doctrine, int $id)
     {
         $quantite = $request->request->get('quantite');
         $ligne = $doctrine->getManager()->find(TShopCommandeLigne::class,['clId'=>$id]);
-        $ligne->setClQte($quantite);
+        if($quantite == 0){
+            $doctrine->getManager()->remove($ligne);
+        }else{
+            $ligne->setClQte($quantite);
+        }
+
         $doctrine->getManager()->flush();
 
         return $this->redirectToRoute('panier');

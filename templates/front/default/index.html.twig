@@ -70,7 +70,11 @@
                     <div class="caption">
                         <div class="title"><a href="/produit?id={{ newProd.prId }}">{{ newProd.prTitre }}</a></div>
                         <p class="price">{{ newProd.prPrix}} €</p>
-                        <a class="button button-primary" href="#">Acheter</a>
+                        <a class="button button-primary" href="/produit?id={{ newProd.prId }}">Voir</a><br>
+                        <form method="post" action="{{ path("addPanier", {'id': newProd.prId}) }}">
+                            <input hidden name="quantite" value="1">
+                            <button type="submit" class="button button-primary" >Acheter</button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}
@@ -205,7 +209,11 @@
                     <div class="caption">
                         <div class="title"><a href="/produit?id={{ popuProd.prId }}">{{ popuProd.prTitre }}</a></div>
                         <p class="price">{{ popuProd.prPrix}} €</p>
-                        <a class="button button-primary" href="#">Acheter</a>
+                        <a class="button button-primary" href="/produit?id={{ popuProd.prId }}">Voir</a><br>
+                        <form method="post" action="{{ path("addPanier", {'id': popuProd.prId}) }}">
+                            <input hidden name="quantite" value="1">
+                            <button type="submit" class="button button-primary" >Acheter</button>
+                        </form>
                     </div>
                 </div>
             {% endfor %}

@@ -24,6 +24,28 @@ class AdminProduitController extends AbstractController
             $id = $request->request->get('pr_id');
 
             if($id == 0) {
+                $nouveautesToday = $doctrine->getRepository(TShopProduit::class)->findBy(['prNouveaux'=>1,'prDateCreation'=>new \DateTime()]);
+                $nouveautes = $doctrine->getRepository(TShopProduit::class)->findBy(['prNouveaux'=>1],['prDateCreation' => 'DESC']);
+                if(count($nouveautesToday) > 3){
+                    foreach ($nouveautes as $nouveaute){
+                        $nouveaute->setPrNouveaux(0);
+                        $doctrine->getManager()->flush();
+                    }
+                    foreach ($nouveautesToday as $nouveaute){
+                        $nouveaute->setPrNouveaux(1);
+                        $doctrine->getManager()->flush();
+                    }
+                }
+                else{
+                    foreach ($nouveautes as $nouveaute){
+                        $nouveaute->setPrNouveaux(0);
+                        $doctrine->getManager()->flush();
+                    }
+                    for ($i = 0; $i < 4; $i++) {
+                        $nouveautes[$i]->setPrNouveaux(1);
+                        $doctrine->getManager()->flush();
+                    }
+                }
                 $produit = new TShopProduit();
             }
             else{
@@ -52,6 +74,7 @@ class AdminProduitController extends AbstractController
             $produit->setPrActif($request->request->get('pr_actif'));
             $produit->setPrPopu($request->request->get('pr_popu'));
             $produit->setPrPrix($request->request->get('pr_prix'));
+            $produit->setPrNouveaux(1);
             $produit->setPrDateCreation(new \DateTime());
             $doctrine->getManager()->persist($produit);
             $doctrine->getManager()->flush();

@@ -37,12 +37,14 @@
     <div class="container text-center">
         <div class="row row-30 text-left">
             <div class="col-md-3">
+                <form method="post" action="{{ path(app.request.attributes.get('_route'),
+                    app.request.attributes.get('_route_params')) }}">
                 <h2 class="fs-40 Benne-Regular ">Filter par prix</h2>
                 <div class="barre mb-3"></div>
-                <input type="number" min="0" max="100" step="1" placeholder="prix min" class="form-input mb-2 text-center fs-18">
-                <input type="number" min="0" max="100" step="1" placeholder="prix max" class="form-input text-center fs-18">
-                <button class="button button-primary mt-3" style="width: 100%;" href="#">Rechercher</button>
-
+                <input name="prixMin" type="number" min="0" max="100" step="1" placeholder="prix min" class="form-input mb-2 text-center fs-18" value="{{ prixMin }}">
+                <input name="prixMax" type="number" min="0" max="100" step="1" placeholder="prix max" class="form-input text-center fs-18" value="{{ prixMax }}">
+                <button class="button button-primary mt-3" style="width: 100%;" type="submit">Rechercher</button>
+                </form>
 
 
                 <h2 class="fs-40 Benne-Regular mt-4">Catégorie</h2>
@@ -80,18 +82,20 @@
                     <div data-select2-id="5">
                         <div class="group-sm group-middle">
                             <div data-select2-id="4">
-                                <select class="select2 select2-hidden-accessible form-select" id="filterSelect" style="width:250px;" data-select2-id="filterSelect" tabindex="-1" aria-hidden="true">
-                                    <option value="order" data-select2-id="2">Trier par pertinence</option>
-                                    <option value="priceAsc" data-select2-id="13">Trier par prix croissant</option>
-                                    <option value="priceDesc" data-select2-id="14">Trier par prix decroissant</option>
-                                    <option value="nameAsc" data-select2-id="15">Trier de A à Z</option>
-                                    <option value="nameDesc" data-select2-id="16">Trier de Z à A</option>
-                                </select></div>
-                        </div>
+                                <form method="post" action="{{ path(app.request.attributes.get('_route'),
+                                    app.request.attributes.get('_route_params')) }}">
+                                <select name="tri" class="select2 select2-hidden-accessible form-select" id="filterSelect" style="width:250px;" data-select2-id="filterSelect" tabindex="-1" aria-hidden="true" onchange="form.submit()">
+                                    <option value="order" data-select2-id="2" {{ tri == 'order' ? 'selected' : '' }}>Trier par pertinence</option>
+                                    <option value="priceAsc" data-select2-id="13" {{ tri == 'priceAsc' ? 'selected' : '' }}>Trier par prix croissant</option>
+                                    <option value="priceDesc" data-select2-id="14" {{ tri == 'priceDesc' ? 'selected' : '' }}>Trier par prix decroissant</option>
+                                    <option value="nameAsc" data-select2-id="15" {{ tri == 'nameAsc' ? 'selected' : '' }}>Trier de A à Z</option>
+                                    <option value="nameDesc" data-select2-id="16" {{ tri == 'nameDesc' ? 'selected' : '' }}>Trier de Z à A</option>
+                                </select></form></div>
                     </div>
                 </div>
                 <div class="row row-50">
                     {% for prod in produits %}
+                        {% if (prixMin == null or prod.prPrix >= prixMin) and (prixMax == null  or prod.prPrix <= prixMax) %}
                         <div class="col-sm-6 col-lg-4">
                         <div class="price-box text-center">
                             <div class="figure">
@@ -108,6 +112,7 @@
                             </div>
                         </div>
                     </div>
+                    {% endif %}
                     {% endfor %}
 
                     <div class="col-md-12 arvo">
