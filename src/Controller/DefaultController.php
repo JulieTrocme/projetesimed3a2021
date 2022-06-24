@@ -40,20 +40,6 @@ class DefaultController extends AbstractController
         ]);
     }
 
-    public function boutique(ManagerRegistry $doctrine)
-    {
-        $categories = $doctrine
-            ->getRepository(TShopProduitCategorie::class)
-            ->findAll();
-        $produits = $doctrine
-            ->getRepository(TShopProduit::class)
-            ->findAll();
-        return $this->render('front/default/produits.html.twig', [
-            'produits'=>$produits,
-            'categories'=>$categories,
-        ]);
-    }
-
     public function produit(Request $request,ManagerRegistry $doctrine)
     {
         $categories = $doctrine

@@ -3,7 +3,7 @@ index:
     controller: App\Controller\DefaultController::index
 boutique:
     path: /boutique
-    controller: App\Controller\DefaultController::boutique
+    controller: App\Controller\front\BoutiqueController::boutique
 produit:
     path: /produit
     controller: App\Controller\DefaultController::produit

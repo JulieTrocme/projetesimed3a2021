@@ -5,6 +5,9 @@ namespace App\Controller\front;
 use App\Entity\TShopCommande;
 use App\Entity\TShopCommandeLigne;
 use App\Entity\TShopProduit;
+use App\Entity\TShopProduitCategorie;
+use App\Entity\TShopProduitCategorie2;
+use App\Entity\TShopProduitMaison;
 use App\Entity\TShopUser;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,12 +18,102 @@ use Symfony\Component\HttpFoundation\Response;
 class BoutiqueController extends AbstractController
 {
 
-    public function boutique()
+    public function boutique(ManagerRegistry $doctrine)
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+        $produits = $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findAll();
+
+        $catAfficher = $doctrine
+            -> getRepository(TShopProduitCategorie::class)
+            -> findAll();
 
         return $this->render('front/default/produits.html.twig', [
-
+            'produits'=>$produits,
+            'categories'=>$categories,
+            'catAfficher'=>$catAfficher,
+            'catActuel'=>null,
+            'url1' => null,
+            'url2' => null
         ]);
+    }
+
+    /**
+     * @Route("/boutique/{cat}", name="boutiqueCat")
+     */
+    public function boutiqueCat(string $cat, ManagerRegistry $doctrine)
+    {
+        $catURL = $cat;
+        $categorie = $doctrine
+            -> getRepository(TShopProduitCategorie::class)
+            -> findOneBy(['caSeoUrl'=>$catURL]);
+
+        if ($categorie != null) {
+            $produits = $doctrine
+                ->getRepository(TShopProduit::class)
+                ->findBy(['prIdCat1'=>$categorie->getCaId()]);
+
+            $catAfficher = $doctrine
+                -> getRepository(TShopProduitCategorie2::class)
+                -> findBy(['caCatId' => $categorie->getCaId()]);
+        } else {
+            $categorieMaison = $doctrine
+                -> getRepository(TShopProduitMaison::class)
+                ->findOneBy(['pmLibelle' =>$catURL]);
+
+            $produits = $doctrine
+                ->getRepository(TShopProduit::class)
+                ->findBy(['prIdMaison'=>$categorieMaison->getPmId()]);
+            $catAfficher = $doctrine
+                -> getRepository(TShopProduitCategorie::class)
+                -> findAll();
+        }
+
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+
+        return $this->render('front/default/produits.html.twig', [
+            'produits'=>$produits,
+            'categories'=>$categories,
+            'catAfficher'=>$catAfficher,
+            'catActuel'=>$categorie,
+            'url1' => $catURL,
+            'url2' => null
+        ]);
+    }
+
+
+    /**
+     * @Route("/boutique/{cat}/{sscat}", name="boutiqueSousCat")
+     */
+    public function boutiqueSousCat(string $cat, string $sscat, ManagerRegistry $doctrine)
+    {
+        $catURL = $cat;
+        $sscatURL = $sscat;
+
+        $sscategorie = $doctrine
+            -> getRepository(TShopProduitCategorie2::class)
+            -> findOneBy(['caSeoUrl'=>$sscatURL]);
+
+        $produits = $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findBy(['prIdCat2'=>$sscategorie->getCaId()]);
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+        return $this->render('front/default/produits.html.twig', [
+            'produits'=>$produits,
+            'categories'=>$categories,
+            'catAfficher'=>null,
+            'catActuel'=>$sscategorie,
+            'url1' => $catURL,
+            'url2' => $sscatURL
+        ]);
+
     }
 
     /**
