@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\TShopProduitCategorie;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -12,8 +14,11 @@ class UserSecurityController extends AbstractController
     /**
      * @Route("/connexion", name="connexion")
      */
-    public function login(AuthenticationUtils $authenticationUtils): Response
+    public function login(ManagerRegistry $doctrine, AuthenticationUtils $authenticationUtils): Response
     {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
         if ($this->getUser()) {
             return $this->redirectToRoute('membre');
         }
@@ -22,7 +27,7 @@ class UserSecurityController extends AbstractController
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('front/default/login.html.twig', ['last_username' => $lastUsername, 'error' => $error]);
+        return $this->render('front/default/login.html.twig', ['categories'=>$categories,'last_username' => $lastUsername, 'error' => $error]);
     }
 
     /**

@@ -59,7 +59,7 @@
                         <p>{{ commande.cdeDate|date('d/m/Y H:i:s') }}</p><br>
                     </div>
                     <div class="col-3 mt-3">
-                        <h4>Code promo : {{ commande.cdeCodePromo }}</h4><br><br>
+                        <h4>Code promo : {{ commande.promo != null ? commande.promo.pLibelle }}</h4><br><br>
                         <h4>État de la commande</h4><br>
                         {% if commande.cdeEtatId == 2 %}
                         <p name="cde_traite" class="btn btn-gradient-success" style="cursor:default">Commande payée</p><br>
@@ -120,6 +120,12 @@
                         <h2 class="m-text25 p-t-15 p-b-10">Commentaire</h2>
                         <p>{{ commande.cdeCom }}</p>
                     </div>
+                    {% if commande.promo != null and commande.promo.pRemise > 0 %}
+                        <div class="col-md-6 mt-3 table-responsive">
+                            <h2 class="m-text25 p-t-15 p-b-10">Total panier</h2>
+                            <p>{{ commande.promo.pRemise }} %</p>
+                        </div>
+                    {% endif %}
                     <div class="col-md-6 mt-3 table-responsive">
                         <h2 class="m-text25 p-t-15 p-b-10">Total panier</h2>
                         <p>{{ commande.cdeMtn }} €</p>

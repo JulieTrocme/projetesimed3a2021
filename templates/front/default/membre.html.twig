@@ -226,6 +226,7 @@
                     <!-- Bootstrap collapse-->
                     <div class="card-custom-group text-left" id="accordion1" role="tablist" aria-multiselectable="true">
                         {% for commande in user.commandes %}
+                            {% if commande.cdeEtatId != 1 %}
                         <!-- Bootstrap card-->
                         <article class="card card-custom card-custom-default">
                             <div class="card-custom-heading" role="tab">
@@ -233,6 +234,9 @@
                                     <a id="accordion1-card-head-qtpwelxd" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-agesbltr" aria-controls="accordion1-card-body-agesbltr" aria-expanded="true" role="button">
                                         Commande N°<chiffre>{{ commande.cdeId }}</chiffre> du <chiffre>{{ commande.cdeDate|date('d/m/Y') }}</chiffre>, Total TTC : <chiffre>
                                         {{ commande.cdeMtn }}</chiffre> €
+                                        {% if commande.promo != null and commande.promo.pRemise > 0 %}
+                                            Remise {{ commande.promo.pRemise }} %
+                                        {% endif %}
                                     </a>
                                 </p>
                             </div>
@@ -263,6 +267,7 @@
                                 </div>
                             </div>
                         </article>
+                        {% endif %}
                         {% endfor %}
 
                     </div>

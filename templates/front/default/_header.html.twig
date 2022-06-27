@@ -32,9 +32,11 @@
                                 <li>
                                     <a href="/membre" class="fs-18 "><div class="btn-compte d-inline-block"></div>Compte</a>
                                 </li>
+                                {% if app.user is not null %}
                                 <li>
-                                    <a href="/deco" class="fs-18">  <div class="btn-deconnexion d-inline-block"></div> Déconnexion</a>
+                                    <a href="/logout" class="fs-18">  <div class="btn-deconnexion d-inline-block"></div> Déconnexion</a>
                                 </li>
+                                {% endif %}
                                 <li>
                                     <a href="/panier" class="fs-18"> <div class="btn-panier d-inline-block"></div><span class="cart-btn-count" id="cart-btn-count">0</span> Panier</a>
                                 </li>

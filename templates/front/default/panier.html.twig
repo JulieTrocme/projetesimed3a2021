@@ -71,18 +71,33 @@
             </div>
             {% if commande != null and commande.lignes != null and commande.lignes.count > 0%}
             {% if 70 - somme > 0 %}
-            <div class="col-12" id="divFDP" style="text-align: left;">
-                <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
-            </div>
+                {% if commande.promo is defined and commande.promo != null and commande.promo.pLivraison != 1 %}
+                    {% if commande.promo.pActif == 1 and (commande.promo.pDateBegin == null or commande.promo.pDateBegin|date("m/d/Y") <= "now"|date("m/d/Y")) and (commande.promo.pDateEnd() == null or commande.promo.pDateEnd|date("m/d/Y") >= "now"|date("m/d/Y")) and (commande.promo.pAPartir == null or commande.promo.pAPartir <= somme) %}
+                        <p class="fs-18">Les frais de port vous sont offerts</p>
+                    {% else %}
+                        <div class="col-12" id="divFDP" style="text-align: left;">
+                            <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
+                        </div>
+                    {% endif %}
+                {% else %}
+                    <div class="col-12" id="divFDP" style="text-align: left;">
+                        <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
+                    </div>
+                {% endif %}
             {% else %}
                 <p class="fs-18">Les frais de port vous sont offerts</p>
             {% endif %}
 
 
         <div class="row justify-content-end">
-
             <div class="col-12 col-lg-5 mb-5 mb-lg-0">
-                <form method="post" class="row" action="/script/shop_panier">
+                {% if error is defined %}
+                    <div class="alert alert-danger" role="alert">
+                        <p style="color:red">{{ error }}</p>
+                    </div>
+                {% endif %}
+                <form method="post" class="row" action="/panier/promo">
+                    <input hidden name="total" value="{{ somme }}">
                     <div class="col-7">
                         <input type="text" class="form-input" name="code" style="border-radius: 6px;border-width: 1px 1px 1px 1px;min-height: 35px;height: 35px;padding: 17px 10px;" placeholder="Code promo">
                     </div>
@@ -100,16 +115,21 @@
                     <td style="border-top:0px;vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC :</div></td>
                     <td style="border-top:0px;" class="text-right"><div class="heading-3 font-weight-normal" id="totalTTC1"><chifre>{{ somme }}</chifre> €</div></td>
                 </tr>
-                {% if promo is defined%}
+                {% if commande.promo is defined and commande.promo != null %}
+                {% if commande.promo.pActif == 1 and (commande.promo.pDateBegin == null or commande.promo.pDateBegin|date("m/d/Y") <= "now"|date("m/d/Y")) and (commande.promo.pDateEnd() == null or commande.promo.pDateEnd|date("m/d/Y") >= "now"|date("m/d/Y")) and (commande.promo.pAPartir == null or commande.promo.pAPartir <= somme) %}
+                {% if commande.promo.pRemise != 0 %}
                 <tr>
-                    <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Remise 10 % :</div></td>
-                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalRemise">- <chifre>5.30</chifre> €</div></td>
+                    <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Remise
+                        {{ commande.promo.pRemise }} % :</div></td>
+                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalRemise">- <chifre>{{ somme * commande.promo.pRemise /100 }}</chifre> €</div></td>
                 </tr>
 
                 <tr>
                     <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC avec remise :</div></td>
-                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalTTCRemise"><chifre>47.70</chifre> €</div></td>
+                    <td class="text-right"><div class="heading-3 font-weight-normal" id="totalTTCRemise"><chifre>{{ somme - (somme * commande.promo.pRemise/100) }}</chifre> €</div></td>
                 </tr>
+                {% endif %}
+                {% endif %}
                 {% endif %}
                 </tbody>
             </table>

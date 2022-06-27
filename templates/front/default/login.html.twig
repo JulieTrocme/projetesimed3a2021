@@ -25,11 +25,18 @@
             <div class="row row-30 justify-content-sm-center">
                 <div class="col-md-10 col-xl-8">
                     <h1 class="heading-decorative"><span>Connexion</span></h1>
+                    {% for type, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="alert " role="alert">
+                                <p style="color:green">{{ message }}</p>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     {% if error %}
                         <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                     {% endif %}
                     <!-- RD Mailform-->
-                    <form class="rd-mailform text-center text-md-center" action="/login" method="POST">
+                    <form action="#" method="POST">
                         <div class="form-wrap form-wrap-validation">
                             <label class="form-label" for="forms-login-email">E-mail</label>
                             <input class="form-input" id="forms-login-email" type="email" name="username" data-constraints="@Required">

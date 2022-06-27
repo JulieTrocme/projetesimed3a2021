@@ -202,10 +202,16 @@ class BoutiqueController extends AbstractController
      */
     public function addPanier(Request $request, ManagerRegistry $doctrine, int $id){
         $quantite = $request->request->get('quantite');
-        $idUser = $this->get('session')->get('user');
+        $user = $this->getUser();
+        if($user != null) {
+            $idUser = $user->getUId();
+        }else{
+            $idUser = $this->get('session')->get('user');
+        }
         if($idUser == null){
             //créer user temp
             $user = new TShopUser();
+            $user->setUIdRang(1);
             $doctrine->getManager()->persist($user);
             $doctrine->getManager()->flush();
             $idUser = $user->getUId();

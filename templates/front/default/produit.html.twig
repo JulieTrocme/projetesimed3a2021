@@ -35,7 +35,7 @@
                 </div>
                 <div class="col-md-9 col-lg-6 product-description">
                     <h1 class="heading-decorative fs-40 mb-3"><span>{{ produit.prTitre }}</span></h1>
-                    <p class="fs-17">{{ produit.prDescShort }}</p>
+                    <p class="fs-17">{{ produit.prDescShort|raw }}</p>
                     <p class="fs-17">Référence : {{ produit.prRef }}<br>
                         EAN : 4580416907392</p>
                     <div class="pricing mb-5">
@@ -49,7 +49,7 @@
                 </div>
                 <div class="col-md-12">
                     <h2 class="fs-30">Description</h2>
-                    <p class="big">{{ produit.prDesc }}</p>
+                    <p class="big">{{produit.prDesc|raw }}</p>
                 </div>
             </div>
         </div>

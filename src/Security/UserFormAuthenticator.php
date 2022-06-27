@@ -2,6 +2,7 @@
 
 namespace App\Security;
 
+use App\Entity\TShopUser;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -31,7 +32,6 @@ class UserFormAuthenticator extends AbstractLoginFormAuthenticator
     public function authenticate(Request $request): Passport
     {
         $username = $request->request->get('username', '');
-        dd($username);
         $request->getSession()->set(Security::LAST_USERNAME, $username);
 
         return new Passport(

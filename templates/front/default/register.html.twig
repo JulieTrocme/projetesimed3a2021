@@ -26,13 +26,13 @@
                     <h1 class="heading-decorative"><span>Inscription</span></h1>
                     {% for type, messages in app.flashes %}
                         {% for message in messages %}
-                            <div class="alert alert-{{ type }}" role="alert">
-                                {{ message }}
+                            <div class="alert alert-danger" role="alert">
+                                <p style="color:red">{{ message }}</p>
                             </div>
                         {% endfor %}
                     {% endfor %}
                     <!-- RD Mailform-->
-                    <form class="rd-mailform text-left" data-form-output="form-output-global" data-form-type="forms" method="post" action="/register">
+                    <form method="post" action="/register">
                         <div class="row justify-content-end row-10 row-horizontal-10">
                             <div class="col-md-12">
                                 <div class="form-wrap form-wrap-validation">

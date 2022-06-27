@@ -172,6 +172,28 @@ class TShopCommande
      */
     private TShopUser $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=TShopPromo::class)
+     * @ORM\JoinColumn(name="cde_code_promo", referencedColumnName="p_id")
+     */
+    private ?TShopPromo $promo;
+
+    /**
+     * @return ?TShopPromo
+     */
+    public function getPromo(): ?TShopPromo
+    {
+        return $this->promo;
+    }
+
+    /**
+     * @param ?TShopPromo $promo
+     */
+    public function setPromo(?TShopPromo $promo): void
+    {
+        $this->promo = $promo;
+    }
+
     public function getCdeId(): ?int
     {
         return $this->cdeId;

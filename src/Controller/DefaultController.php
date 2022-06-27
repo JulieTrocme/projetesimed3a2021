@@ -79,7 +79,12 @@ class DefaultController extends AbstractController
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
-        $idUser = $this->get('session')->get('user');
+        $user = $this->getUser();
+        if($user != null) {
+            $idUser = $user->getUId();
+        }else{
+            $idUser = $this->get('session')->get('user');
+        }
         $commande = $doctrine
             ->getRepository(TShopCommande::class)
             ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
@@ -92,12 +97,10 @@ class DefaultController extends AbstractController
 
     public function membre(ManagerRegistry $doctrine)
     {
+        $user = $this->getUser();
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
-        $user = $doctrine
-            ->getRepository(TShopUser::class)
-            ->findOneBy(['uId'=>1]);
 
         $pays = $doctrine->getRepository(TShopPays::class)->findAll();
 
@@ -306,23 +309,32 @@ class DefaultController extends AbstractController
     public function inscription(Request $request,ManagerRegistry $doctrine,UserPasswordEncoderInterface $passwordEncoder)
     {
         if ($request->isMethod('post')) {
-            $email = $request->request->get('email');
-            $sameemail = $doctrine->getRepository(TShopUser::class)->findOneBy(['uEmail'=>$email]);
-            if($sameemail == null){
-                $user = new TShopUser();
-                $user->setUActif(1);
-                $user->setUDateCreation(new \DateTime());
-                $user->setUEmail($request->request->get('email'));
-                $user->setUPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
-                $doctrine->getManager()->persist($user);
-                $doctrine->getManager()->flush();
-
-                return $this->redirectToRoute('index');
-            }
-            else{
-                $this->addFlash('error', "L'email est déjà utilisé");
+            $password = $request->request->get('password');
+            $password2 = $request->request->get('password2');
+            if($password == $password2){
+                $email = $request->request->get('email');
+                $sameemail = $doctrine->getRepository(TShopUser::class)->findOneBy(['uEmail'=>$email]);
+                if($sameemail == null){
+                    $user = new TShopUser();
+                    $user->setUActif(1);
+                    $user->setUDateCreation(new \DateTime());
+                    $user->setUEmail($request->request->get('email'));
+                    $user->setUPassword($passwordEncoder->encodePassword($user, $request->request->get('password')));
+                    $user->setUIdRang(2);
+                    $doctrine->getManager()->persist($user);
+                    $doctrine->getManager()->flush();
+                    $this->addFlash('ok', "Inscription réussie");
+                    return $this->redirectToRoute('connexion');
+                }
+                else{
+                    $this->addFlash('error', "L'email est déjà utilisé");
+                    return $this->redirectToRoute('register');
+                }
+            }else{
+                $this->addFlash('error', "Les mots de passe doivent être identiques");
                 return $this->redirectToRoute('register');
             }
+
         }
     }
 }
