@@ -9,8 +9,22 @@
                     <div class="breadcrumb-wrapper p-4 color-gold">
                         <ol class="breadcrumbs-custom">
                             <li><a href="./">Accueil</a></li>
-                            <li><a href="/boutique">Catégorie</a></li>
-                            <li>Nom Produit</li>
+                            <li><a href="/boutique">Boutique</a></li>
+                            {% if produit.cat != null %}
+                            <li>
+                                <a href="{{ path('boutiqueCat',{'cat':produit.cat.caSeoUrl}) }}">
+                                    {{produit.cat.caSeoUrl | lower}}
+                                </a>
+                            </li>
+                            {% endif %}
+                            {% if produit.cat2 != null %}
+                            <li>
+                                <a href="{{ path('boutiqueCat',{'cat':produit.cat2.cat.caSeoUrl,'sscat':produit.cat2.caSeoUrl}) }}">
+                                    {{produit.cat2.caSeoUrl | lower}}
+                                </a>
+                            </li>
+                            {% endif %}
+                            <li>{{ produit.prTitre }}</li>
                         </ol>
                     </div>
                 </div>
