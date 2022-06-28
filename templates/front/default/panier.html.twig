@@ -57,7 +57,7 @@
                         <td style="width: 150px;">
                             <div class="product-stepper">
                                 <form method="post" action="{{ path('changeQuantite', {'id' : ligne.clId }) }}">
-                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="0" max="10" value="{{ ligne.clQte }}" name="quantite" onchange="form.submit()">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="0" max="{{ produit.prStock < 10 ? produit.prStock : 10 }}" value="{{ ligne.clQte }}" name="quantite" onchange="form.submit()">
                                 </form>
                             </div>
                         </td>

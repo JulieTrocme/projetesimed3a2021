@@ -41,11 +41,15 @@
                     <div class="pricing mb-5">
                         <p class="price fs-17"><chiffre>17.85</chiffre> € TTC</p>
                     </div>
+                    {% if produit.prStock == 0 %}
+                        <p class="fs-30">Produit indisponible<br>
+                    {% else %}
                     <form method="post" action="{{ path("addPanier", {'id': produit.prId}) }}">
                         <label for="qte" class="fs-20"> Qte : </label>
-                        <input id="qte" type="number" min="1" step="1" value="1" class="form-input mr-3 arvo" style="width: 18%;display: inline;height: 40px;" name="quantite">
+                        <input id="qte" type="number" min="1" step="1" value="1" class="form-input mr-3 arvo" style="width: 18%;display: inline;height: 40px;" name="quantite" max="{{ produit.prStock }}">
                         <button type="submit" class="button button-primary mt-0" >Acheter</button>
                     </form>
+                    {% endif %}
                 </div>
                 <div class="col-md-12">
                     <h2 class="fs-30">Description</h2>

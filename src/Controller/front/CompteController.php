@@ -4,6 +4,7 @@
 namespace App\Controller\front;
 
 
+use App\Entity\TShopCommande;
 use App\Entity\TShopPays;
 use App\Entity\TShopUser;
 use App\Entity\TShopUserAdresse;
@@ -79,6 +80,35 @@ class CompteController extends AbstractController
 
         $doctrine->getManager()->flush();
 
+        return $this->redirectToRoute('membre');
+    }
+
+    /**
+     * @Route("/membre/panier", name="changeUserPanier")
+     */
+    public function changeUserPanier(ManagerRegistry $doctrine){
+        $idUser = $this->get('session')->get('user');
+        if($idUser != null){
+            $commande = $doctrine
+                ->getRepository(TShopCommande::class)
+                ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
+            if($commande != null){
+                $panier = $doctrine
+                    ->getRepository(TShopCommande::class)
+                    ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$this->getUser()->getUId()]);
+                if($panier != null){
+                    $doctrine->getManager()->remove($panier);
+                    $doctrine->getManager()->flush();
+                }
+                $commande->setCdeCliId($this->getUser()->getUId());
+                $commande->setUser($this->getUser());
+                $doctrine->getManager()->flush();
+            }
+            $user = $doctrine->getRepository(TShopUser::class)->findOneBy(['uId'=>$idUser]);
+            $doctrine->getManager()->remove($user);
+            $doctrine->getManager()->flush();
+            $this->get('session')->set('user',null);
+        }
         return $this->redirectToRoute('membre');
     }
 }

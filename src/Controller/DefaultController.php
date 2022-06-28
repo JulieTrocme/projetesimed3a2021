@@ -29,10 +29,10 @@ class DefaultController extends AbstractController
             ->findAll();
         $newProduit =  $doctrine
             ->getRepository(TShopProduit::class)
-            ->findBy(['prNouveaux'=>1]);
+            ->findBy(['prArchive'=>0,'prActif'=>1,'prNouveaux'=>1]);
         $popuProduit =  $doctrine
             ->getRepository(TShopProduit::class)
-            ->findBy(['prPopu'=>1]);
+            ->findBy(['prArchive'=>0,'prActif'=>1,'prPopu'=>1]);
         return $this->render('front/default/index.html.twig', [
             'newProduit'=>$newProduit,
             'popuProduit'=>$popuProduit,
@@ -47,7 +47,7 @@ class DefaultController extends AbstractController
             ->findAll();
         $produit = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findOneBy(['prId'=>$request->query->get('id')]);
+            ->findOneBy(['prArchive'=>0,'prActif'=>1,'prId'=>$request->query->get('id')]);
         return $this->render('front/default/produit.html.twig', [
             'produit' => $produit,
             'categories'=>$categories
@@ -88,7 +88,11 @@ class DefaultController extends AbstractController
         $commande = $doctrine
             ->getRepository(TShopCommande::class)
             ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
-
+        $panier = 0;
+        foreach ($commande->getLignes() as $ligne){
+            $panier = $panier + $ligne->getClQte();
+        }
+        $this->get('session')->set('panier',$panier);
         return $this->render('front/default/panier.html.twig', [
             'categories'=>$categories,
             'commande'=>$commande,
@@ -97,6 +101,9 @@ class DefaultController extends AbstractController
 
     public function membre(ManagerRegistry $doctrine)
     {
+        if($this->get('session')->get('user') != null){
+            return $this->redirectToRoute('changeUserPanier');
+        }
         $user = $this->getUser();
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)

@@ -69,7 +69,7 @@ class PanierController extends AbstractController
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
         if($promo != null){
-            if($promo->getPActif() == 1){
+            if($promo->getPActif() == 1 && $promo->getPDelete() == 0){
                 if(($promo->getPDateBegin() == null || $promo->getPDateBegin() <= new DateTime()) && ($promo->getPDateEnd() == null || $promo->getPDateEnd() >= new DateTime())){
                     if($promo->getPAPartir() == null || $promo->getPAPartir() <= $total){
                         $commande->setCdeCodePromo($promo->getPId());

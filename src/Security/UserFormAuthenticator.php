@@ -2,7 +2,9 @@
 
 namespace App\Security;
 
+use App\Entity\TShopCommande;
 use App\Entity\TShopUser;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -48,9 +50,9 @@ class UserFormAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        return new RedirectResponse($this->urlGenerator->generate('membre'));
+        return new RedirectResponse($this->urlGenerator->generate('changeUserPanier'));
     }
+
 
     protected function getLoginUrl(Request $request): string
     {

@@ -41,7 +41,7 @@ security:
                 - App\Security\UserFormAuthenticator
             logout:
                 path: app_logout
-                target: membre
+                target: changeUserPanier
 
 
 

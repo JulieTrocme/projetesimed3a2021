@@ -38,7 +38,7 @@
                                 </li>
                                 {% endif %}
                                 <li>
-                                    <a href="/panier" class="fs-18"> <div class="btn-panier d-inline-block"></div><span class="cart-btn-count" id="cart-btn-count">0</span> Panier</a>
+                                    <a href="/panier" class="fs-18"> <div class="btn-panier d-inline-block"></div><span class="cart-btn-count" id="cart-btn-count">{{ app.session.get('panier') != null ? app.session.get('panier') : 0 }}</span> Panier</a>
                                 </li>
                             </ul>
                         </div>

@@ -2,7 +2,9 @@
 
 namespace App\Controller;
 
+use App\Entity\TShopCommande;
 use App\Entity\TShopProduitCategorie;
+use App\Entity\TShopUser;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +22,7 @@ class UserSecurityController extends AbstractController
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
         if ($this->getUser()) {
-            return $this->redirectToRoute('membre');
+            return $this->redirectToRoute('changeUserPanier');
         }
         // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();

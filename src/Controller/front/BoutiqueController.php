@@ -49,7 +49,7 @@ class BoutiqueController extends AbstractController
             ->findAll();
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findBy([],$orderby);
+            ->findBy(['prArchive'=>0,'prActif'=>1,],$orderby);
 
         $catAfficher = $doctrine
             -> getRepository(TShopProduitCategorie::class)
@@ -105,7 +105,7 @@ class BoutiqueController extends AbstractController
         if ($categorie != null) {
             $produits = $doctrine
                 ->getRepository(TShopProduit::class)
-                ->findBy(['prIdCat1'=>$categorie->getCaId()],$orderby);
+                ->findBy(['prArchive'=>0,'prActif'=>1,'prIdCat1'=>$categorie->getCaId()],$orderby);
 
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie2::class)
@@ -117,7 +117,7 @@ class BoutiqueController extends AbstractController
 
             $produits = $doctrine
                 ->getRepository(TShopProduit::class)
-                ->findBy(['prIdMaison'=>$categorieMaison->getPmId()],$orderby);
+                ->findBy(['prArchive'=>0,'prActif'=>1,'prIdMaison'=>$categorieMaison->getPmId()],$orderby);
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie::class)
                 -> findAll();
@@ -179,7 +179,7 @@ class BoutiqueController extends AbstractController
 
         $produits = $doctrine
             ->getRepository(TShopProduit::class)
-            ->findBy(['prIdCat2'=>$sscategorie->getCaId()],$orderby);
+            ->findBy(['prArchive'=>0,'prActif'=>1,'prIdCat2'=>$sscategorie->getCaId()],$orderby);
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
