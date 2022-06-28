@@ -9,6 +9,7 @@ use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
 use App\Entity\TShopProduitMaison;
 use App\Entity\TShopUser;
+use App\Repository\ProduitRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -18,8 +19,10 @@ use Symfony\Component\HttpFoundation\Response;
 class BoutiqueController extends AbstractController
 {
 
-    public function boutique(Request $request, ManagerRegistry $doctrine)
+    public function boutique(Request $request, ManagerRegistry $doctrine,ProduitRepository $repository)
     {
+        $page = $request->query->get('page');
+        if($page == null) $page = 1;
         $prixMin = $request->request->get('prixMin');
         $prixMax = $request->request->get('prixMax');
         $tri = $request->request->get('tri');
@@ -30,26 +33,37 @@ class BoutiqueController extends AbstractController
         switch ($tri){
             case 'order':
                 $orderby = ['prId' => 'DESC'];
+                $sort = 't_shop_produit.prId';
+                $order = 'DESC';
                 break;
             case 'priceAsc':
                 $orderby = ['prPrix' => 'ASC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'ASC';
                 break;
             case 'priceDesc':
                 $orderby = ['prPrix' => 'DESC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'DESC';
                 break;
             case 'nameAsc':
                 $orderby = ['prTitre' => 'ASC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'ASC';
                 break;
             case 'nameDesc':
                 $orderby = ['prTitre' => 'DESC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'DESC';
                 break;
         }
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
-        $produits = $doctrine
-            ->getRepository(TShopProduit::class)
-            ->findBy(['prArchive'=>0,'prActif'=>1,],$orderby);
+
+        $produits = $repository->getProduitsPaginated($page,$sort, $order);
+        $count = $repository->countPage();
+        if($count == 0) $count = 1;
 
         $catAfficher = $doctrine
             -> getRepository(TShopProduitCategorie::class)
@@ -65,14 +79,18 @@ class BoutiqueController extends AbstractController
             'tri' => $tri,
             'prixMin' => $prixMin,
             'prixMax' => $prixMax,
+            'count' => $count,
+            'page' => $page
         ]);
     }
 
     /**
      * @Route("/boutique/{cat}", name="boutiqueCat")
      */
-    public function boutiqueCat(Request $request, string $cat, ManagerRegistry $doctrine)
+    public function boutiqueCat(Request $request, string $cat, ManagerRegistry $doctrine,ProduitRepository $repository)
     {
+        $page = $request->query->get('page');
+        if($page == null) $page = 1;
         $prixMin = $request->request->get('prixMin');
         $prixMax = $request->request->get('prixMax');
         $tri = $request->request->get('tri');
@@ -83,18 +101,28 @@ class BoutiqueController extends AbstractController
         switch ($tri){
             case 'order':
                 $orderby = ['prId' => 'DESC'];
+                $sort = 't_shop_produit.prId';
+                $order = 'DESC';
                 break;
             case 'priceAsc':
                 $orderby = ['prPrix' => 'ASC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'ASC';
                 break;
             case 'priceDesc':
                 $orderby = ['prPrix' => 'DESC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'DESC';
                 break;
             case 'nameAsc':
                 $orderby = ['prTitre' => 'ASC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'ASC';
                 break;
             case 'nameDesc':
                 $orderby = ['prTitre' => 'DESC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'DESC';
                 break;
         }
         $catURL = $cat;
@@ -103,10 +131,8 @@ class BoutiqueController extends AbstractController
             -> findOneBy(['caSeoUrl'=>$catURL]);
 
         if ($categorie != null) {
-            $produits = $doctrine
-                ->getRepository(TShopProduit::class)
-                ->findBy(['prArchive'=>0,'prActif'=>1,'prIdCat1'=>$categorie->getCaId()],$orderby);
-
+            $produits = $repository->getProduitsPaginated($page,$sort, $order,$categorie->getCaId());
+            $count = $repository->countPage($categorie->getCaId());
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie2::class)
                 -> findBy(['caCatId' => $categorie->getCaId()]);
@@ -114,10 +140,10 @@ class BoutiqueController extends AbstractController
             $categorieMaison = $doctrine
                 -> getRepository(TShopProduitMaison::class)
                 ->findOneBy(['pmLibelle' =>$catURL]);
-
-            $produits = $doctrine
-                ->getRepository(TShopProduit::class)
-                ->findBy(['prArchive'=>0,'prActif'=>1,'prIdMaison'=>$categorieMaison->getPmId()],$orderby);
+            $produits = $repository->getProduitsPaginated($page,$sort, $order,0,0,$categorieMaison->getPmId());
+            $count = $repository->countPage(0,0,$categorieMaison->getPmId());
+            if($count == 0) $count = 1;
+            if($count == 0) $count = 1;
             $catAfficher = $doctrine
                 -> getRepository(TShopProduitCategorie::class)
                 -> findAll();
@@ -137,6 +163,8 @@ class BoutiqueController extends AbstractController
             'tri' => $tri,
             'prixMin' => $prixMin,
             'prixMax' => $prixMax,
+            'count' => $count,
+            'page' => $page
         ]);
     }
 
@@ -144,8 +172,10 @@ class BoutiqueController extends AbstractController
     /**
      * @Route("/boutique/{cat}/{sscat}", name="boutiqueSousCat")
      */
-    public function boutiqueSousCat(Request $request, string $cat, string $sscat, ManagerRegistry $doctrine)
+    public function boutiqueSousCat(Request $request, string $cat, string $sscat, ManagerRegistry $doctrine,ProduitRepository $repository)
     {
+        $page = $request->query->get('page');
+        if($page == null) $page = 1;
         $prixMin = $request->request->get('prixMin');
         $prixMax = $request->request->get('prixMax');
         $tri = $request->request->get('tri');
@@ -156,18 +186,28 @@ class BoutiqueController extends AbstractController
         switch ($tri){
             case 'order':
                 $orderby = ['prId' => 'DESC'];
+                $sort = 't_shop_produit.prId';
+                $order = 'DESC';
                 break;
             case 'priceAsc':
                 $orderby = ['prPrix' => 'ASC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'ASC';
                 break;
             case 'priceDesc':
                 $orderby = ['prPrix' => 'DESC'];
+                $sort = 't_shop_produit.prPrix';
+                $order = 'DESC';
                 break;
             case 'nameAsc':
                 $orderby = ['prTitre' => 'ASC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'ASC';
                 break;
             case 'nameDesc':
                 $orderby = ['prTitre' => 'DESC'];
+                $sort = 't_shop_produit.prTitre';
+                $order = 'DESC';
                 break;
         }
         $catURL = $cat;
@@ -176,10 +216,9 @@ class BoutiqueController extends AbstractController
         $sscategorie = $doctrine
             -> getRepository(TShopProduitCategorie2::class)
             -> findOneBy(['caSeoUrl'=>$sscatURL]);
-
-        $produits = $doctrine
-            ->getRepository(TShopProduit::class)
-            ->findBy(['prArchive'=>0,'prActif'=>1,'prIdCat2'=>$sscategorie->getCaId()],$orderby);
+        $produits = $repository->getProduitsPaginated($page,$sort, $order,0,$sscategorie->getCaId());
+        $count = $repository->countPage(0,$sscategorie->getCaId());
+        if($count == 0) $count = 1;
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
@@ -193,6 +232,8 @@ class BoutiqueController extends AbstractController
             'tri' => 'order',
             'prixMin' => $prixMin,
             'prixMax' => $prixMax,
+            'count' => $count,
+            'page' => $page
         ]);
 
     }

@@ -88,11 +88,13 @@ class DefaultController extends AbstractController
         $commande = $doctrine
             ->getRepository(TShopCommande::class)
             ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
-        $panier = 0;
-        foreach ($commande->getLignes() as $ligne){
-            $panier = $panier + $ligne->getClQte();
+        if($commande != null){
+            $panier = 0;
+            foreach ($commande->getLignes() as $ligne){
+                $panier = $panier + $ligne->getClQte();
+            }
+            $this->get('session')->set('panier',$panier);
         }
-        $this->get('session')->set('panier',$panier);
         return $this->render('front/default/panier.html.twig', [
             'categories'=>$categories,
             'commande'=>$commande,

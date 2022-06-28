@@ -57,7 +57,7 @@
                         <td style="width: 150px;">
                             <div class="product-stepper">
                                 <form method="post" action="{{ path('changeQuantite', {'id' : ligne.clId }) }}">
-                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="0" max="{{ produit.prStock < 10 ? produit.prStock : 10 }}" value="{{ ligne.clQte }}" name="quantite" onchange="form.submit()">
+                                <input class="form-input arvo" id="more" type="number" data-zeros="true" min="0" max="{{ ligne.article.prStock < 10 ? ligne.article.prStock : 10 }}" value="{{ ligne.clQte }}" name="quantite" onchange="form.submit()">
                                 </form>
                             </div>
                         </td>
@@ -70,23 +70,34 @@
                 </table>
             </div>
             {% if commande != null and commande.lignes != null and commande.lignes.count > 0%}
-            {% if 70 - somme > 0 %}
-                {% if commande.promo is defined and commande.promo != null and commande.promo.pLivraison != 1 %}
+                {% if commande.promo is defined and commande.promo != null%}
                     {% if commande.promo.pActif == 1 and (commande.promo.pDateBegin == null or commande.promo.pDateBegin|date("m/d/Y") <= "now"|date("m/d/Y")) and (commande.promo.pDateEnd() == null or commande.promo.pDateEnd|date("m/d/Y") >= "now"|date("m/d/Y")) and (commande.promo.pAPartir == null or commande.promo.pAPartir <= somme) %}
+                        {% if commande.promo.pLivraison == 1  %}
                         <p class="fs-18">Les frais de port vous sont offerts</p>
+                        {% else %}
+                            {% if commande.promo.pRemise != 0 and (somme - (somme * commande.promo.pRemise/100)) > 70%}
+                                <p class="fs-18">Les frais de port vous sont offerts</p>
+                            {% else %}
+                                <div class="col-12" id="divFDP" style="text-align: left;">
+                                    <p class="fs-18">Dans {{ 70 - (somme - (somme * commande.promo.pRemise/100)) }} €, les frais de port vous seront offerts</p>
+                                </div>
+                            {% endif %}
+                        {% endif %}
                     {% else %}
                         <div class="col-12" id="divFDP" style="text-align: left;">
                             <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
                         </div>
                     {% endif %}
                 {% else %}
+                    {% if 70 - somme > 0 %}
                     <div class="col-12" id="divFDP" style="text-align: left;">
                         <p class="fs-18">Dans {{ 70 - somme }} €, les frais de port vous seront offerts</p>
                     </div>
+                    {% else %}
+                        <p class="fs-18">Les frais de port vous sont offerts</p>
+                    {% endif %}
                 {% endif %}
-            {% else %}
-                <p class="fs-18">Les frais de port vous sont offerts</p>
-            {% endif %}
+
 
 
         <div class="row justify-content-end">
