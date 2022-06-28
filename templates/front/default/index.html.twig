@@ -71,7 +71,7 @@
                         <div class="title"><a href="/produit?id={{ newProd.prId }}">{{ newProd.prTitre }}</a></div>
                         <p class="price">{{ newProd.prPrix}} €</p>
                         <a class="button button-primary" href="/produit?id={{ newProd.prId }}">Voir</a><br>
-                        {% if popuProd.prStock == 0 %}
+                        {% if newProd.prStock == 0 %}
                         <p class="fs-20">Produit indisponible<br>
                         {% else %}
                         <form method="post" action="{{ path("addPanier", {'id': newProd.prId}) }}">

@@ -4,6 +4,7 @@ namespace App\Controller\front;
 
 use App\Entity\TShopCommande;
 use App\Entity\TShopProduitCategorie;
+use App\Entity\TShopUser;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,25 +20,21 @@ class ValideCommandeController extends AbstractController {
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
 
-        dd($session);
-        if ($session->get('user')) {
+            $idUser = $this->getUser();
 
+        $client = $doctrine
+            ->getRepository(TShopUser::class)
+            ->findOneBy(['uId'=>$idUser]);
 
-            $idUser = $session->get('user');
             $commande = $doctrine
                 ->getRepository(TShopCommande::class)
                 ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
 
             return $this->render('front/default/commande.html.twig', [
                 'categories'=>$categories,
+                'client'=>$client,
                 'commande'=>$commande
             ]);
-        } else {
-            return $this->render('front/default/login.html.twig', [
-                'categories'=>$categories,
-                'error' => ''
-            ]);
-        }
 
     }
 

@@ -22,9 +22,9 @@ panier:
 membre:
     path: /membre
     controller: App\Controller\DefaultController::membre
-boutique:
-    path: /boutique
-    controller: App\Controller\front\BoutiqueController::boutique
+commande:
+    path: /commande
+    controller: App\Controller\front\ValideCommandeController::commande
 administrateur:
     path: /administrateur
     controller: App\Controller\SecurityController::login
