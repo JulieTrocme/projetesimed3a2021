@@ -42,7 +42,7 @@
                         </select>
 
                         <!-- Au clic affiche une modal bootstrap pour ajouter une adresse -->
-                        <a href="/membre" class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
+                        <a data-toggle="modal" data-target="#modalAdresse" class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
                     </div>
 
                     <div class="col-md-6 text-left" id="blockFac">
@@ -60,7 +60,7 @@
                         </select>
 
                         <!-- Au clic affiche une modal bootstrap pour ajouter une adresse -->
-                        <a href="/membre" class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
+                        <a data-toggle="modal" data-target="#modalAdresse"  class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
 
                     </div>
                 </div>
@@ -207,7 +207,6 @@
                                             <td class="text-right"><div class="heading-3 font-weight-normal">{{prixPanier + 7.35 }} €</div></td>
                                         {% endif %}
 
-                                    </div></td>
                             </tr>
                             {% endif %}
                             </tbody>
@@ -238,89 +237,87 @@
 
     <!-- Si le client n'est pas connecté on le redirige vers la connection  -->
 
-
-        <!-- Modal -->
-        <div class="modal fade" id="modalAdresse" tabindex="-1" role="dialog" aria-labelledby="modalAdresseLabel" aria-hidden="true">
-            <div class="modal-dialog modal-lg" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="modalAdresseLabel">Ajout d'adresse</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <form class="rd-form mt-0" method="post" action="#">
-                        <div class="modal-body">
-                            <div class="row row-15">
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-first-name-2" type="text" name="nom" required>
-                                        <label class="form-label rd-input-label" for="checkout-first-name-2">Nom</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-last-name-2" type="text" name="prenom" required>
-                                        <label class="form-label rd-input-label" for="checkout-last-name-2">Prénom</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-company-2" type="text" name="societe">
-                                        <label class="form-label rd-input-label" for="checkout-company-2">Société</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-phone-3" type="text" name="telephone1" required>
-                                        <label class="form-label rd-input-label" for="checkout-phone-3">Téléphone</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-address-3" type="text" name="adresse1" required>
-                                        <label class="form-label rd-input-label" for="checkout-address-3">Adresse</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-address-4" type="text" name="adresse2">
-                                        <label class="form-label rd-input-label" for="checkout-address-4">Complement d'adresse</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-city-2" type="text" name="ville" required>
-                                        <label class="form-label rd-input-label" for="checkout-city-2">Ville</label>
-                                    </div>
-                                </div>
-                                <div class="col-6">
-                                    <div class="form-wrap">
-                                        <input class="form-input" id="checkout-cp-2" type="text" name="cp" required>
-                                        <label class="form-label rd-input-label" for="checkout-cp-2">Code postal</label>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="form-wrap">
-                                        <?php $pays = getPays(); ?>
-                                        <select name="pays" id="pays1" class="form-input" required>
-                                            <option value="">--Choisir un pays--</option>
-                                            <option value="">France</option>
-                                            <?php } ?>
-                                        </select>
-                                    </div>
-                                </div>
-                                <input type="hidden" name="id" value="$_SESSION['auth']['u_id']">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer</button>
-                            <button type="submit" name="add-adresse" class="btn btn-primary">Enregistrer</button>
-                        </div>
-                    </form>
+    <div class="modal fade" id="modalAdresse" tabindex="-1" role="dialog" aria-labelledby="modalAdresseLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalAdresseLabel">Ajout d'adresse</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
+                <form class="rd-form mt-0" method="post" action="/commande/addAdresse">
+                    <div class="modal-body">
+                        <div class="row row-15">
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-first-name-2" type="text" name="nom" required>
+                                    <label class="form-label rd-input-label" for="checkout-first-name-2">Nom</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-last-name-2" type="text" name="prenom" required>
+                                    <label class="form-label rd-input-label" for="checkout-last-name-2">Prénom</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-phone-3" type="text" name="telephone1" required>
+                                    <label class="form-label rd-input-label" for="checkout-phone-3">Téléphone</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-phone-4" type="text" name="telephone2" required>
+                                    <label class="form-label rd-input-label" for="checkout-phone-4">Téléphone</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-address-3" type="text" name="adresse1" required>
+                                    <label class="form-label rd-input-label" for="checkout-address-3">Adresse</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-address-4" type="text" name="adresse2">
+                                    <label class="form-label rd-input-label" for="checkout-address-4">Complement d'adresse</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-city-2" type="text" name="ville" required>
+                                    <label class="form-label rd-input-label" for="checkout-city-2">Ville</label>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-wrap">
+                                    <input class="form-input" id="checkout-cp-2" type="text" name="cp" required>
+                                    <label class="form-label rd-input-label" for="checkout-cp-2">Code postal</label>
+                                </div>
+                            </div>
+                            <div class="col-12">
+                                <div class="form-wrap">
+                                    <select name="pays" id="pays1" class="form-input" required>
+                                        <option value="">--Choisir un pays--</option>
+                                        {% for pays in listepays %}
+                                            <option value="{{ pays.pId }}" >{{ pays.pLibelle }}</option>
+                                        {% endfor %}
+
+                                    </select>
+                                </div>
+                            </div>
+                            <input type="hidden" name="id" value="">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="button button-secondary" data-dismiss="modal">Fermer</button>
+                        <button type="submit" name="add-adresse" class="button button-primary">Enregistrer</button>
+                    </div>
+                </form>
             </div>
         </div>
-
+    </div>
 
 {% endblock %}

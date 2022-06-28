@@ -40,8 +40,8 @@ class CompteController extends AbstractController
             $adresse->setAActif(1);
             $adresse->setAIdPays($request->request->get('pays'));
             $adresse->setPays($doctrine->getManager()->find(TShopPays::class,$adresse->getAIdPays()));
-            $adresse->setAIdUser(1);
-            $adresse->setUser($doctrine->getManager()->find(TShopUser::class,$adresse->getAIdUser()));
+            $adresse->setAIdUser($this->getUser()->getUId());
+            $adresse->setUser($this->getUser());
             $adresse->setATelephone1($request->request->get('telephone1'));
             $adresse->setATelephone2($request->request->get('telephone2'));
             $adresse->setAVille($request->request->get('ville'));
