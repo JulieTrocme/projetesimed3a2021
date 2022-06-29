@@ -26,7 +26,9 @@
             {% for type, messages in app.flashes %}
                 {% for message in messages %}
                     <div class="alert " role="alert">
-                        <p style="color: #c15e72;background-color: rgba(254, 124, 150, 0.2);border-color: #ea728a;">{{ message }}</p>
+                        <p style="{{ type == 'ok' ?  'color: #159d89;
+                                        background-color: rgba(27, 207, 180, 0.2);
+                                        border-color: #19bea6;' : 'color: #c15e72;background-color: rgba(254, 124, 150, 0.2);border-color: #ea728a;' }}">{{ message }}</p>
                     </div>
                 {% endfor %}
             {% endfor %}

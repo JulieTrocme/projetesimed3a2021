@@ -26,7 +26,19 @@
             <div class="container">
 
                 <div class="row">
+                    {% for type, messages in app.flashes %}
+                        {% for message in messages %}
+                            <div class="col-md-12" id="blockLiv">
+                                <div class="alert " role="alert">
+                                    <p style="{{ type == 'ok' ?  'color: #159d89;
+                                            background-color: rgba(27, 207, 180, 0.2);
+                                            border-color: #19bea6;' : 'color: #c15e72;background-color: rgba(254, 124, 150, 0.2);border-color: #ea728a;' }}">{{ message }}</p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% endfor %}
                     <div class="col-md-6 text-left" id="blockLiv">
+
                         <h3 class="fs-50 text-transform-none font-weight-medium">Livraison</h3>
                         <p class="mt-0" id="errorLiv">Merci de sélectionner une adresse de livraison</p>
 
@@ -100,7 +112,7 @@
                                                 </td>
                                                 <td><div id="total "><chiffre>{{ ligne.clMtn * ligne.clQte }}</chiffre> € </div></td>
                                                 {% set prixPanier = prixPanier + (ligne.clMtn * ligne.clQte) %}
-                                                {% set prixTVA = (ligne.clMtn * ligne.clQte) * ligne.article.prTva / 100 %}
+                                                {% set prixTVA = prixTVA + (ligne.clMtn * ligne.clQte) * ligne.article.prTva / 100 %}
                                             </tr>
                                         {% endfor %}
                                     </tbody>
@@ -134,7 +146,7 @@
 
                                 <tr>
                                     <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Remise promo {{ commande.promo.pRemise }} % :</div></td>
-                                    <td class="text-right"><div class="heading-3 font-weight-normal">- {{ prixPanier * promo / 100 }} €</div></td>
+                                    <td class="text-right"><div class="heading-3 font-weight-normal">- {{ prixPanier * commande.promo.pRemise / 100 }} €</div></td>
 
 
                                 </tr>
