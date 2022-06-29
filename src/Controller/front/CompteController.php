@@ -75,7 +75,16 @@ class CompteController extends AbstractController
     {
         $user = $doctrine->getManager()->find(TShopUser::class,$request->request->get('id'));
 
-        if($request->request->get('email') != null)$user->setUEmail($request->request->get('email'));
+        if($request->request->get('email') != null){
+            $sameemail = $doctrine->getRepository(TShopUser::class)->findOneBy(['uEmail'=>$request->request->get('email')]);
+            if($sameemail == null) {
+                $user->setUEmail($request->request->get('email'));
+            }
+            else{
+                $this->addFlash('error', "L'email est déjà utilisé");
+                return $this->redirectToRoute('membre');
+            }
+        }
         if($request->request->get('password') != null)$user->setUPassword($passwordEncoder->encodePassword( $user, $request->request->get('password')));
 
         $doctrine->getManager()->flush();
