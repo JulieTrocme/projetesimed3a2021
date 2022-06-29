@@ -21,6 +21,27 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class DefaultController extends AbstractController
 {
 
+    public function cgv(ManagerRegistry $doctrine)
+    {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+
+        return $this->render('front/default/cgv.html.twig', [
+            'categories'=>$categories
+        ]);
+    }
+
+    public function mentionsLegals(ManagerRegistry $doctrine)
+    {
+        $categories = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findAll();
+
+        return $this->render('front/default/mentions-legals.html.twig', [
+            'categories'=>$categories
+        ]);
+    }
 
     public function index(ManagerRegistry $doctrine)
     {

@@ -90,3 +90,11 @@ deleteProduit:
 validCommande:
     path: /commande/valide
     controller: App\Controller\front\ValideCommandeController::validCommande
+
+mentionsLegals:
+    path: /mentions-legals
+    controller: App\Controller\DefaultController::mentionsLegals
+
+cgv:
+    path: /cgv
+    controller: App\Controller\DefaultController::cgv
