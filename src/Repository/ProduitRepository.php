@@ -18,7 +18,7 @@ class ProduitRepository extends ServiceEntityRepository
         parent::__construct($registry, TShopProduit::class);
     }
 
-    public function getProduitsPaginated(int $page, string $sort, string $order, int $catId =0,int $sousCatId = 0, int $maisonId = 0): array
+    public function getProduitsPaginated(int $page, string $sort, string $order, int $catId =0,int $sousCatId = 0, int $maisonId = 0, string $search = ""): array
     {
         $query = $this
             ->createQueryBuilder('t_shop_produit')
@@ -36,6 +36,9 @@ class ProduitRepository extends ServiceEntityRepository
             $query->andWhere('t_shop_produit.prIdMaison = :maisonId')
                 ->setParameter('maisonId', $maisonId);
         }
+        if($search != "" ){
+            $query->andWhere("(t_shop_produit.prTitre LIKE '%".$search."%' OR t_shop_produit.prDescShort LIKE '%".$search."%' OR t_shop_produit.prDesc LIKE '%".$search."%' OR t_shop_produit.prRef LIKE '%".$search."%')");
+        }
         return $query
             ->orderBy($sort,$order)
             ->setFirstResult(2 * ($page - 1))
@@ -44,7 +47,7 @@ class ProduitRepository extends ServiceEntityRepository
             ->getResult();
     }
 
-    public function countPage(int $catId =0,int $sousCatId = 0, int $maisonId = 0): int
+    public function countPage(int $catId =0,int $sousCatId = 0, int $maisonId = 0, string $search = ""): int
     {
         try {
             $query = $this
@@ -63,6 +66,9 @@ class ProduitRepository extends ServiceEntityRepository
             if($maisonId != 0 ){
                 $query->andWhere('t_shop_produit.prIdMaison = :maisonId')
                     ->setParameter('maisonId', $maisonId);
+            }
+            if($search != "" ){
+                $query->andWhere("(t_shop_produit.prTitre LIKE '%".$search."%' OR t_shop_produit.prDescShort LIKE '%".$search."%' OR t_shop_produit.prDesc LIKE '%".$search."%' OR t_shop_produit.prRef LIKE '%".$search."%')");
             }
             return $query
                 ->getQuery()

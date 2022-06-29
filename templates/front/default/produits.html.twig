@@ -118,18 +118,29 @@
                     </div>
                     {% endif %}
                     {% endfor %}
-
                     <div class="col-md-12 arvo">
                         <ul class="pagination-custom text-center">
-                            <li class="{{ page == 1 ? 'disabled' : '' }}"><a class="pager-custom pager-prev" href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page - 1})) }}"></a></li>
+                            {% if search is defined and search != ''%}
+                                <li class="{{ page == 1 ? 'disabled' : '' }}"><a class="pager-custom pager-prev" href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page - 1})|merge({'tri': tri})|merge({'search': search})) }}"></a></li>
+                            {% else %}
+                                <li class="{{ page == 1 ? 'disabled' : '' }}"><a class="pager-custom pager-prev" href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page - 1})|merge({'tri': tri})) }}"></a></li>
+                            {% endif %}
                             {% for i in 1..count %}
                             {% if page == i %}<li class="active"><span>{{ i }}</span></li>
                             {% else %}
-                            <li><a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': i})) }}">{{ i }}</a></li>
+                                {% if search is defined and search != ''%}
+                                    <li><a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': i})|merge({'tri': tri})|merge({'search': search}))}}">{{ i }}</a></li>
+                                {% else %}
+                                    <li><a href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': i})|merge({'tri': tri})) }}">{{ i }}</a></li>
+                                {% endif %}
                             {% endif %}
                             {% endfor %}
-                            <li class="{{ page == count ? 'disabled' : '' }}"><a class="pager-custom pager-next " href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page+1})) }}"></a></li>
-                        </ul>
+                            {% if search is defined and search != ''%}
+                                <li class="{{ page == count ? 'disabled' : '' }}"><a class="pager-custom pager-next " href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page+1})|merge({'tri': tri})|merge({'search': search})) }}"></a></li>
+                            {% else %}
+                                <li class="{{ page == count ? 'disabled' : '' }}"><a class="pager-custom pager-next " href="{{ path(app.request.attributes.get('_route'),app.request.attributes.get('_route_params')|merge({'page': page+1})|merge({'tri': tri})) }}"></a></li>
+                            {% endif %}
+                            </ul>
                     </div>
 
                 </div>
