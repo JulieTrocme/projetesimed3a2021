@@ -108,7 +108,7 @@ class AdminProduitController extends AbstractController
                 }
 
                 $image->setPiImg('/images/produits/'.$nomImg);
-
+                
                 $image->setProduit($produit);
                 $image->setPiOrder(0);
                 $image->setPiIdProduit($produit->getPrId());

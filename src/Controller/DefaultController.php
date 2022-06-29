@@ -17,6 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Doctrine\Common\Collections\ArrayCollection;
 
 class DefaultController extends AbstractController
 {
@@ -54,6 +55,12 @@ class DefaultController extends AbstractController
         $popuProduit =  $doctrine
             ->getRepository(TShopProduit::class)
             ->findBy(['prArchive'=>0,'prActif'=>1,'prPopu'=>1]);
+
+        $cat = $doctrine
+            ->getRepository(TShopProduitCategorie::class)
+            ->findOneBy(['caId'=>30]);
+
+
         return $this->render('front/default/index.html.twig', [
             'newProduit'=>$newProduit,
             'popuProduit'=>$popuProduit,

@@ -41,8 +41,8 @@ class ProduitRepository extends ServiceEntityRepository
         }
         return $query
             ->orderBy($sort,$order)
-            ->setFirstResult(2 * ($page - 1))
-            ->setMaxResults(2)
+            ->setFirstResult(3 * ($page - 1))
+            ->setMaxResults(3)
             ->getQuery()
             ->getResult();
     }
@@ -70,9 +70,7 @@ class ProduitRepository extends ServiceEntityRepository
             if($search != "" ){
                 $query->andWhere("(t_shop_produit.prTitre LIKE '%".$search."%' OR t_shop_produit.prDescShort LIKE '%".$search."%' OR t_shop_produit.prDesc LIKE '%".$search."%' OR t_shop_produit.prRef LIKE '%".$search."%')");
             }
-            return $query
-                ->getQuery()
-                ->getSingleScalarResult() / 2;
+            return ceil($query->getQuery()->getSingleScalarResult() / 3);
         } catch (NonUniqueResultException|NoResultException $e) {
             return 0;
         }

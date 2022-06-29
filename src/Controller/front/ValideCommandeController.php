@@ -105,76 +105,63 @@ class ValideCommandeController extends AbstractController {
             $cde_montant = 0;
 
             if ($request->request->get('cgv') == 1) {
-                if ($request->request->get('cde_liv') != 0) {
-
-                    if ($request->request->get('cde_fac') != 0 ) {
-                        $commande = $doctrine
-                            ->getRepository(TShopCommande::class)
-                            ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$this->getUser()]);
+                $commande = $doctrine
+                    ->getRepository(TShopCommande::class)
+                    ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$this->getUser()]);
 
 
-                        //on modifie les stocks pour chaque produit
-                        foreach ($commande->getLignes() as $ligne){
+                //on modifie les stocks pour chaque produit
+                foreach ($commande->getLignes() as $ligne){
 
 
-                            $produit = $doctrine->getRepository(TShopProduit::class)->findOneBy(['prId'=>$ligne->getClArtId()]);
-                            $newStock = $produit->getPrStock() - $ligne->getClQte();
-                            $produit->setPrStock($newStock);
+                    $produit = $doctrine->getRepository(TShopProduit::class)->findOneBy(['prId'=>$ligne->getClArtId()]);
+                    $newStock = $produit->getPrStock() - $ligne->getClQte();
+                    $produit->setPrStock($newStock);
 
-                            $cde_montant = $cde_montant + ($ligne->getClQte() * $ligne->getClMtn());
+                    $cde_montant = $cde_montant + ($ligne->getClQte() * $ligne->getClMtn());
 
-                        }
-
-
-                        //On met a jour la commande une fois que les tous les stocks sont mis a jour
-                        $commande->setcdeEtatId(2);
-
-                        $commande->setcdeLivId($request->request->get('cde_liv'));
-
-                        $commande->setcdeFacId($request->request->get('cde_fac'));
-
-                        $commande->setcdeCom($request->request->get('cde_com'));
-
-                        $codePromo = $doctrine
-                            ->getRepository(TShopPromo::class)
-                            ->findOneBy(['pId'=>$commande->getCdeCodePromo()]);
-
-                        //si il y a un code promo
-                        if ($codePromo){
-                            $cde_montant = $cde_montant - ($cde_montant * $codePromo->getpRemise() /100);
-                            $commande->setcdeMtn($cde_montant);
-                            if ($codePromo->getpLivraison()){
-                                $commande->setcdeMtnFdp(0.00);
-                            }elseif ($cde_montant >= 70){
-                                $commande->setcdeMtnFdp(0.00);
-                            } else {
-                                $commande->setcdeMtnFdp(7.35);
-                            }
-                        } else {
-                            $commande->setcdeMtn($cde_montant);
-                            if ($cde_montant >= 70){
-                                $commande->setcdeMtnFdp(0.00);
-                            } else {
-                                $commande->setcdeMtnFdp(7.35);
-                            }
-
-                        }
-                        $doctrine->getManager()->flush();
-
-                        $this->get('session')->set('panier',0);
-
-                        $this->addFlash('ok','Merci pour votre commande');
-                        return $this->redirectToRoute('membre');
-                    } else {
-                        $this->addFlash('error','Merci de choisir une adresse de facturation');
-                        return $this->redirectToRoute('commande');
-                    }
-
-                } else {
-                    $this->addFlash('error','Merci de choisir une adresse de livraison');
-                    return $this->redirectToRoute('commande');
                 }
 
+
+                //On met a jour la commande une fois que les tous les stocks sont mis a jour
+                $commande->setcdeEtatId(2);
+
+                $commande->setcdeLivId($request->request->get('cde_liv'));
+
+                $commande->setcdeFacId($request->request->get('cde_fac'));
+
+                $commande->setcdeCom($request->request->get('cde_com'));
+
+                $codePromo = $doctrine
+                    ->getRepository(TShopPromo::class)
+                    ->findOneBy(['pId'=>$commande->getCdeCodePromo()]);
+
+                //si il y a un code promo
+                if ($codePromo){
+                    $cde_montant = $cde_montant - ($cde_montant * $codePromo->getpRemise() /100);
+                    $commande->setcdeMtn($cde_montant);
+                    if ($codePromo->getpLivraison()){
+                        $commande->setcdeMtnFdp(0.00);
+                    }elseif ($cde_montant >= 70){
+                        $commande->setcdeMtnFdp(0.00);
+                    } else {
+                        $commande->setcdeMtnFdp(7.35);
+                    }
+                } else {
+                    $commande->setcdeMtn($cde_montant);
+                    if ($cde_montant >= 70){
+                        $commande->setcdeMtnFdp(0.00);
+                    } else {
+                        $commande->setcdeMtnFdp(7.35);
+                    }
+
+                }
+                $doctrine->getManager()->flush();
+
+                $this->get('session')->set('panier',0);
+
+                $this->addFlash('ok','Merci pour votre commande');
+                return $this->redirectToRoute('membre');
             } else {
                 $this->addFlash('error','Veuillez accepter les conditions général de vente');
                 return $this->redirectToRoute('commande');

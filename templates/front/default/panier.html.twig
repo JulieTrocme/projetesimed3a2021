@@ -6,7 +6,7 @@
             <div class="row justify-content-center">
                 <div class="col-md-12 p-0">
                     <div>
-                        <img src="images/page-header/entete2.jpg">
+                        <img src="/images/page-header/entete2.jpg">
                     </div>
                     <div class="breadcrumb-wrapper p-4 color-gold">
                         <ol class="breadcrumbs-custom">
@@ -42,7 +42,7 @@
                     {% for ligne in commande.lignes %}
                     <tr id="row">
                         <td>
-                            <a href="/panier/deleteLigne/{{ ligne.clId }}"> <img src="images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
+                            <a href="/panier/deleteLigne/{{ ligne.clId }}"> <img src="/images/icone/2730296_harry_potter_solid_time_turner_icon.png" alt="supprimer produit" width="35px"></a>
                         </td>
                         <td>
                             <a class="table-cart-figure" href="/produit?id={{ligne.article.prId }}">

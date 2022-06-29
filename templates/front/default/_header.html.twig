@@ -58,7 +58,7 @@
                             {%  for cat in categories %}
                                 <li><a href="{{ path('boutiqueCat',{'cat':cat.caSeoUrl}) }}">{{ cat.caTitre }}</a>
                                     <!-- RD Navbar Dropdown-->
-                                    {% if(cat.souscats) %}
+                                    {% if not (cat.souscats is empty) %}
                                         <ul class="rd-navbar-dropdown">
                                             {% for ssCat in cat.souscats %}
                                                 <li><a href="{{ path('boutiqueSousCat',{'cat':cat.caSeoUrl,'sscat':ssCat.caSeoUrl}) }}">{{ ssCat.caTitre }}</a></li>
