@@ -86,3 +86,7 @@ addProduit:
 deleteProduit:
     path: /administrateur/produit/deleteProduit
     controller: App\Controller\admin\AdminProduitController::delProduit
+
+validCommande:
+    path: /commande/valide
+    controller: App\Controller\front\ValideCommandeController::validCommande
