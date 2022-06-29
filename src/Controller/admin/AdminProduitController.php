@@ -7,11 +7,13 @@ namespace App\Controller\admin;
 use App\Entity\TShopProduit;
 use App\Entity\TShopProduitCategorie;
 use App\Entity\TShopProduitCategorie2;
+use App\Entity\TShopProduitImage;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class AdminProduitController extends AbstractController
 {
@@ -19,6 +21,7 @@ class AdminProduitController extends AbstractController
      * @Route("/administrateur/produit/addProduit", methods={"POST"})
      */
     public function addProduit(Request $request,ManagerRegistry $doctrine){
+
         if($request->isMethod('post')){
 
             $id = $request->request->get('pr_id');
@@ -52,6 +55,11 @@ class AdminProduitController extends AbstractController
                 $produit = $doctrine->getRepository(TShopProduit::class)->findOneBy(['prId'=>$id]);
             }
 
+
+
+
+
+
             $produit->setPrIdCat1($request->request->get('pr_id_cat1'));
             $produit->setCat($doctrine->getManager()->find(TShopProduitCategorie::class,$produit->getPrIdCat1()));
 
@@ -76,8 +84,40 @@ class AdminProduitController extends AbstractController
             $produit->setPrPrix($request->request->get('pr_prix'));
             $produit->setPrNouveaux(1);
             $produit->setPrDateCreation(new \DateTime());
+
             $doctrine->getManager()->persist($produit);
             $doctrine->getManager()->flush();
+
+            //Fichier image
+            /** @var UploadedFile $uploadedFile */
+            $uploadedFile = $request->files->get('image');
+            if ($uploadedFile) {
+                $nomImg = md5(uniqid()).'.'.$uploadedFile->guessExtension();
+                $destination = $this->getParameter('kernel.project_dir').'/public/images/produits';
+
+
+                $uploadedFile->move(
+                    $destination,
+                    $nomImg
+                );
+
+                if ($id == 0) {
+                    $image = new TShopProduitImage();
+                } else {
+                    $image = $produit->getImages()[0];
+                }
+
+                $image->setPiImg('/images/produits/'.$nomImg);
+
+                $image->setProduit($produit);
+                $image->setPiOrder(0);
+                $image->setPiIdProduit($produit->getPrId());
+
+                $doctrine->getManager()->persist($image);
+                $doctrine->getManager()->flush();
+            }
+
+
 
             return $this->redirectToRoute('admin_produit');
         }
@@ -95,4 +135,6 @@ class AdminProduitController extends AbstractController
 
         return $this->redirectToRoute('admin_produit');
     }
+
+
 }

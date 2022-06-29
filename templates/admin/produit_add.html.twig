@@ -47,15 +47,14 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Image</label><br>
-                                    <input type="file" class="file-upload-default cropInput" name="image" accept="image/*" data-shellid="" data-cropratio="1.5" data-choix='script/cropperProduitAdd.php' data-width='1200'>
-                                    <div class="input-group col-xs-12">
-                                        <input type="text" readonly class="form-control file-upload-success" placeholder="Sélectionner un fichier" style="height: 42px;">
-                                        <span class="input-group-append">
-                                        <button class="file-upload-browse btn btn-gradient-success" type="button">Choisir un fichier</button>
-                                </span>
-                                    </div>
-
-                                    <input type="hidden" name="pr_image" id="pr_image">
+                                    {% if(produit.images.count > 0)  %}
+                                    <img src="{{ produit.images[0].piImg }}">
+                                    {% endif %}
+                                    <input type="file"
+                                           id="image" name="image"
+                                           accept="image/png, image/jpeg"
+                                    value=""
+                                    >
                                 </div>
                             </div>
                             <div class="col-md-6">
