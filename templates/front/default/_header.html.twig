@@ -18,10 +18,10 @@
                         <div class="d-flex justify-content-between mb-3 menu-petit">
                             <div>
 
-                                <form class="rd-mailform rd-mailform-inline rd-mailform-icon text-left" method="post" action="#" >
+                                <form class="text-left rd-mailform-inline rd-mailform-icon" method="post" action="/boutique" >
                                     <div class="form-wrap">
                                         <label class="form-label rd-input-label fs-18" for="recherche">Rechercher un produit</label>
-                                        <input class="form-input form-control-has-validation" id="recherche" type="text" name="recherche">
+                                        <input class="form-input form-control-has-validation" id="recherche" type="text" name="search">
                                         <button class="button recherche" type="submit"><div class="btn-recherche"></div></button>
                                     </div>
                                 </form>
@@ -38,7 +38,19 @@
                                 </li>
                                 {% endif %}
                                 <li>
-                                    <a href="/panier" class="fs-18"> <div class="btn-panier d-inline-block"></div><span class="cart-btn-count" id="cart-btn-count">{{ app.session.get('panier') != null ? app.session.get('panier') : 0 }}</span> Panier</a>
+                                    <a href="/panier" class="fs-18"> <div class="btn-panier d-inline-block"></div>
+                                        <span class="cart-btn-count" id="cart-btn-count" style="
+                                           top: 25px;
+                                            right: 53px;
+                                            font-size: 12px;
+                                            font-weight: 600;
+                                            letter-spacing: 0;
+                                            color: #000000;
+                                            border: 1px solid #ffffff;
+                                            border-radius: 100%;
+                                            padding: 0px 9px 0 9px;
+                                            background-color: #f3c13c;
+                                        ">{{ app.session.get('panier') != null ? app.session.get('panier') : 0 }}</span> Panier</a>
                                 </li>
                             </ul>
                         </div>
