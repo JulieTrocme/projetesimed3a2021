@@ -97,6 +97,10 @@ class CompteController extends AbstractController
                     ->getRepository(TShopCommande::class)
                     ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$this->getUser()->getUId()]);
                 if($panier != null){
+                    foreach ($panier->getLignes() as $ligne){
+                        $doctrine->getManager()->remove($ligne);
+                        $doctrine->getManager()->flush();
+                    }
                     $doctrine->getManager()->remove($panier);
                     $doctrine->getManager()->flush();
                 }

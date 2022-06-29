@@ -21,13 +21,23 @@ class BoutiqueController extends AbstractController
 
     public function boutique(Request $request, ManagerRegistry $doctrine,ProduitRepository $repository)
     {
+        $search = $request->request->get('search');
+        if($search == null) {
+            $search = $request->query->get('search');
+            if($search == null){
+                $search = "";
+            }
+        }
         $page = $request->query->get('page');
         if($page == null) $page = 1;
         $prixMin = $request->request->get('prixMin');
         $prixMax = $request->request->get('prixMax');
         $tri = $request->request->get('tri');
-        if($tri == null){
-            $tri = 'order';
+        if($tri == null) {
+            $tri = $request->query->get('tri');
+            if($tri == null){
+                $tri = 'order';
+            }
         }
         $orderby = [];
         switch ($tri){
@@ -61,8 +71,8 @@ class BoutiqueController extends AbstractController
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
 
-        $produits = $repository->getProduitsPaginated($page,$sort, $order);
-        $count = $repository->countPage();
+        $produits = $repository->getProduitsPaginated($page,$sort, $order, 0, 0, 0, $search);
+        $count = $repository->countPage(0, 0, 0, $search);
         if($count == 0) $count = 1;
 
         $catAfficher = $doctrine
@@ -80,7 +90,8 @@ class BoutiqueController extends AbstractController
             'prixMin' => $prixMin,
             'prixMax' => $prixMax,
             'count' => $count,
-            'page' => $page
+            'page' => $page,
+            'search' => $search
         ]);
     }
 

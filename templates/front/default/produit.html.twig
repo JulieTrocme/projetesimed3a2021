@@ -10,14 +10,14 @@
                         <ol class="breadcrumbs-custom">
                             <li><a href="./">Accueil</a></li>
                             <li><a href="/boutique">Boutique</a></li>
-                            {% if produit.cat != null %}
+                            {% if produit.prIdCat1 != 0 and produit.cat != null %}
                             <li>
                                 <a href="{{ path('boutiqueCat',{'cat':produit.cat.caSeoUrl}) }}">
                                     {{produit.cat.caSeoUrl | lower}}
                                 </a>
                             </li>
                             {% endif %}
-                            {% if produit.cat2 != null %}
+                            {% if produit.prIdCat2 != 0 and produit.cat2 != null %}
                             <li>
                                 <a href="{{ path('boutiqueCat',{'cat':produit.cat2.cat.caSeoUrl,'sscat':produit.cat2.caSeoUrl}) }}">
                                     {{produit.cat2.caSeoUrl | lower}}
