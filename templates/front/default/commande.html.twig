@@ -27,7 +27,7 @@
 
                 <div class="row">
                     <div class="col-md-6 text-left" id="blockLiv">
-                        <h3 class="text-transform-none font-weight-medium">Livraison</h3>
+                        <h3 class="fs-50 text-transform-none font-weight-medium">Livraison</h3>
                         <p class="mt-0" id="errorLiv">Merci de sélectionner une adresse de livraison</p>
 
                         <select name="cde_liv" id="cde_liv" class="form-control mt-3">
@@ -42,11 +42,11 @@
                         </select>
 
                         <!-- Au clic affiche une modal bootstrap pour ajouter une adresse -->
-                        <a data-toggle="modal" data-target="#modalAdresse" class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
+                        <a data-toggle="modal" data-target="#modalAdresse" class="button button-primary w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
                     </div>
 
                     <div class="col-md-6 text-left" id="blockFac">
-                        <h3 class="text-transform-none font-weight-medium">Facturation</h3>
+                        <h3 class="fs-50 text-transform-none font-weight-medium">Facturation</h3>
                         <p class="mt-0" id="errorFact">Merci de sélectionner une adresse de facturation</p>
 
                         <select name="cde_fac" id="cde_fac" class="form-control mt-3">
@@ -60,14 +60,14 @@
                         </select>
 
                         <!-- Au clic affiche une modal bootstrap pour ajouter une adresse -->
-                        <a data-toggle="modal" data-target="#modalAdresse"  class="button button-primary-3 button-zakaria mt-3 w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
+                        <a data-toggle="modal" data-target="#modalAdresse"  class="button button-primary w-100" style="padding: 5px 20px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Ajouter une adresse</a><br>
 
                     </div>
                 </div>
 
                 <div class="row">
                     <div class="col-md-12">
-                        <h3 class="text-transform-none font-weight-medium text-left">Récapitulatif</h3>
+                        <h3 class="fs-50 text-transform-none font-weight-medium text-left">Récapitulatif</h3>
                         <div class="table-custom-responsive mt-4">
                             <div class="table-responsive mt-4">
                                 {% set prixPanier = 0 %}
@@ -112,11 +112,11 @@
 
                 <div class="row justify-content-end">
                     <div class="col-lg-6 col-sm-12">
-                        <h3 class="text-transform-none font-weight-medium text-left">Commentaire</h3>
+                        <h3 class="fs-50 text-transform-none font-weight-medium text-left">Commentaire</h3>
                         <textarea name="cde_com" class="form-control mt-3" rows="6"></textarea>
                     </div>
                     <div class="col-lg-6 col-sm-12 mt-3 mt-lg-0">
-                        <h3 class="text-transform-none font-weight-medium text-left">Total</h3>
+                        <h3 class="fs-50 text-transform-none font-weight-medium text-left">Total</h3>
                         <table class="table float-right text-center text-lg-right mt-3">
                             <tbody>
                             <!--prix frais de port = 7.35 -->
@@ -190,7 +190,6 @@
                             </tr>
                             <tr>
                                 <td style="vertical-align: middle;"><div class="heading-5 font-weight-medium text-gray-500">Total TTC :</div></td>
-                                <td class="text-right"><div class="heading-3 font-weight-normal">
 
                                         <!-- if il y a un code promo frais de port Offert
                                                 prixPanier
@@ -224,7 +223,7 @@
 
                         </div>
 
-                        <button type="submit" name="val_cde" class="button button-lg button-primary-3 button-zakaria w-100"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Paiement</button>
+                        <button type="submit" name="val_cde" class="button button-primary w-100"><i class="fa fa-credit-card-alt" aria-hidden="true"></i> Paiement</button>
 
                     </div>
 
