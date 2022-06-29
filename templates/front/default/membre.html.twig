@@ -239,7 +239,7 @@
                         <article class="card card-custom card-custom-default">
                             <div class="card-custom-heading" role="tab">
                                 <p class="card-custom-title">
-                                    <a id="accordion1-card-head-qtpwelxd" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-agesbltr" aria-controls="accordion1-card-body-agesbltr" aria-expanded="true" role="button">
+                                    <a id="accordion1-card-head-qtpwelxd{{ commande.cdeId }}" data-toggle="collapse" data-parent="#accordion1" href="#accordion1-card-body-agesbltr{{ commande.cdeId }}" aria-controls="accordion1-card-body-agesbltr{{ commande.cdeId }}" aria-expanded="true" role="button">
                                         Commande N°<chiffre>{{ commande.cdeId }}</chiffre> du <chiffre>{{ commande.cdeDate|date('d/m/Y') }}</chiffre>, Total TTC : <chiffre>
                                         {{ commande.cdeMtn }}</chiffre> €
                                         {% if commande.promo != null and commande.promo.pRemise > 0 %}
@@ -248,7 +248,7 @@
                                     </a>
                                 </p>
                             </div>
-                            <div class="card-custom-collapse collapse show" id="accordion1-card-body-agesbltr" aria-labelledby="accordion1-card-head-qtpwelxd" data-parent="#accordion1">
+                            <div class="card-custom-collapse collapse" id="accordion1-card-body-agesbltr{{ commande.cdeId }}" aria-labelledby="accordion1-card-head-qtpwelxd{{ commande.cdeId }}" data-parent="#accordion1">
                                 <div class="card-custom-body">
                                     <table class="table table-cart">
                                         <thead>
