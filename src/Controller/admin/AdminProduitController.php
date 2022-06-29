@@ -104,7 +104,11 @@ class AdminProduitController extends AbstractController
                 if ($id == 0) {
                     $image = new TShopProduitImage();
                 } else {
-                    $image = $produit->getImages()[0];
+                    if ($produit->getImages()[0] == null) {
+                        $image = new TShopProduitImage();
+                    } else {
+                        $image = $produit->getImages()[0];
+                    }
                 }
 
                 $image->setPiImg('/images/produits/'.$nomImg);
