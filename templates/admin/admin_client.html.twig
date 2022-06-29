@@ -37,6 +37,7 @@
                                 </thead>
                                 <tbody>
                                 {% for client in clients %}
+                                    {% if client.uIdRang != 1%}
                                 <tr>
                                     <td>#{{ client.uId }}</td>
                                     <td class="no-wrap">{{client.uEmail}}</td>
@@ -50,6 +51,7 @@
                                         </form>
                                     </td>
                                 </tr>
+                                    {% endif %}
                                 {% endfor %}
                                 </tbody>
                             </table>

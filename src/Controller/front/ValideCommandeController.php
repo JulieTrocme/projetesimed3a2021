@@ -20,6 +20,32 @@ class ValideCommandeController extends AbstractController {
 
     public function commande(ManagerRegistry $doctrine, SessionInterface $session)
     {
+        $idUser = $this->get('session')->get('user');
+        if($idUser != null){
+            $commande = $doctrine
+                ->getRepository(TShopCommande::class)
+                ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$idUser]);
+            if($commande != null){
+                $panier = $doctrine
+                    ->getRepository(TShopCommande::class)
+                    ->findOneBy(['cdeEtatId'=>1,'cdeCliId'=>$this->getUser()->getUId()]);
+                if($panier != null){
+                    foreach ($panier->getLignes() as $ligne){
+                        $doctrine->getManager()->remove($ligne);
+                        $doctrine->getManager()->flush();
+                    }
+                    $doctrine->getManager()->remove($panier);
+                    $doctrine->getManager()->flush();
+                }
+                $commande->setCdeCliId($this->getUser()->getUId());
+                $commande->setUser($this->getUser());
+                $doctrine->getManager()->flush();
+            }
+            $user = $doctrine->getRepository(TShopUser::class)->findOneBy(['uId'=>$idUser]);
+            $doctrine->getManager()->remove($user);
+            $doctrine->getManager()->flush();
+            $this->get('session')->set('user',null);
+        }
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();

@@ -99,6 +99,7 @@
                         <!-- Bootstrap collapse-->
                         <div class="card-custom-group text-left" id="accordion1" role="tablist" aria-multiselectable="true">
                             {% for commande in user.commandes %}
+                                {% if commande.cdeEtatId != 1 %}
                                 <!-- Bootstrap card-->
                                 <article class="card card-custom card-custom-default">
                                     <div class="card-custom-heading" role="tab">
@@ -136,6 +137,7 @@
                                         </div>
                                     </div>
                                 </article>
+                                {% endif %}
                             {% endfor %}
 
                         </div>

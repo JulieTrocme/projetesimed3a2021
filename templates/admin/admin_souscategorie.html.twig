@@ -46,7 +46,7 @@
                                             <td>{{ souscategorie.caActif ? '<p style="color:green">actif</p>' : '<p style="color:red">Inactif</p>' }}
                                                 <?php</td>
                                             <td class="text-center">
-                                                <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="/produit" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
+                                                <a style="padding: 10px;" class="btn btn-gradient-info btn-rounded btn-icon mr-2" href="{{ path('boutiqueSousCat',{'cat':souscategorie.cat.caSeoUrl,'sscat':souscategorie.caSeoUrl}) }}" target="_blank" title="Voir"><i class="fa fa-eye icon-btn"></i></a>
                                                 <a style="padding: 10px;" target="_blank" class="btn btn-gradient-success btn-rounded btn-icon mr-2" href="/administrateur/souscategorie/add?id={{ souscategorie.caId }}" title="Editer"><i class="fa fa-edit icon-btn"></i></a>
                                                 <form method="post" action="/administration/souscategorie/delete" onsubmit="return confirm('Voulez vous vraiment désactiver cette sous-catégorie ?');">
                                                     <input hidden name="ca_id" value="{{ souscategorie.caId }}">

@@ -90,7 +90,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="display:none">
                                 <div class="form-group">
                                     <label>Produit à mettre en avant dans le panier</label><br>
                                     <div class="form-check d-inline">
@@ -101,7 +101,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-3">
+                            <div class="col-md-3" style="display:none">
                                 <div class="form-group">
                                     <label>Particularité du produit</label><br>
                                     <div class="form-check d-inline">
@@ -184,7 +184,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label style="font-weight:bold;">Titre *</label>
-                                    <input type="text" name="pr_titre" class="form-control" maxlength="255" placeholder="Titre du produit"  value="{{ produit != null ? produit.prTitre : 0 }}" required>
+                                    <input type="text" name="pr_titre" class="form-control" maxlength="255" placeholder="Titre du produit"  value="{{ produit != null ? produit.prTitre : '' }}" required>
                                 </div>
                             </div>
 
