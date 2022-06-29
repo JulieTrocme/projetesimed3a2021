@@ -47,7 +47,7 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label>Image</label><br>
-                                    {% if(produit.images.count > 0)  %}
+                                    {% if(produit != null and produit.images.count > 0)  %}
                                     <img src="{{ produit.images[0].piImg }}">
                                     {% endif %}
                                     <input type="file"
