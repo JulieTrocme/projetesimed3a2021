@@ -107,6 +107,11 @@ class DefaultController extends AbstractController
         $categories = $doctrine
             ->getRepository(TShopProduitCategorie::class)
             ->findAll();
+
+        $panierProduits =  $doctrine
+            ->getRepository(TShopProduit::class)
+            ->findBy(['prArchive'=>0,'prActif'=>1,'prMiseAvantPanier'=>1]);
+
         $user = $this->getUser();
         if($user != null) {
             $idUser = $user->getUId();
@@ -126,6 +131,7 @@ class DefaultController extends AbstractController
         return $this->render('front/default/panier.html.twig', [
             'categories'=>$categories,
             'commande'=>$commande,
+            'panierProduits'=>$panierProduits
         ]);
     }
 

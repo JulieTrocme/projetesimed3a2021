@@ -160,5 +160,68 @@
         </div>
     </section>
 
+    <!-- Produit panier -->
+    <section class="section section-lg bg-default">
+        <div class="container-fluid text-center">
+            <h1 class="heading-decorative"><span>Vous aimerez aussi</span></h1>
+            <!-- Owl Carousel-->
+            <div class="owl-carousel" data-items="1" data-sm-items="1" data-md-items="2" data-lg-items="4" data-dots="true" data-nav="true" data-stage-padding="28" data-xxl-stage-padding="0" data-loop="true" data-margin="30" data-mouse-drag="false">
+                {% for panierProd in panierProduits %}
+                    <div class="price-box">
+                        <div class="figure">
+                            <a href="/produit?id={{ panierProd.prId }}">
+                                <img class="mt-5" src="{{ panierProd.images.count > 0 ? panierProd.images[0].piImg : '' }}" alt="" style="height: 210px;width: auto;"/>
+                            </a>
+                        </div>
+                        <div class="caption">
+                            <div class="title"><a href="/produit?id={{ panierProd.prId }}">{{ panierProd.prTitre }}</a></div>
+                            <p class="price">{{ panierProd.prPrix}} €</p>
+                            <a class="button button-primary" href="/produit?id={{ panierProd.prId }}">Voir</a><br>
+                            {% if panierProd.prStock == 0 %}
+                                <p class="fs-20">Produit indisponible<br>
+                            {% else %}
+                                <form method="post" action="{{ path("addPanier", {'id': panierProd.prId}) }}">
+                                    <input hidden name="quantite" value="1">
+                                    <button type="submit" class="button button-primary mt-2" >Acheter</button>
+                                </form>
+                            {% endif %}
+                        </div>
+                    </div>
+                {% endfor %}
+
+                <!--
+                 <div class="price-box">
+                    <div class="figure"><a href="#"><img class="mt-5" src="images/produits/mug-carte-du-maraudeur-thermoreactif-harry-potter-1.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="#">Organic Makeup Set</a></div>
+                        <p class="price">35.80 €</p><a class="button button-primary" href="#">Acheter</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="#"><img class="mt-5" src="images/produits/sacoche-d-ordinateur-vif-d-or-harry-potter.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="#">Beeswax Lip Balm</a></div>
+                        <p class="price">12.90 €</p><a class="button button-primary" href="#">Acheter</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="#"><img class="mt-5" src="images/produits/harry-potter-lumos-wands-18cm-harry-potter.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="#">Organic Makeup Set</a></div>
+                        <p class="price">35.80 €</p><a class="button button-primary" href="#">Acheter</a>
+                    </div>
+                </div>
+                <div class="price-box">
+                    <div class="figure"><a href="#"><img class="mt-5" src="images/produits/nn7351_480.jpg" alt="" width="370" height="270"/></a></div>
+                    <div class="caption">
+                        <div class="title"><a href="#">Organic Makeup Set</a></div>
+                        <p class="price">35.80 €</p><a class="button button-primary" href="#">Acheter</a>
+                    </div>
+                </div>
+                 -->
+            </div>
+        </div>
+    </section>
+
 
 {% endblock %}
